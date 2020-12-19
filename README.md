@@ -1,3 +1,3 @@
 # Dynamic-Stimulus-Task
 
-(../master/img/image.png)
+![Optional Text](../master/myFolder/image.png)
