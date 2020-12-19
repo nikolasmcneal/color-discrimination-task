@@ -1,3 +1,3 @@
 # Dynamic-Stimulus-Task
 
-![Progress Update](../master/img/image.png)
+![Progress Update](/img/image.png)
