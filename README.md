@@ -2,15 +2,15 @@
 
 ## Progress
 
-* Randomly selected colors chosen and displayed on a JavaScript Canvas
-* Written code to determine total value of left and right sides (currently logs in console)
+* Randomly selected colors chosen and displayed on a JavaScript Canvas each run
+* Written code to determine total value of left and right sides by summing color values (currently logs in console)
 * Randomly determines order of values for colors
 
 
 
 ## Needed Changes
 
-* Need to wrap into jsPsych (keyboard response goes to next trial)
+* Need to add jsPsych (so that keyboard response goes to next trial, currently fixed at one combination per refresh)
 * Canvases currently fixed in absolute positioning (not easily flexible to change size)
 * Fixation cross, instructions, training, etc.
 
