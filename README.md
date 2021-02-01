@@ -14,7 +14,7 @@
 
 * Canvas not perfectly centered (may not work with all resolutions)
 * 'display_selection' not working when added to jsPsych plugin
-* Instructions needed
+* Instructions, training needed
 
 
 ![Progress Update](/img/image.png)
