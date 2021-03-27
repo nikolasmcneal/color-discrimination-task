@@ -164,7 +164,7 @@
         <p>Each block is valued according to its color, and each color is worth a different</p>
         <p>amount of points. In order to know the v alue of an object, you will need to</p>
         <p>learn what each color is worth.</p>
-        <p>Press the SPACE BAR to continue.s </p>`,
+        <p>Press the SPACE BAR to continue. </p>`,
         choices: ['space']
     }
     timeline.push(instr2)
@@ -176,11 +176,22 @@
         <p>at random and you will receive the value of the object that you chose in that round. Every</p>
         <p>%d points is worth $1. Additionally, you will start with an initial balance of %d points,</p>
         <p>amount of points. In order to know the value of an object, you will need to</p>
-        <p>'worth $%1.11s.</p>`,
+        <p>worth $%1.11s.</p>
+        <p>Press the SPACE BAR to continue.</p>`,
         choices: ['space']
     }
     timeline.push(instr3)
 
+    var instr4 = {
+        type: 'html-keyboard-response',
+        stimulus:`<p>Some objects will have positive values, while others will have negative values. </p>
+        <p>At the end of the study, you can either earn additional money or lose money</p>
+        <p>from your starting balance based on your choices.</p>
+        <p></p>
+        <p>Press the SPACE BAR to continue.</p>`,
+        choices: ['space']
+    }
+    timeline.push(instr4)
 
 
     var trial_1 = {
