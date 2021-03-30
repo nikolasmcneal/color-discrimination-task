@@ -149,8 +149,6 @@
         type: 'html-keyboard-response',
         stimulus:`<p>Welcome to the study! </p>
         <p>Today, you will make some decisions about colorful objects.</p>
-        <p>If you have any questions, please ask the experimenter at this time.</p>
-        <p>If you have any questions, please ask the experimenter at this time.</p>
         <p>If you are ready to begin, please press the SPACE BAR.</p>`, //numerosity uses Space but Blair matlab code uses up arrow, which one
         choices: ['space']
     }
@@ -161,8 +159,9 @@
         stimulus:`<p>Today, your task will be to choose colorful objects, similar to the item below. </p>
         <p>Over %d rounds, you will be choosing the better of two objects. The value of each</p>
         <p>object is simply the sum of the values of the colored blocks in the object.</p>
+        <br>
         <p>Each block is valued according to its color, and each color is worth a different</p>
-        <p>amount of points. In order to know the v alue of an object, you will need to</p>
+        <p>amount of points. In order to know the value of an object, you will need to</p>
         <p>learn what each color is worth.</p>
         <p>Press the SPACE BAR to continue. </p>`,
         choices: ['space']
@@ -174,9 +173,9 @@
         stimulus:`<p>Each round, you will see two objects on the screen. Your task is to indicate which of the </p>
         <p>two objects you want to choose. At the end of the experiment, one round will be selected</p>
         <p>at random and you will receive the value of the object that you chose in that round. Every</p>
-        <p>%d points is worth $1. Additionally, you will start with an initial balance of %d points,</p>
+        <p>x points is worth $1. Additionally, you will start with an initial balance of x points,</p>
         <p>amount of points. In order to know the value of an object, you will need to</p>
-        <p>worth $%1.11s.</p>
+        <p>worth $1.11s.</p>
         <p>Press the SPACE BAR to continue.</p>`,
         choices: ['space']
     }
@@ -193,7 +192,12 @@
     }
     timeline.push(instr4)
 
+//Show] 
 
+
+
+
+//Training
     var trial_1 = {
         type: 'blocks',
         stimulus_L: drawRectL,
@@ -201,7 +205,7 @@
         text_l: drawText_l,
         text_r: drawText_r,
         coverWhite_f: coverWhite,
-        choices: ['f','j'],
+        choices: ['f','j', 'space'],
         //data: {shape: 'rectangle'}
     };
     
