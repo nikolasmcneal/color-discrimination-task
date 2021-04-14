@@ -1,8 +1,8 @@
-<!DOCTYPE html>
+<script src="jspsych/plugins/jquery-3.5.1.min.js"></script>
 <html>
-<head>
-    <script src="jspsych/jspsych.js"></script>
-    <script src="jspsych/plugins/jquery-3.5.1.min.js"></script>
+    <head>
+        <script src="jspsych/jspsych.js"></script>
+        <!DOCTYPE html>
     <script src="jspsych/plugins/jspsych-blocks.js"></script>
     <script src="jspsych/plugins/jspsych-html-keyboard-response.js"></script>
     <link rel="stylesheet" href="css/jspsych.css">
@@ -44,7 +44,53 @@
     var timeline = [];
     var j = 0;
     var w = 0;
+    var trial_count = 1;
+
+    
+    
+    function rainbow(z){
+
+            var test=0;
+    
+            var ctx = z.getContext('2d');
+            ctx.beginPath(); 
+    
+            ctx.fillStyle = colors[0];
+            ctx.fillRect(0, 0, 100, 100);
+    
+            ctx.fillStyle = colors[1];
+            ctx.fillRect(125, 0, 100, 100);
+    
+            ctx.fillStyle = colors[2];
+            ctx.fillRect(250, 0, 100, 100);
+    
+            ctx.fillStyle = colors[3];
+            ctx.fillRect(375, 0, 100, 100);
+    
+            ctx.fillStyle = colors[4]; 
+            ctx.fillRect(500, 0, 100, 100);
+    
+            ctx.fillStyle = colors[5];
+            ctx.fillRect(625, 0, 100, 100);
+    
+            ctx.fillStyle = colors[6];
+            ctx.fillRect(750, 0, 100, 100);
+    
+            ctx.fillStyle = colors[7];
+            ctx.fillRect(875, 0, 100, 100);
+    
+            ctx.fillStyle = colors[8];
+            ctx.fillRect(1000, 0, 100, 100);
+    
+            ctx.fillStyle = colors[9];
+            ctx.fillRect(1125, 0, 100, 100);
+    
+            console.log("RAINBOW")
+        }
+   
     function drawRectL(c){
+        j = 0;
+
         var ctx = c.getContext('2d');
         ctx.beginPath(); 
 
@@ -75,10 +121,12 @@
 
         var arr_L = [a, b, c, d, e, f]
         for(var i = 0; i < arr_L.length; ++i){
-            j += (arr_L[i] - 4); 
+            j += (arr_L[i]); 
         }
         console.log("arr_L :" + j)
         // export { j };
+        
+
     }
 
     function drawText_l(l){
@@ -90,6 +138,8 @@
             }
 
     function drawRectR(d){
+        w = 0;
+
         var ctx = d.getContext('2d');
         ctx.beginPath();
         
@@ -118,21 +168,20 @@
         ctx.fillRect(250, 125, 100, 100);
         
         var arr_R = [g, h, i, j, k, l]
-        for(var z = 0; i < arr_R.length; ++i){
-            w += (arr_R[i] - 4); 
+        for(var z = 0; z < arr_R.length; ++z){
+            w += (arr_R[z]); 
         }
         console.log("arr_R :" + w)
+
+
     }
 
     function drawText_r(r){
         var ctx = r.getContext('2d');
-        var text = w
         ctx.font = "36px Times New Roman, sans-serif";
         ctx.textAlign = "center";
-        ctx.fillText("   " + text, 0, 40);
+        ctx.fillText("   " + w, 0, 40);
             }
-
-            
 
     function coverWhite(wh){
         var ctx = wh.getContext('2d');
@@ -142,8 +191,8 @@
         ctx.fillRect(0, 0, 200, 200);
             }
 
-    var n = 10;
 
+    var n = 6;
 
     var instr1 = {
         type: 'html-keyboard-response',
@@ -192,13 +241,107 @@
     }
     timeline.push(instr4)
 
-//Show] 
+
+//Show rainbow
+
+var show_rainbow = {
+    type: 'blocks',
+    rainbow_parameter: rainbow,
+    choices: ['space']
+}
+timeline.push(show_rainbow)
 
 
+var pass_training = {
+        type: 'html-keyboard-response',
+        stimulus: `<p> You passed the training. </p> 
+        <p></p>
+        <p>Press space whenever you are ready to begin the expceriment.</p>
+        `,
+        choices: ['space']
+    }
+
+var fail_training_1 = {
+    type: 'html-keyboard-response',
+    stimulus: `<p> You failed the training. </p> 
+    <p>Please remember to select the rectangle with higher values.</p>
+    <p>Press space to continue</p>
+    `,
+    choices: ['space']
+}
+
+var fail_training_2 = {
+    type: 'html-keyboard-response',
+    stimulus: `<p> You failed the training. </p> 
+    <p>Please remember to select the </p>
+    <p>Press space to continue.</p>
+    `,
+    choices: ['space']
+}
+
+var fail_training_3 = {
+    type: 'html-keyboard-response',
+    stimulus: `<p> You failed the training a third try. </p> 
+    <p></p>
+    <p>Press space to end the experiment.</p>
+    `,
+    choices: ['space'],
+    on_finish: function(data){
+        jsPsych.endExperiment('The experiment was ended after three failures.');
+    }
+}
 
 
-//Training
-    var trial_1 = {
+var acc = [];
+var acc2 = [];
+var acc3 = [];
+var idx = 0;
+var idx2 = 0;
+var idx3 = 0;
+
+//Test 1
+var trial_training = {
+    type: 'blocks',
+    stimulus_L: drawRectL,
+    stimulus_R: drawRectR,
+    text_l: drawText_l,
+    text_r: drawText_r,
+    coverWhite_f: coverWhite,
+    choices: ['f','j', 'space'],
+    on_finish: function(data){
+        data.task = 'training';
+        if(j >= w){ //if left is greater than right
+            if(data.key_press == 70){
+                data.correct = 1;
+            }
+            else{
+                data.correct = 0;
+            }
+        }
+        if(w >= j){
+            if(data.key_press == 74){
+                data.correct = 1;
+            }
+            else{
+                data.correct = 0;
+            }
+        }
+        acc[idx] = data.correct;
+        data.acc = acc;
+        idx++;
+        data.trialN = trial_count;
+        trial_count++;
+    }
+    //data: {shape: 'rectangle'}
+};
+var node = {
+    timeline: [fixation, trial_training],
+    repetitions: n
+}
+timeline.push(node);
+
+//Test 2
+var trial_training2 = {
         type: 'blocks',
         stimulus_L: drawRectL,
         stimulus_R: drawRectR,
@@ -206,15 +349,234 @@
         text_r: drawText_r,
         coverWhite_f: coverWhite,
         choices: ['f','j', 'space'],
+        on_finish: function(data){
+            data.task = 'training';
+            if(j >= w){ //if left is greater than right
+                if(data.key_press == 70){
+                    data.correct = 1;
+                }
+                else{
+                    data.correct = 0;
+                }
+            }
+            if(w >= j){
+                if(data.key_press == 74){
+                    data.correct = 1;
+                }
+                else{
+                    data.correct = 0;
+                }
+            }
+            acc2[idx2] = data.correct;
+            data.acc2 = acc2;
+            idx2++;
+            data.trialN = trial_count;
+            trial_count++;
+        }
         //data: {shape: 'rectangle'}
     };
-    
-    var node = {
-        timeline: [trial_1, fixation],
-        repetitions: n
+var node2 = {
+    timeline: [fixation, trial_training2],
+    repetitions: n
+}
+
+//Test 3
+var trial_training3 = {
+    type: 'blocks',
+    stimulus_L: drawRectL,
+    stimulus_R: drawRectR,
+    text_l: drawText_l,
+    text_r: drawText_r,
+    coverWhite_f: coverWhite,
+    choices: ['f','j', 'space'],
+    on_finish: function(data){
+        data.task = 'training';
+        if(j >= w){ //if left is greater than right
+            if(data.key_press == 70){
+                data.correct = 1;
+            }
+            else{
+                data.correct = 0;
+            }
+        }
+        if(w >= j){
+            if(data.key_press == 74){
+                data.correct = 1;
+            }
+            else{
+                data.correct = 0;
+            }
+        }
+        acc3[idx3] = data.correct;
+        data.acc3 = acc3;
+        idx3++;
+        data.trialN = trial_count;
+        trial_count++;
+    }
+    //data: {shape: 'rectangle'}
+};
+var node3 = {
+    timeline: [fixation, trial_training3],
+    repetitions: n
+}
+
+
+//Conditional 1
+var accuracy;
+var conditional_1 = {
+timeline: [fail_training_1, node2],
+    conditional_function: function(){
+        accuracy = 0.00;
+        var counter = 0;
+        for(var i = 0; i < acc.length; i++){
+            if(acc[i]==1){
+                counter++;
+            }
+        }
+        accuracy = counter / acc.length;
+        if(accuracy < 0.70){
+            return true;
+        } else{ 
+            return false;
+        }
+    }
+}
+timeline.push(conditional_1)
+
+
+//Conditional 2
+var accuracy2 = 1;
+var conditional_2 = {
+timeline: [fail_training_2, node3],
+    conditional_function: function(){
+        accuracy2 = 0.00;
+        var counter2 = 0;
+        for(var i = 0; i < acc2.length; i++){
+            if(acc2[i]==1){
+                counter2++;
+            }
+        }
+        accuracy2 = counter2 / acc2.length;
+        if(accuracy2 < 0.70){
+            return true;
+        } else{ 
+            timeline.push(pass_training)
+            return false;
+        }
+    }
+}
+timeline.push(conditional_2)
+
+//Conditional 3
+var accuracy3 = 1;
+var conditional_3 = {
+timeline: [fail_training_3],
+    conditional_function: function(){
+        accuracy3 = 0.00;
+        var counter3 = 0;
+        for(var i = 0; i < acc3.length; i++){
+            if(acc3[i]==1){
+                counter3++;
+            }
+        }
+        accuracy3 = counter3 / acc3.length;
+        if(accuracy3 < 0.70){
+            return true;
+        } else{ 
+            timeline.push(pass_training)
+            return false;
+        }
+    }
+}
+timeline.push(conditional_3)
+
+
+//150 trials of main task
+
+timeline.push(pass_training)
+
+var rand_reward = [];
+var rewardval = 0;
+//Experiment
+var experiment = {
+    type: 'blocks',
+    stimulus_L: drawRectL,
+    stimulus_R: drawRectR,
+    text_l: drawText_l,
+    text_r: drawText_r,
+    coverWhite_f: coverWhite,
+    choices: ['f','j', 'space'],
+    on_finish: function(data){
+        data.task = 'training';
+        if(j >= w){ //if left is greater than right
+            if(data.key_press == 70){
+                data.correct = 1;
+            }
+            else{
+                data.correct = 0;
+            }
+        }
+        if(w >= j){
+            if(data.key_press == 74){
+                data.correct = 1;
+            }
+            else{
+                data.correct = 0;
+            }
+        }
+        acc3[idx3] = data.correct;
+        data.acc3 = acc3;
+        data.trialN = trial_count;
+
+
+        // if(Math.random <= .5 && data.correct == 1){
+        //     data.rew = w
+        // } else if(Math.random > .5 && data.correct == 1){
+        //     data.rew = j
+        // } else{
+        //     data.rew = 0;
+        // }
+        // rand_reward[idx] = data.rew;
+        // data.rand_reward = rand_reward
+        // idx3++;
+        // trial_count++;
+        // for(var i = 0; i < rand_reward; i++){
+        //     if(rand_reward[i] != 0){
+        //         rewardval = rand_reward[i];
+        //         break;
+        //     }
+        // }
+    fixed_reward = 5
+    if(rewardval == 0){
+    rewardval = fixed_reward;
+    }
+    console.log(reward)
+    }
+    //data: {shape: 'rectangle'}
+};
+
+
+
+
+var experiment_node = {
+    timeline: [fixation, experiment],
+    repetitions: 3
+}
+timeline.push(experiment_node)
+
+
+
+var reward = {
+        type: 'html-keyboard-response',
+        stimulus: `<p> You have completed the experiment! </p> 
+        <p>One correct trial was selected at random, and you are rewarded the value of that choice.</p>
+        <p>Your reward is </p>
+        `,
+        choices: ['space'] //Need to figure out how to write JS var in HTML
     }
 
-    timeline.push(node);
+
+
 
 
     jsPsych.init({
