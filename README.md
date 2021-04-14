@@ -19,5 +19,5 @@
 * Cannot proceed past rainbow
 * Need to finish editing reward selection
 
-
-![Progress Update](/img/image.png)
+![blocks-rainbow](/img/image2.png)
+![blocks-old](/img/image.png)
