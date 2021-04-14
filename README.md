@@ -7,6 +7,8 @@
 * Randomly selected colors chosen and displayed on a JavaScript Canvas each run
 * Written code to determine total value of left and right sides by summing color values (currently logs in console)
 * Randomly determines order of values for colors
+* Training and instructions are added
+* Rainbow is shown at beginning
 
 
 
@@ -14,7 +16,8 @@
 
 * Canvas not perfectly centered (may not work with all resolutions)
 * 'display_selection' not working when added to jsPsych plugin
-* Instructions, training needed
+* Cannot proceed past rainbow
+* Need to finish editing reward selection
 
 
 ![Progress Update](/img/image.png)
