@@ -1,6 +1,6 @@
 # Dynamic-Stimulus-Task
 
-## Progress (Feb 1 2021)
+## Progress (Apr 13 2021)
 
 * Now coded with 'jspsych-canvas-keyboard-response' plugin, runs 3 times
 * Fixation cross added
