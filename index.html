@@ -4,6 +4,9 @@
         <script src="jspsych/jspsych.js"></script>
         <!DOCTYPE html>
     <script src="jspsych/plugins/jspsych-blocks.js"></script>
+    <script src="jspsych/plugins/jspsych-rainbow.js"></script>
+    <script src="jspsych/plugins/jspsych-call-function.js"></script>
+    <script src="jspsych/plugins/jspsych-fullscreen.js"></script>
     <script src="jspsych/plugins/jspsych-html-keyboard-response.js"></script>
     <link rel="stylesheet" href="css/jspsych.css">
 </head>
@@ -25,6 +28,17 @@
     //     onsetDelaySecL = onsetTargetSec;
     // }
 
+
+    var timeline = [];
+    //fullscreen
+    timeline.push({
+    type: 'fullscreen',
+    fullscreen_mode: true
+    });
+
+
+
+
     var fixation = {
         type: 'html-keyboard-response',
         stimulus: '<div style="font-size:60px;">+</div>',
@@ -41,13 +55,16 @@
 
 
 
-    var timeline = [];
     var j = 0;
     var w = 0;
     var trial_count = 1;
 
     
-    
+    // function blank(b) {
+    //     var ctx = b.getContext('2d');
+    //     console.log("blank")
+    // }
+
     function rainbow(z){
 
             var test=0;
@@ -88,6 +105,34 @@
             console.log("RAINBOW")
         }
    
+
+    function rainbow_values(rv){
+
+        var ctx = rv.getContext('2d');
+        ctx.font = "36px Times New Roman, sans-serif";
+        var n = 290 - 165
+
+        ctx.fillText("1", 40, 50);
+        ctx.fillText("2", 165, 50);
+        ctx.fillText("3", 290, 50);
+        ctx.fillText("4", 290 + n, 50);
+        ctx.fillText("5", 290 + 2*n, 50);
+        ctx.fillText("6", 290 + 3*n, 50);
+        ctx.fillText("7", 290 + 4*n, 50);
+        ctx.fillText("8", 290 + 5*n, 50);
+        ctx.fillText("9", 290 + 6*n, 50);
+        ctx.fillText("10", 290 + 7*n - 20, 50);
+
+    }
+    function rainbow_text(rv){
+
+        var ctx = rv.getContext('2d');
+        ctx.font = "24px Times New Roman, sans-serif";
+        // ctx.textAlign = 'cener';
+        //ctx.fillText("Colors farther to the right are worth more points.", 140, 50);
+        ctx.fillText("Press the SPACE BAR to continue.", 450, 50);
+
+    }
     function drawRectL(c){
         j = 0;
 
@@ -121,7 +166,7 @@
 
         var arr_L = [a, b, c, d, e, f]
         for(var i = 0; i < arr_L.length; ++i){
-            j += (arr_L[i]); 
+            j += (arr_L[i]+1); 
         }
         console.log("arr_L :" + j)
         // export { j };
@@ -134,7 +179,7 @@
         var text = j
         ctx.font = "36px Times New Roman, sans-serif";
         ctx.textAlign = "center";
-        ctx.fillText("   " + j, 0, 40);
+        ctx.fillText("   " + j, 140, 100);
             }
 
     function drawRectR(d){
@@ -169,7 +214,7 @@
         
         var arr_R = [g, h, i, j, k, l]
         for(var z = 0; z < arr_R.length; ++z){
-            w += (arr_R[z]); 
+            w += (arr_R[z]+1); 
         }
         console.log("arr_R :" + w)
 
@@ -180,7 +225,7 @@
         var ctx = r.getContext('2d');
         ctx.font = "36px Times New Roman, sans-serif";
         ctx.textAlign = "center";
-        ctx.fillText("   " + w, 0, 40);
+        ctx.fillText("   " + w, 140, 100);
             }
 
     function coverWhite(wh){
@@ -192,7 +237,7 @@
             }
 
 
-    var n = 6;
+    var n = 5;
 
     var instr1 = {
         type: 'html-keyboard-response',
@@ -205,10 +250,9 @@
 
     var instr2 = {
         type: 'html-keyboard-response',
-        stimulus:`<p>Today, your task will be to choose colorful objects, similar to the item below. </p>
-        <p>Over %d rounds, you will be choosing the better of two objects. The value of each</p>
+        stimulus:`<p>Today, your task will be to choose between colorful objects. </p>
+        <p>Over 150 rounds, you will be choosing the better of two objects. The value of each</p>
         <p>object is simply the sum of the values of the colored blocks in the object.</p>
-        <br>
         <p>Each block is valued according to its color, and each color is worth a different</p>
         <p>amount of points. In order to know the value of an object, you will need to</p>
         <p>learn what each color is worth.</p>
@@ -221,10 +265,7 @@
         type: 'html-keyboard-response',
         stimulus:`<p>Each round, you will see two objects on the screen. Your task is to indicate which of the </p>
         <p>two objects you want to choose. At the end of the experiment, one round will be selected</p>
-        <p>at random and you will receive the value of the object that you chose in that round. Every</p>
-        <p>x points is worth $1. Additionally, you will start with an initial balance of x points,</p>
-        <p>amount of points. In order to know the value of an object, you will need to</p>
-        <p>worth $1.11s.</p>
+        <p>at random and you will receive the value of the object that you chose in that round.</p>
         <p>Press the SPACE BAR to continue.</p>`,
         choices: ['space']
     }
@@ -233,39 +274,57 @@
     var instr4 = {
         type: 'html-keyboard-response',
         stimulus:`<p>Some objects will have positive values, while others will have negative values. </p>
-        <p>At the end of the study, you can either earn additional money or lose money</p>
-        <p>from your starting balance based on your choices.</p>
-        <p></p>
+        <p>The following screen will display the colors you will see and their associated values.</p>
+        <p>The values of the colors <b>increase</b> from left to right.</p>
         <p>Press the SPACE BAR to continue.</p>`,
         choices: ['space']
     }
     timeline.push(instr4)
 
 
-//Show rainbow
+// Show rainbow
+
 
 var show_rainbow = {
-    type: 'blocks',
+    type: 'rainbow',
     rainbow_parameter: rainbow,
+    rainbow_values_parameter: rainbow_values,
+    text_parameter: rainbow_text,
     choices: ['space']
 }
 timeline.push(show_rainbow)
 
 
+
+    var instr5 = {
+        type: 'html-keyboard-response',
+        stimulus:`<p>You will now begin the training. </p>
+        <p>Six random colors will appear on the left, and six random colors will appear on the right.</p>
+        <p>Press <b>F</b> to select left, and press <b>J</b> to select right</p>
+        <p>When you are ready, rest your fingers on <b>F</b> and <b>J</b> and</p>
+        <p>press the SPACE BAR to continue.</p>`,
+        choices: ['space']
+    }
+    timeline.push(instr5)
+
+
+
+
 var pass_training = {
         type: 'html-keyboard-response',
         stimulus: `<p> You passed the training. </p> 
-        <p></p>
-        <p>Press space whenever you are ready to begin the expceriment.</p>
-        `,
+        <p>You are now ready to begin the experiment.</p>
+        <p>When you are ready, rest your fingers on <b>F</b> and <b>J</b> and</p>
+        <p>press the SPACE BAR to start the experiment.</p>`,
         choices: ['space']
     }
 
 var fail_training_1 = {
     type: 'html-keyboard-response',
     stimulus: `<p> You failed the training. </p> 
-    <p>Please remember to select the rectangle with higher values.</p>
-    <p>Press space to continue</p>
+    <p>Please remember to select the object with the higher value sum.</p>
+    <p>Press <b>F</b> to select left, and press <b>J</b> to select right</p>
+    <p>When you are ready, press the SPACE BAR to try the training again.</p>
     `,
     choices: ['space']
 }
@@ -273,8 +332,9 @@ var fail_training_1 = {
 var fail_training_2 = {
     type: 'html-keyboard-response',
     stimulus: `<p> You failed the training. </p> 
-    <p>Please remember to select the </p>
-    <p>Press space to continue.</p>
+    <p>Please remember to select the object with the higher value sum.</p>
+    <p>Press <b>F</b> to select left, and press <b>J</b> to select right</p>
+    <p>When you are ready, press the SPACE BAR to try the training one more time.</p>
     `,
     choices: ['space']
 }
@@ -283,7 +343,7 @@ var fail_training_3 = {
     type: 'html-keyboard-response',
     stimulus: `<p> You failed the training a third try. </p> 
     <p></p>
-    <p>Press space to end the experiment.</p>
+    <p>Please press space to end the experiment.</p>
     `,
     choices: ['space'],
     on_finish: function(data){
@@ -310,7 +370,10 @@ var trial_training = {
     choices: ['f','j', 'space'],
     on_finish: function(data){
         data.task = 'training';
-        if(j >= w){ //if left is greater than right
+        if(j == w){
+            data.correct = 1;
+        }
+        if(j > w){ //if left is greater than right
             if(data.key_press == 70){
                 data.correct = 1;
             }
@@ -318,7 +381,7 @@ var trial_training = {
                 data.correct = 0;
             }
         }
-        if(w >= j){
+        if(w > j){
             if(data.key_press == 74){
                 data.correct = 1;
             }
@@ -351,22 +414,25 @@ var trial_training2 = {
         choices: ['f','j', 'space'],
         on_finish: function(data){
             data.task = 'training';
-            if(j >= w){ //if left is greater than right
-                if(data.key_press == 70){
-                    data.correct = 1;
-                }
-                else{
-                    data.correct = 0;
-                }
+            if(j == w){
+            data.correct = 1;
+        }
+        if(j > w){ //if left is greater than right
+            if(data.key_press == 70){
+                data.correct = 1;
             }
-            if(w >= j){
-                if(data.key_press == 74){
-                    data.correct = 1;
-                }
-                else{
-                    data.correct = 0;
-                }
+            else{
+                data.correct = 0;
             }
+        }
+        if(w > j){
+            if(data.key_press == 74){
+                data.correct = 1;
+            }
+            else{
+                data.correct = 0;
+            }
+        }
             acc2[idx2] = data.correct;
             data.acc2 = acc2;
             idx2++;
@@ -391,7 +457,10 @@ var trial_training3 = {
     choices: ['f','j', 'space'],
     on_finish: function(data){
         data.task = 'training';
-        if(j >= w){ //if left is greater than right
+        if(j == w){
+            data.correct = 1;
+        }
+        if(j > w){ //if left is greater than right
             if(data.key_press == 70){
                 data.correct = 1;
             }
@@ -399,7 +468,7 @@ var trial_training3 = {
                 data.correct = 0;
             }
         }
-        if(w >= j){
+        if(w > j){
             if(data.key_press == 74){
                 data.correct = 1;
             }
@@ -494,9 +563,15 @@ timeline.push(conditional_3)
 //150 trials of main task
 
 timeline.push(pass_training)
-
+var reward_val = 0
 var rand_reward = [];
-var rewardval = 0;
+// var reward_val = 0;
+var left_arr = []
+var right_arr = []
+var all_arr = []
+var randidx;
+acc_exp = []
+var idx4=0;
 //Experiment
 var experiment = {
     type: 'blocks',
@@ -508,7 +583,10 @@ var experiment = {
     choices: ['f','j', 'space'],
     on_finish: function(data){
         data.task = 'training';
-        if(j >= w){ //if left is greater than right
+        if(j == w){
+            data.correct=1
+        }
+        if(j > w){ //if left is greater than right
             if(data.key_press == 70){
                 data.correct = 1;
             }
@@ -516,7 +594,7 @@ var experiment = {
                 data.correct = 0;
             }
         }
-        if(w >= j){
+        if(w > j){
             if(data.key_press == 74){
                 data.correct = 1;
             }
@@ -524,58 +602,59 @@ var experiment = {
                 data.correct = 0;
             }
         }
-        acc3[idx3] = data.correct;
-        data.acc3 = acc3;
+        acc_exp[idx4] = data.correct;
+        data.acc_exp = acc_exp;
         data.trialN = trial_count;
-
-
-        // if(Math.random <= .5 && data.correct == 1){
-        //     data.rew = w
-        // } else if(Math.random > .5 && data.correct == 1){
-        //     data.rew = j
-        // } else{
-        //     data.rew = 0;
-        // }
-        // rand_reward[idx] = data.rew;
-        // data.rand_reward = rand_reward
-        // idx3++;
-        // trial_count++;
-        // for(var i = 0; i < rand_reward; i++){
-        //     if(rand_reward[i] != 0){
-        //         rewardval = rand_reward[i];
-        //         break;
-        //     }
-        // }
-    fixed_reward = 5
-    if(rewardval == 0){
-    rewardval = fixed_reward;
-    }
-    console.log(reward)
+        left_arr[idx4] = j;
+        data.left = left_arr;
+        right_arr[idx4] = w;
+        data.right = right_arr;
+        idx4++;
+        data.trialN = trial_count;
+        trial_count++;
+        all_arr = left_arr.concat(right_arr);
     }
     //data: {shape: 'rectangle'}
 };
 
 
-
-
 var experiment_node = {
     timeline: [fixation, experiment],
-    repetitions: 3
+    repetitions: 20
 }
 timeline.push(experiment_node)
 
 
 
+var reward_function = function(){
+    while(reward_val == 0){
+            randidx = Math.floor(Math.random() * all_arr.length)
+            reward_val = all_arr[randidx]
+        }
+        //data.randidx = randidx;
+        //data.reward_val = reward_val
+        
+        //return reward_val;
+        return reward_val
+}
+
+var reward_node = {
+    type: 'call-function',
+    func: reward_function
+}
+timeline.push(reward_node)
+
 var reward = {
         type: 'html-keyboard-response',
         stimulus: `<p> You have completed the experiment! </p> 
         <p>One correct trial was selected at random, and you are rewarded the value of that choice.</p>
-        <p>Your reward is </p>
-        `,
+        <p>Your reward is $` + reward_val + `.</p>`,
         choices: ['space'] //Need to figure out how to write JS var in HTML
     }
-
-
+timeline.push(reward)
+// if(reward_val != 0){
+//     timeline.push(reward)
+// }
 
 
 
