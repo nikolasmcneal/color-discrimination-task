@@ -29,12 +29,6 @@ jsPsych.plugins["blocks"] = (function () {
         default: undefined,
         description: 'The drawing function to apply to the canvas. Should take the canvas object as argument.'
       },
-      rainbow_parameter: {
-        type: jsPsych.plugins.parameterType.FUNCTION,
-        pretty_name: 'Stimulus',
-        default: undefined,
-        description: 'The drawing function to apply to the canvas. Should take the canvas object as argument.'
-      },
       choices: {
         type: jsPsych.plugins.parameterType.KEYCODE,
         array: true,
@@ -109,10 +103,8 @@ jsPsych.plugins["blocks"] = (function () {
     new_html = '<div id="jspsych-canvas-keyboard-response-stimulus" style = "position: absolute; margin-left: auto; margin-right: auto; left: 0; right: 0; text-align: center;">' 
     new_html += '<canvas id="jspsych-canvas-stimulus-left"  height="' + trial.canvas_size_L[0] + '" width="' + trial.canvas_size_L[1] + '"style = "padding: 0; margin: auto; display: block; width = 350px; height = 225px; position: absolute; top: 0; bottom: 0; left: -700px; right: 0; text-align: center;" ></canvas>'
     new_html += '<canvas id="jspsych-canvas-stimulus-right" height="' + trial.canvas_size_R[0] + '" width="' + trial.canvas_size_R[1] + '"style = "padding: 0; margin: auto; display: block; width = 350px; height = 225px; position: absolute; top: 0; bottom: 0; left: 700px; right: 0; text-align: center;" ></canvas>'
-    new_html += '<canvas id="jspsych-text-left"  height="' + 80  + '" width="' + 80 + '"style = "padding: 0; margin: auto; display: block; width = 360px; height = 225px; position: fixed; top: -350px; bottom: 0; left: -655px; right: 0; text-align: center;" ></canvas>'
-    new_html += '<canvas id="jspsych-text-right"  height="' + 80  + '" width="' + 80 + '"style = "padding: 0; margin: auto; display: block; width = 360px; height = 225px; position: fixed; top: -350px; bottom: 0; left: 745px; right: 0; text-align: center;" ></canvas>'
-    new_html += '<canvas id="jspsych-rainbow"  height="' + 150 + '" width="' + 1300 + '"style = "padding: 0; margin: auto; display: block; width = 350px; height = 225px; position: absolute; top: 0; bottom: 0; left: 0px; right: 0; text-align: center;" ></canvas>'
-    
+    new_html += '<canvas id="jspsych-text-left"  height="' + 225  + '" width="' + 350 + '"style = "padding: 0; margin: auto; display: block; width = 360px; height = 225px; position: fixed; top: -350px; bottom: 0; left: -655px; right: 0; text-align: center;" ></canvas>'
+    new_html += '<canvas id="jspsych-text-right"  height="' + 225  + '" width="' + 350 + '"style = "padding: 0; margin: auto; display: block; width = 360px; height = 225px; position: fixed; top: -350px; bottom: 0; left: 745px; right: 0; text-align: center;" ></canvas>'
     new_html += '<canvas id="jspsych-white"  height="' + 700  + '" width="' + 200 + ' "style = "position: fixed; height: 300px; width: 1000px; margin-top: -240px; margin-left: -500px;" ></canvas>'
     
     
@@ -129,8 +121,7 @@ jsPsych.plugins["blocks"] = (function () {
     // draw
     display_element.innerHTML = new_html;
 
-    let z = document.getElementById("jspsych-rainbow")
-    trial.rainbow_parameter(z)
+
 
     let c = document.getElementById("jspsych-canvas-stimulus-left")
     trial.stimulus_L(c)
