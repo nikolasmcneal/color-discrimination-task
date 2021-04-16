@@ -1,6 +1,6 @@
 # Dynamic-Stimulus-Task
 
-## Progress (Apr 13 2021)
+## Progress (Apr 16 2021)
 
 * Now coded with 'jspsych-blocks' and 'jspsych-rainbow'
 * Fixation cross added
