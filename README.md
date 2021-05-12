@@ -22,5 +22,8 @@
 * Need to remove values on the fixed reward rainbow
 
 
+
+![blocks-rainbow-new](/img/Screen Shot 2021-05-12 at 1.07.58 AM.png)
 ![blocks-rainbow](/img/image2.png)
 ![blocks-old](/img/image.png)
+
