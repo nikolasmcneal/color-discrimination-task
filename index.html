@@ -14,28 +14,22 @@
 <script>
 
     const fixation_duration = 500;
-    // var onsetDelaySec = .8; //Onset delay for delay stimuli, in seconds (.8)
-    // var onsetTargetSec = 0.2; //Onset delay for target stimuli, in seconds (.2)
-    // Is this just for the eye tracking?
-    // var onsetDelaySecR;
-    // var onsetDelaySecL;
 
-    // if(Math.random() > .5){
-    //     onsetDelaySecL = onsetDelaySec;
-    //     onsetDelaySecR = onsetTargetSec;
-    // } else{
-    //     onsetDelaySecR = onsetDelaySec;
-    //     onsetDelaySecL = onsetTargetSec;
-    // }
 
 
     var timeline = [];
     //fullscreen
-    timeline.push({
-    type: 'fullscreen',
-    fullscreen_mode: true
-    });
+    // timeline.push({
+    // type: 'fullscreen',
+    // fullscreen_mode: true
+    // });
 
+    var fixedfirst = true;
+    if(Math.random() > .5){
+        fixedfirst = true;
+    } else{
+        fixedfirst = false;
+    }
 
 
 
@@ -47,19 +41,33 @@
     };
 
 
-    var colors = ["DarkBlue", "MediumBlue", "Teal", "Green", "Yellow", "Orange", "PeachPuff", "Pink"]
+    var colors = [
+    'rgb(237,48,137)', 'rgb(226,62,153)', 'rgb(211,77,167)', 'rgb(193.5,90,177.5)', 'rgb(172,103,185)', 'rgb(149,113.5,189)', 'rgb(125,122,189)', 'rgb(100,129.5,184.5)'
+    ]
     if(Math.random()>.5){
      colors.reverse();
      console.log("Array reversed.")
     }
-
-
+   
+    var colors2 = [
+    'rgb(82.5,142,91)', 'rgb(100,140,73)', 'rgb(117,137,56.5)', 'rgb(134,133,41)', 'rgb(152,127.5,28.5)', 'rgb(169,120,20)', 'rgb(186.5,111.5,19.5)', 'rgb(202,101,27)'
+    ]
+    if(Math.random()>.5){
+     colors2.reverse();
+     console.log("Array reversed.")
+    }
 
     var j = 0;
     var w = 0;
     var trial_count = 1;
+    var col1 = []
+    if(Math.random() > .5){
+        col1 = colors
+    } else{
+        col1 = colors2
+    }
 
-    
+
     // function blank(b) {
     //     var ctx = b.getContext('2d');
     //     console.log("blank")
@@ -72,35 +80,35 @@
             var ctx = z.getContext('2d');
             ctx.beginPath(); 
     
-            ctx.fillStyle = colors[0];
-            ctx.fillRect(0, 0, 100, 100);
-    
-            ctx.fillStyle = colors[1];
+            ctx.fillStyle = col1[0];
             ctx.fillRect(125, 0, 100, 100);
     
-            ctx.fillStyle = colors[2];
+            ctx.fillStyle = col1[1];
             ctx.fillRect(250, 0, 100, 100);
     
-            ctx.fillStyle = colors[3];
+            ctx.fillStyle = col1[2];
             ctx.fillRect(375, 0, 100, 100);
     
-            ctx.fillStyle = colors[4]; 
+            ctx.fillStyle = col1[3]; 
             ctx.fillRect(500, 0, 100, 100);
     
-            ctx.fillStyle = colors[5];
+            ctx.fillStyle = col1[4];
             ctx.fillRect(625, 0, 100, 100);
     
-            ctx.fillStyle = colors[6];
+            ctx.fillStyle = col1[5];
             ctx.fillRect(750, 0, 100, 100);
     
-            ctx.fillStyle = colors[7];
+            ctx.fillStyle = col1[6];
             ctx.fillRect(875, 0, 100, 100);
-    
-            ctx.fillStyle = colors[8];
+
+            ctx.fillStyle = col1[7];
             ctx.fillRect(1000, 0, 100, 100);
     
-            ctx.fillStyle = colors[9];
-            ctx.fillRect(1125, 0, 100, 100);
+            // ctx.fillStyle = colors[8];
+            // ctx.fillRect(1000, 0, 100, 100);
+    
+            // ctx.fillStyle = colors[9];
+            // ctx.fillRect(1125, 0, 100, 100);
     
             console.log("RAINBOW")
         }
@@ -108,27 +116,28 @@
 
     function rainbow_values(rv){
 
+
         var ctx = rv.getContext('2d');
         ctx.font = "36px Times New Roman, sans-serif";
         var n = 290 - 165
 
-        ctx.fillText("1", 40, 50);
-        ctx.fillText("2", 165, 50);
-        ctx.fillText("3", 290, 50);
-        ctx.fillText("4", 290 + n, 50);
-        ctx.fillText("5", 290 + 2*n, 50);
-        ctx.fillText("6", 290 + 3*n, 50);
-        ctx.fillText("7", 290 + 4*n, 50);
-        ctx.fillText("8", 290 + 5*n, 50);
-        ctx.fillText("9", 290 + 6*n, 50);
-        ctx.fillText("10", 290 + 7*n - 20, 50);
+        //ctx.fillText("1", 40, 50);
+        ctx.fillText("1", 165, 50);
+        ctx.fillText("2", 290, 50);
+        ctx.fillText("3", 290 + n, 50);
+        ctx.fillText("4", 290 + 2*n, 50);
+        ctx.fillText("5", 290 + 3*n, 50);
+        ctx.fillText("6", 290 + 4*n, 50);
+        ctx.fillText("7", 290 + 5*n, 50);
+        ctx.fillText("8", 290 + 6*n, 50);
+        // ctx.fillText("10", 290 + 7*n - 20, 50);
 
     }
     function rainbow_text(rv){
 
         var ctx = rv.getContext('2d');
         ctx.font = "24px Times New Roman, sans-serif";
-        // ctx.textAlign = 'cener';
+        // ctx.textAlign = 'center';
         //ctx.fillText("Colors farther to the right are worth more points.", 140, 50);
         ctx.fillText("Press the SPACE BAR to continue.", 450, 50);
 
@@ -140,27 +149,27 @@
         ctx.beginPath(); 
 
         var a = Math.floor(Math.random()*8);
-        ctx.fillStyle = colors[a];
+        ctx.fillStyle = col1[a];
         ctx.fillRect(0, 0, 100, 100);
 
         var b = Math.floor(Math.random()*8);
-        ctx.fillStyle = colors[b];
+        ctx.fillStyle = col1[b];
         ctx.fillRect(125, 0, 100, 100);
        
         var c = Math.floor(Math.random()*8);
-        ctx.fillStyle = colors[c];
+        ctx.fillStyle = col1[c];
         ctx.fillRect(250, 0, 100, 100);
         
         var d = Math.floor(Math.random()*8);
-        ctx.fillStyle = colors[d];
+        ctx.fillStyle = col1[d];
         ctx.fillRect(0, 125, 100, 100);
         
         var e = Math.floor(Math.random()*8);
-        ctx.fillStyle = colors[e]; 
+        ctx.fillStyle = col1[e]; 
         ctx.fillRect(125, 125, 100, 100);
         
         var f = Math.floor(Math.random()*8);
-        ctx.fillStyle = colors[f];
+        ctx.fillStyle = col1[f];
         ctx.fillRect(250, 125, 100, 100);
 
 
@@ -174,14 +183,45 @@
 
     }
 
-    function drawText_l(l){
+    function drawtext_l_incentive(l){
         var ctx = l.getContext('2d');
         var text = j
         ctx.font = "36px Times New Roman, sans-serif";
         ctx.textAlign = "center";
         ctx.fillText("   " + j, 140, 100);
             }
+    function drawtext_r_incentive(r){
+        var ctx = r.getContext('2d');
+        ctx.font = "36px Times New Roman, sans-serif";
+        ctx.textAlign = "center";
+        ctx.fillText("   " + w, 140, 100);
+            }
+    var fixedvalleft = 0;
+    var fixedvalright = 0;
+    function drawtext_l_fixed(l){
+        var ctx = l.getContext('2d');
+        var text = j
+        ctx.font = "36px Times New Roman, sans-serif";
+        ctx.textAlign = "center";
+        if(j>=w){
+            fixedvalleft = "10";
+        } else{
+            fixedvalleft = "0";
+        }
+        ctx.fillText("   " + fixedvalleft, 140, 100);
+            }
 
+    function drawtext_r_fixed(r){
+        var ctx = r.getContext('2d');
+        ctx.font = "36px Times New Roman, sans-serif";
+        ctx.textAlign = "center";
+        if(j<=w){
+            fixedvalright = "10";
+        } else{
+            fixedvalright = "0";
+        }
+        ctx.fillText("   " + fixedvalright, 140, 100);
+            }
     function drawRectR(d){
         w = 0;
 
@@ -189,27 +229,27 @@
         ctx.beginPath();
         
         var g = Math.floor(Math.random()*8);
-        ctx.fillStyle = colors[g];
+        ctx.fillStyle = col1[g];
         ctx.fillRect(0, 0, 100, 100);
 
         var h = Math.floor(Math.random()*8);
-        ctx.fillStyle = colors[h];
+        ctx.fillStyle = col1[h];
         ctx.fillRect(125, 0, 100, 100);
         
         var i = Math.floor(Math.random()*8);
-        ctx.fillStyle = colors[i];
+        ctx.fillStyle = col1[i];
         ctx.fillRect(250, 0, 100, 100);
 
         var j = Math.floor(Math.random()*8);
-        ctx.fillStyle = colors[j];
+        ctx.fillStyle = col1[j];
         ctx.fillRect(0, 125, 100, 100);
 
         var k = Math.floor(Math.random()*8);
-        ctx.fillStyle = colors[k];
+        ctx.fillStyle = col1[k];
         ctx.fillRect(125, 125, 100, 100);
 
         var l = Math.floor(Math.random()*8);
-        ctx.fillStyle = colors[l];
+        ctx.fillStyle = col1[l];
         ctx.fillRect(250, 125, 100, 100);
         
         var arr_R = [g, h, i, j, k, l]
@@ -221,12 +261,6 @@
 
     }
 
-    function drawText_r(r){
-        var ctx = r.getContext('2d');
-        ctx.font = "36px Times New Roman, sans-serif";
-        ctx.textAlign = "center";
-        ctx.fillText("   " + w, 140, 100);
-            }
 
     function coverWhite(wh){
         var ctx = wh.getContext('2d');
@@ -274,15 +308,13 @@
     var instr4 = {
         type: 'html-keyboard-response',
         stimulus:`<p>Some objects will have positive values, while others will have negative values. </p>
-        <p>The following screen will display the colors you will see and their associated values.</p>
+        <p>The following screen will display the colors you will see.</p>
         <p>The values of the colors <b>increase</b> from left to right.</p>
         <p>Press the SPACE BAR to continue.</p>`,
         choices: ['space']
     }
     timeline.push(instr4)
 
-
-// Show rainbow
 
 
 var show_rainbow = {
@@ -295,6 +327,36 @@ var show_rainbow = {
 timeline.push(show_rainbow)
 
 
+
+var instrfixed = {
+        type: 'html-keyboard-response',
+        stimulus:`<p>In the following task, you will receive a <b>fixed reward</b> for choosing the correct answer. </p>
+        <p>You will receive ten points for the correct answer, and zero points for the incorrect answer.</p>
+        <p>Press the SPACE BAR to continue.</p>`,
+        choices: ['space']
+    }
+    if(fixedfirst==true){
+        timeline.push(instrfixed)
+    }
+
+var instrincentive = {
+    type: 'html-keyboard-response',
+    stimulus:`<p>In the following task, you will receive an <b>incentive</b> for choosing the correct answer. </p>
+    <p>You will receive more points for the correct answer, and less points for the incorrect answer.</p>
+    <p>Press the SPACE BAR to continue.</p>`,
+    choices: ['space']
+}
+    if(fixedfirst==false){
+        timeline.push(instrincentive)
+    }
+
+    // if(fixedfirst==false){
+    //     timeline.push(instr4)
+    // }
+    
+if(fixedfirst==true){
+    timeline.push(instrfixed)
+}
 
     var instr5 = {
         type: 'html-keyboard-response',
@@ -359,13 +421,13 @@ var idx = 0;
 var idx2 = 0;
 var idx3 = 0;
 
-//Test 1
+//Test 1 incentive
 var trial_training = {
     type: 'blocks',
     stimulus_L: drawRectL,
     stimulus_R: drawRectR,
-    text_l: drawText_l,
-    text_r: drawText_r,
+    text_l: drawtext_l_incentive,
+    text_r: drawtext_r_incentive,
     coverWhite_f: coverWhite,
     choices: ['f','j', 'space'],
     on_finish: function(data){
@@ -401,15 +463,16 @@ var node = {
     timeline: [fixation, trial_training],
     repetitions: n
 }
-timeline.push(node);
-
+if(fixedfirst==false){
+    timeline.push(node)
+}
 //Test 2
 var trial_training2 = {
         type: 'blocks',
         stimulus_L: drawRectL,
         stimulus_R: drawRectR,
-        text_l: drawText_l,
-        text_r: drawText_r,
+        text_l: drawtext_l_incentive,
+        text_r: drawtext_r_incentive,
         coverWhite_f: coverWhite,
         choices: ['f','j', 'space'],
         on_finish: function(data){
@@ -451,8 +514,8 @@ var trial_training3 = {
     type: 'blocks',
     stimulus_L: drawRectL,
     stimulus_R: drawRectR,
-    text_l: drawText_l,
-    text_r: drawText_r,
+    text_l: drawtext_l_incentive,
+    text_r: drawtext_r_incentive,
     coverWhite_f: coverWhite,
     choices: ['f','j', 'space'],
     on_finish: function(data){
@@ -490,6 +553,7 @@ var node3 = {
 }
 
 
+
 //Conditional 1
 var accuracy;
 var conditional_1 = {
@@ -503,15 +567,16 @@ timeline: [fail_training_1, node2],
             }
         }
         accuracy = counter / acc.length;
-        if(accuracy < 0.70){
+        if(accuracy < 0.10){ //change to .70
             return true;
         } else{ 
             return false;
         }
     }
 }
-timeline.push(conditional_1)
-
+if(fixedfirst==false){
+    timeline.push(conditional_1)
+}
 
 //Conditional 2
 var accuracy2 = 1;
@@ -534,8 +599,9 @@ timeline: [fail_training_2, node3],
         }
     }
 }
-timeline.push(conditional_2)
-
+if(fixedfirst==false){
+    timeline.push(conditional_2)
+}
 //Conditional 3
 var accuracy3 = 1;
 var conditional_3 = {
@@ -557,13 +623,17 @@ timeline: [fail_training_3],
         }
     }
 }
-timeline.push(conditional_3)
-
+if(fixedfirst==false){
+    timeline.push(conditional_3)
+}
 
 //150 trials of main task
 
-timeline.push(pass_training)
-var reward_val = 0
+if(fixedfirst==false){
+    timeline.push(pass_training)
+}
+
+var reward_val;
 var rand_reward = [];
 // var reward_val = 0;
 var left_arr = []
@@ -577,8 +647,8 @@ var experiment = {
     type: 'blocks',
     stimulus_L: drawRectL,
     stimulus_R: drawRectR,
-    text_l: drawText_l,
-    text_r: drawText_r,
+    text_l: drawtext_l_incentive,
+    text_r: drawtext_r_incentive,
     coverWhite_f: coverWhite,
     choices: ['f','j', 'space'],
     on_finish: function(data){
@@ -620,31 +690,352 @@ var experiment = {
 
 var experiment_node = {
     timeline: [fixation, experiment],
-    repetitions: 20
+    repetitions: 2
 }
+if(fixedfirst==false){
 timeline.push(experiment_node)
+}
+
+
+var instr3 = {
+        type: 'html-keyboard-response',
+        stimulus:`<p>You have completed the first half of the experiment. </p>
+        <p>In this second half, you will be choosing <b>fixed amount</b></p>
+        <p>Press the SPACE BAR to continue.</p>`,
+        choices: ['space']
+    }
+    if(fixedfirst==false){
+    timeline.push(instr3)
+    }
+
+
+
+
+
+
+
+    var myfunc = function() {
+        if(col1 == colors){
+            col1 = colors2
+        } else{
+            col1 = colors;
+        }
+    }
+
+    var trialm = {
+        type: 'call-function',
+        func: myfunc
+    }
+    if(fixedfirst==false){
+        timeline.push(trialm)
+    }
+
+//Test 1 incentive
+var trial_training_fixed = {
+    type: 'blocks',
+    stimulus_L: drawRectL,
+    stimulus_R: drawRectR,
+    text_l: drawtext_l_fixed,
+    text_r: drawtext_r_fixed,
+    coverWhite_f: coverWhite,
+    choices: ['f','j', 'space'],
+    on_finish: function(data){
+        data.task = 'training';
+        if(j == w){
+            data.correct = 1;
+        }
+        if(j > w){ //if left is greater than right
+            if(data.key_press == 70){
+                data.correct = 1;
+            }
+            else{
+                data.correct = 0;
+            }
+        }
+        if(w > j){
+            if(data.key_press == 74){
+                data.correct = 1;
+            }
+            else{
+                data.correct = 0;
+            }
+        }
+        acc[idx] = data.correct;
+        data.acc = acc;
+        idx++;
+        data.trialN = trial_count;
+        trial_count++;
+    }
+    //data: {shape: 'rectangle'}
+};
+var node_fixed = {
+    timeline: [fixation, trial_training_fixed],
+    repetitions: n
+}
+timeline.push(node_fixed)
+
+//Test 2
+var trial_training2_fixed = {
+        type: 'blocks',
+        stimulus_L: drawRectL,
+        stimulus_R: drawRectR,
+        text_l: drawtext_l_fixed,
+        text_r: drawtext_r_fixed,
+        coverWhite_f: coverWhite,
+        choices: ['f','j', 'space'],
+        on_finish: function(data){
+            data.task = 'training';
+            if(j == w){
+            data.correct = 1;
+        }
+        if(j > w){ //if left is greater than right
+            if(data.key_press == 70){
+                data.correct = 1;
+            }
+            else{
+                data.correct = 0;
+            }
+        }
+        if(w > j){
+            if(data.key_press == 74){
+                data.correct = 1;
+            }
+            else{
+                data.correct = 0;
+            }
+        }
+            acc2[idx2] = data.correct;
+            data.acc2 = acc2;
+            idx2++;
+            data.trialN = trial_count;
+            trial_count++;
+        }
+        //data: {shape: 'rectangle'}
+    };
+var node2_fixed = {
+    timeline: [fixation, trial_training2_fixed],
+    repetitions: n
+}
+
+//Test 3
+var trial_training3_fixed = {
+    type: 'blocks',
+    stimulus_L: drawRectL,
+    stimulus_R: drawRectR,
+    text_l: drawtext_l_fixed,
+    text_r: drawtext_r_fixed,
+    coverWhite_f: coverWhite,
+    choices: ['f','j', 'space'],
+    on_finish: function(data){
+        data.task = 'training';
+        if(j == w){
+            data.correct = 1;
+        }
+        if(j > w){ //if left is greater than right
+            if(data.key_press == 70){
+                data.correct = 1;
+            }
+            else{
+                data.correct = 0;
+            }
+        }
+        if(w > j){
+            if(data.key_press == 74){
+                data.correct = 1;
+            }
+            else{
+                data.correct = 0;
+            }
+        }
+        acc3[idx3] = data.correct;
+        data.acc3 = acc3;
+        idx3++;
+        data.trialN = trial_count;
+        trial_count++;
+    }
+    //data: {shape: 'rectangle'}
+};
+var node3_fixed = {
+    timeline: [fixation, trial_training3_fixed],
+    repetitions: n
+}
+
+
+
+//Conditional 1
+var accuracy;
+var conditional_1_fixed = {
+timeline: [fail_training_1, node2_fixed],
+    conditional_function: function(){
+        accuracy = 0.00;
+        var counter = 0;
+        for(var i = 0; i < acc.length; i++){
+            if(acc[i]==1){
+                counter++;
+            }
+        }
+        accuracy = counter / acc.length;
+        if(accuracy < 0.10){ //change to .70
+            return true;
+        } else{ 
+            return false;
+        }
+    }
+}
+timeline.push(conditional_1_fixed)
+
+
+//Conditional 2
+var accuracy2 = 1;
+var conditional_2_fixed = {
+timeline: [fail_training_2, node3_fixed],
+    conditional_function: function(){
+        accuracy2 = 0.00;
+        var counter2 = 0;
+        for(var i = 0; i < acc2.length; i++){
+            if(acc2[i]==1){
+                counter2++;
+            }
+        }
+        accuracy2 = counter2 / acc2.length;
+        if(accuracy2 < 0.70){
+            return true;
+        } else{ 
+            timeline.push(pass_training)
+            return false;
+        }
+    }
+}
+timeline.push(conditional_2_fixed)
+
+//Conditional 3
+var accuracy3 = 1;
+var conditional_3_fixed = {
+timeline: [fail_training_3],
+    conditional_function: function(){
+        accuracy3 = 0.00;
+        var counter3 = 0;
+        for(var i = 0; i < acc3.length; i++){
+            if(acc3[i]==1){
+                counter3++;
+            }
+        }
+        accuracy3 = counter3 / acc3.length;
+        if(accuracy3 < 0.70){
+            return true;
+        } else{ 
+            timeline.push(pass_training)
+            return false;
+        }
+    }
+}
+timeline.push(conditional_3_fixed)
+
+
+//150 trials of main task
+
+timeline.push(pass_training)
+var reward_val;
+var rand_reward = [];
+// var reward_val = 0;
+var left_arr = []
+var right_arr = []
+var all_arr = []
+var randidx;
+acc_exp = []
+var idx4=0;
+//Experiment
+var experiment_fixed = {
+    type: 'blocks',
+    stimulus_L: drawRectL,
+    stimulus_R: drawRectR,
+    text_l: drawtext_l_fixed,
+    text_r: drawtext_r_fixed,
+    coverWhite_f: coverWhite,
+    choices: ['f','j', 'space'],
+    on_finish: function(data){
+        data.task = 'training';
+        if(j == w){
+            data.correct=1
+        }
+        if(j > w){ //if left is greater than right
+            if(data.key_press == 70){
+                data.correct = 1;
+            }
+            else{
+                data.correct = 0;
+            }
+        }
+        if(w > j){
+            if(data.key_press == 74){
+                data.correct = 1;
+            }
+            else{
+                data.correct = 0;
+            }
+        }
+        acc_exp[idx4] = data.correct;
+        data.acc_exp = acc_exp;
+        data.trialN = trial_count;
+        left_arr[idx4] = j;
+        data.left = left_arr;
+        right_arr[idx4] = w;
+        data.right = right_arr;
+        idx4++;
+        data.trialN = trial_count;
+        trial_count++;
+        all_arr = left_arr.concat(right_arr);
+    }
+    //data: {shape: 'rectangle'}
+};
+
+
+var experiment_node_fixed = {
+    timeline: [fixation, experiment_fixed],
+    repetitions: 2
+}
+timeline.push(experiment_node_fixed)
+
+if(fixedfirst==true){
+    fixedfirst=false;
+    timeline.push(trialm)
+    timeline.push(instrincentive)
+    timeline.push(instr4)
+    timeline.push(show_rainbow)
+    timeline.push()
+    timeline.push(node)
+    timeline.push(conditional_1)
+    timeline.push(conditional_2)
+    timeline.push(conditional_3)
+    timeline.push(pass_training)
+    timeline.push(experiment_node)
+}
+
 
 
 
 var reward_function = function(){
-    while(reward_val == 0){
-            randidx = Math.floor(Math.random() * all_arr.length)
-            reward_val = all_arr[randidx]
-        }
-        //data.randidx = randidx;
-        //data.reward_val = reward_val
-        
+        randidx = Math.floor(Math.random() * all_arr.length)
+        reward_val = all_arr[randidx]
+
+        // reward_val = 4;        
         //return reward_val;
+        console.log(reward_val)
         return reward_val
 }
 
 var reward_node = {
     type: 'call-function',
-    func: reward_function
+    func: reward_function,
+    on_finish: function(data){
+        data.randidx = randidx;
+        data.reward_val = reward_val;
+    }
 }
 timeline.push(reward_node)
 
-var reward = {
+
+var reward = { //trial onset
         type: 'html-keyboard-response',
         stimulus: `<p> You have completed the experiment! </p> 
         <p>One correct trial was selected at random, and you are rewarded the value of that choice.</p>
