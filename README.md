@@ -1,4 +1,4 @@
-# Dynamic-Stimulus-Task
+# Color-Discrimination-Task
 
 ## Progress (Apr 16 2021)
 
