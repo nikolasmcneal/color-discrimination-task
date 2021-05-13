@@ -8,11 +8,41 @@
  @import url(https://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700);
 
 /* Container holding jsPsych content */
+html{
+  color:white;
+  background-color: black;
+  
+}
+p.center{
+  text-align:center;
+}
+
+p.justify{
+  text-align: justify;
+}
+
+div.center{
+  text-align: center;
+}
+
+div.justify{
+  text-align: justify;
+}
+p {
+    clear:both;
+}
+
 
  .jspsych-display-element {
+   /* position: relative; */
    display: flex;
    flex-direction: column;
    overflow-y: auto;
+   margin: auto;
+   /*margin: 50px auto 50px auto;*/
+   background-size:600px 450px;
+   background-repeat:no-repeat;
+   background-position:center;
  }
 
  .jspsych-display-element:focus {
@@ -44,7 +74,7 @@
 
 .jspsych-display-element {
   font-family: 'Open Sans', 'Arial', sans-serif;
-  font-size: 18px;
+  font-size: 20px;
   line-height: 1.6em;
 }
 
@@ -76,17 +106,9 @@
   border-color: #ccc;
 }
 
-/* only apply the hover style on devices with a mouse/pointer that can hover - issue #977 */
-@media (hover: hover) {
-  .jspsych-btn:hover {
-    background-color: #ddd;
-    border-color: #aaa;
-  }
-}
-
-.jspsych-btn:active {
+.jspsych-btn:hover {
   background-color: #ddd;
-  border-color:#000000;
+  border-color: #aaa;
 }
 
 .jspsych-btn:disabled {
@@ -96,78 +118,128 @@
   cursor: not-allowed;
 }
 
-/* custom style for input[type="range] (slider) to improve alignment between positions and labels */
+.container {
+  display: flex;
+  flex-direction: column;
+  /* overflow-y: auto; */
+  position: relative;
+  height: 450px;
+  width: 600px;
+  margin: auto;
+  /* overflow: visible;  */
+}
 
-.jspsych-slider {
-  appearance: none;
-  -webkit-appearance: none; 
-  -moz-appearance: none;
-  width: 100%; 
-  background: transparent; 
+#message {
+  position: absolute;
+  display: inline-block;
+  width: 600px;
+  height: 100px;
+  bottom: 70px;
+  text-align: center;
 }
-.jspsych-slider:focus {
-  outline: none;
+
+#left-planet {
+  position:absolute;
+  display:inline-block;
+  left:90px;
+  bottom:-10px;
+  height:160px;
+  width:160px;
+  /* text-align: center; */
+  font-size: 500%;
+  border-width: 4px;
+	border-style: dashed;
+  border-color: rgba(0, 0, 0, 0);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 160px 160px;
+
 }
-/* track */
-.jspsych-slider::-webkit-slider-runnable-track {
-  appearance: none;
-  -webkit-appearance: none;
-  width: 100%;
-  height: 8px;
-  cursor: pointer;
-  background: #eee;
-  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
-  border-radius: 2px;
-  border: 1px solid #aaa;
+
+#right-planet {
+  position:absolute;
+  display:inline-block;
+  right:90px;
+  bottom:-10px;
+  height:160px;
+  width:160px;
+  /* text-align: center; */
+  font-size: 500%;
+  border-width: 4px;
+	border-style: dashed;
+  border-color: rgba(0, 0, 0, 0);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 160px 160px;
 }
-.jspsych-slider::-moz-range-track {
-  appearance: none;
-  width: 100%;
-  height: 8px;
-  cursor: pointer;
-  background: #eee;
-  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
-  border-radius: 2px;
-  border: 1px solid #aaa;
+
+#positive {
+  display:inline-block;
+  position:absolute;
+  bottom:70px;
+  width:130px;
+  height:35px;
+  left:70px;
+  font-size:30px;
+  text-align:center;
 }
-.jspsych-slider::-ms-track {
-  appearance: none;
-  width: 99%;
-  height: 14px;
-  cursor: pointer;
-  background: #eee;
-  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
-  border-radius: 2px;
-  border: 1px solid #aaa;
+
+#zero {
+  display:inline-block;
+  position:absolute;
+  bottom:70px;
+  width:100px;
+  height:35px;
+  left:250px;
+  font-size:30px;
+  text-align:center;
 }
-/* thumb */
-.jspsych-slider::-webkit-slider-thumb {
-  border: 1px solid #666;
-  height: 24px;
-  width: 15px;
-  border-radius: 5px;
-  background: #ffffff;
-  cursor: pointer;
-  -webkit-appearance: none;
-  margin-top: -9px;
+
+#negative {
+  display:inline-block;
+  position:absolute;
+  bottom:70px;
+  width:130px;
+  height:35px;
+  right:70px;
+  font-size:30px;
+  text-align:center;
 }
-.jspsych-slider::-moz-range-thumb {
-  border: 1px solid #666;
-  height: 24px;
-  width: 15px;
-  border-radius: 5px;
-  background: #ffffff;
-  cursor: pointer;
+
+#positiveX {
+  display:inline-block;
+  position:absolute;
+  bottom:130px;
+  width:130px;
+  height:35px;
+  left:70px;
+  font-size:30px;
+  text-align:center;
 }
-.jspsych-slider::-ms-thumb {
-  border: 1px solid #666;
-  height: 20px;
-  width: 15px;
-  border-radius: 5px;
-  background: #ffffff;
-  cursor: pointer;
-  margin-top: -2px;
+
+#zeroX {
+  display:inline-block;
+  position:absolute;
+  bottom:130px;
+  width:100px;
+  height:35px;
+  left:250px;
+  font-size:30px;
+  text-align:center;
 }
+
+#negativeX {
+  display:inline-block;
+  position:absolute;
+  bottom:130px;
+  width:130px;
+  height:35px;
+  right:70px;
+  font-size:30px;
+  text-align:center;
+}
+
+
 
 /* jsPsych progress bar */
 
