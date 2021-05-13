@@ -24,7 +24,4 @@
 
 
 ![blocks-rainbow-newest](/img/image4.png)
-![blocks-rainbow-new](/img/image3.png)
-![blocks-rainbow](/img/image2.png)
-![blocks-old](/img/image.png)
-
+![blocks-rainbow-newest2](/img/image5.png)
