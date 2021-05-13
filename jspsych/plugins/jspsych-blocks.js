@@ -248,7 +248,7 @@ jsPsych.plugins["blocks"] = (function () {
       // TO END TRIAL:
       
       if (trial.response_ends_trial) {
-         setTimeout(() => end_trial(false), 500); //change to 500
+         setTimeout(() => end_trial(false), 1500); //change to 500
        }
     };
 
