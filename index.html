@@ -13,7 +13,6 @@
 </head>
 <body></body>
 <script>
-
     // Fixation duration, this is also currently used if the participant selects
     // "Space" -- neither Left or Right -- and no border is shown
     // for their selection
@@ -131,6 +130,7 @@
 
         var ctx = rv.getContext('2d');
         ctx.font = "36px Times New Roman, sans-serif";
+        ctx.fillStyle = "white"
         var n = 290 - 165
 
         //ctx.fillText("1", 40, 50);
@@ -734,7 +734,7 @@ var instr3 = {
     timeline.push(instr3)
     }
 
-
+    
 
 
 
@@ -756,7 +756,10 @@ var instr3 = {
     }
 
 
-    
+    if(fixedfirst==false){
+        timeline.push(show_rainbow)
+    }
+
 //Test 1 incentive
 var trial_training_fixed = {
     type: 'blocks',
