@@ -4,6 +4,7 @@
         <script src="jspsych/jspsych.js"></script>
         <!DOCTYPE html>
     <script src="jspsych/plugins/jspsych-blocks.js"></script>
+    <script src="jspsych/plugins/jspsych-blocks-exp.js"></script>
     <script src="jspsych/plugins/jspsych-rainbow.js"></script>
     <script src="jspsych/plugins/jspsych-call-function.js"></script>
     <script src="jspsych/plugins/jspsych-fullscreen.js"></script>
@@ -13,17 +14,24 @@
 <body></body>
 <script>
 
-    const fixation_duration = 500;
-
+    // Fixation duration, this is also currently used if the participant selects
+    // "Space" -- neither Left or Right -- and no border is shown
+    // for their selection
+    const fixation_duration = 500; 
+    
 
 
     var timeline = [];
-    //fullscreen
+
+    // Enter fullscreen:
     // timeline.push({
     // type: 'fullscreen',
     // fullscreen_mode: true
     // });
 
+    // This is a boolean variable that determines if the task with a fixed
+    // reward comes first or not. The two tasks are identical, but this will
+    // help with the data logging and final reward.
     var fixedfirst = true;
     if(Math.random() > .5){
         fixedfirst = true;
@@ -40,27 +48,34 @@
         trial_duration: fixation_duration,
     };
 
-
+    // This is the pink/blue rainbow
     var colors = [
     'rgb(237,48,137)', 'rgb(226,62,153)', 'rgb(211,77,167)', 'rgb(193.5,90,177.5)', 'rgb(172,103,185)', 'rgb(149,113.5,189)', 'rgb(125,122,189)', 'rgb(100,129.5,184.5)'
     ]
+
+    // Randomize the direction of the rainbow
     if(Math.random()>.5){
      colors.reverse();
-     console.log("Array reversed.")
+    //  console.log("Array reversed.")
     }
    
+    // This is the orange/green rainbow
     var colors2 = [
     'rgb(82.5,142,91)', 'rgb(100,140,73)', 'rgb(117,137,56.5)', 'rgb(134,133,41)', 'rgb(152,127.5,28.5)', 'rgb(169,120,20)', 'rgb(186.5,111.5,19.5)', 'rgb(202,101,27)'
     ]
+
+    //Randomize the direction of the rainbow
     if(Math.random()>.5){
      colors2.reverse();
-     console.log("Array reversed.")
+    //  console.log("Array reversed.")
     }
 
-    var j = 0;
-    var w = 0;
-    var trial_count = 1;
+    var j = 0; // This is the sum of all values for the left option
+    var w = 0; // This is the sum of all values for the right option
+    var trial_count = 1; // For data logging
     var col1 = []
+
+    //This determines which color spectrum for each experiment
     if(Math.random() > .5){
         col1 = colors
     } else{
@@ -68,11 +83,8 @@
     }
 
 
-    // function blank(b) {
-    //     var ctx = b.getContext('2d');
-    //     console.log("blank")
-    // }
-
+    //This creates a canvas rainbow element
+    
     function rainbow(z){
 
             var test=0;
@@ -110,10 +122,10 @@
             // ctx.fillStyle = colors[9];
             // ctx.fillRect(1125, 0, 100, 100);
     
-            console.log("RAINBOW")
+            // console.log("RAINBOW")
         }
    
-
+    //This creates a canvas element that displays the value of each color
     function rainbow_values(rv){
 
 
@@ -133,15 +145,21 @@
         // ctx.fillText("10", 290 + 7*n - 20, 50);
 
     }
+
+    //This creates a canvas element beneath the rainbow telling the 
+    //participant to press space to continue.
     function rainbow_text(rv){
 
         var ctx = rv.getContext('2d');
         ctx.font = "24px Times New Roman, sans-serif";
+        ctx.fillStyle = "white";
         // ctx.textAlign = 'center';
         //ctx.fillText("Colors farther to the right are worth more points.", 140, 50);
         ctx.fillText("Press the SPACE BAR to continue.", 450, 50);
 
     }
+
+    //Creates the object of six colors on the left
     function drawRectL(c){
         j = 0;
 
@@ -183,45 +201,49 @@
 
     }
 
+    //This shows the value of the objects in training.
+    //"incentive" in the var name will be removed, this is for both trainings
     function drawtext_l_incentive(l){
         var ctx = l.getContext('2d');
         var text = j
         ctx.font = "36px Times New Roman, sans-serif";
         ctx.textAlign = "center";
+        ctx.fillStyle = "white"
         ctx.fillText("   " + j, 140, 100);
             }
     function drawtext_r_incentive(r){
         var ctx = r.getContext('2d');
         ctx.font = "36px Times New Roman, sans-serif";
         ctx.textAlign = "center";
+        ctx.fillStyle = "white"
         ctx.fillText("   " + w, 140, 100);
             }
     var fixedvalleft = 0;
-    var fixedvalright = 0;
-    function drawtext_l_fixed(l){
-        var ctx = l.getContext('2d');
-        var text = j
-        ctx.font = "36px Times New Roman, sans-serif";
-        ctx.textAlign = "center";
-        if(j>=w){
-            fixedvalleft = "10";
-        } else{
-            fixedvalleft = "0";
-        }
-        ctx.fillText("   " + fixedvalleft, 140, 100);
-            }
+    // var fixedvalright = 0;
+    // function drawtext_l_incentive(l){
+    //     var ctx = l.getContext('2d');
+    //     var text = j
+    //     ctx.font = "36px Times New Roman, sans-serif";
+    //     ctx.textAlign = "center";
+    //     if(j>=w){
+    //         fixedvalleft = "10";
+    //     } else{
+    //         fixedvalleft = "0";
+    //     }
+    //     ctx.fillText("   " + fixedvalleft, 140, 100);
+    //         }
 
-    function drawtext_r_fixed(r){
-        var ctx = r.getContext('2d');
-        ctx.font = "36px Times New Roman, sans-serif";
-        ctx.textAlign = "center";
-        if(j<=w){
-            fixedvalright = "10";
-        } else{
-            fixedvalright = "0";
-        }
-        ctx.fillText("   " + fixedvalright, 140, 100);
-            }
+    // function drawtext_r_incentive(r){
+    //     var ctx = r.getContext('2d');
+    //     ctx.font = "36px Times New Roman, sans-serif";
+    //     ctx.textAlign = "center";
+    //     if(j<=w){
+    //         fixedvalright = "10";
+    //     } else{
+    //         fixedvalright = "0";
+    //     }
+    //     ctx.fillText("   " + fixedvalright, 140, 100);
+    //         }
     function drawRectR(d){
         w = 0;
 
@@ -261,17 +283,20 @@
 
     }
 
-
+    //This is actually now "coverBlack" technically
+    //It covers the values of the numbers in training until key press
+    //Then the numbers are shown
     function coverWhite(wh){
         var ctx = wh.getContext('2d');
         ctx.beginPath(); 
         var a = Math.floor(Math.random()*8);
-        ctx.fillStyle = "white";
+        ctx.fillStyle = "black";
         ctx.fillRect(0, 0, 200, 200);
             }
 
 
-    var n = 5;
+
+    var n = 5; //number of training trials
 
     var instr1 = {
         type: 'html-keyboard-response',
@@ -350,13 +375,11 @@ var instrincentive = {
         timeline.push(instrincentive)
     }
 
-    // if(fixedfirst==false){
-    //     timeline.push(instr4)
-    // }
-    
-if(fixedfirst==true){
-    timeline.push(instrfixed)
-}
+
+    //Show instructions for fixed if fixed trial is randomly assigned to come first
+    if(fixedfirst==true){
+        timeline.push(instrfixed)
+    }
 
     var instr5 = {
         type: 'html-keyboard-response',
@@ -413,7 +436,8 @@ var fail_training_3 = {
     }
 }
 
-
+//These are for determining if the participant passes the training
+//as well as data logging
 var acc = [];
 var acc2 = [];
 var acc3 = [];
@@ -421,7 +445,9 @@ var idx = 0;
 var idx2 = 0;
 var idx3 = 0;
 
-//Test 1 incentive
+
+
+//This is the training section for the trials where reward is summed (not fixed)
 var trial_training = {
     type: 'blocks',
     stimulus_L: drawRectL,
@@ -629,6 +655,8 @@ if(fixedfirst==false){
 
 //150 trials of main task
 
+//I think this was assuming the program would end if participant fails training for
+//the first task. I will update this
 if(fixedfirst==false){
     timeline.push(pass_training)
 }
@@ -644,11 +672,9 @@ acc_exp = []
 var idx4=0;
 //Experiment
 var experiment = {
-    type: 'blocks',
+    type: 'blocks-exp',
     stimulus_L: drawRectL,
     stimulus_R: drawRectR,
-    text_l: drawtext_l_incentive,
-    text_r: drawtext_r_incentive,
     coverWhite_f: coverWhite,
     choices: ['f','j', 'space'],
     on_finish: function(data){
@@ -713,7 +739,7 @@ var instr3 = {
 
 
 
-
+    //Make the color spectrum different
     var myfunc = function() {
         if(col1 == colors){
             col1 = colors2
@@ -721,7 +747,6 @@ var instr3 = {
             col1 = colors;
         }
     }
-
     var trialm = {
         type: 'call-function',
         func: myfunc
@@ -730,13 +755,15 @@ var instr3 = {
         timeline.push(trialm)
     }
 
+
+    
 //Test 1 incentive
 var trial_training_fixed = {
     type: 'blocks',
     stimulus_L: drawRectL,
     stimulus_R: drawRectR,
-    text_l: drawtext_l_fixed,
-    text_r: drawtext_r_fixed,
+    text_l: drawtext_l_incentive,
+    text_r: drawtext_r_incentive,
     coverWhite_f: coverWhite,
     choices: ['f','j', 'space'],
     on_finish: function(data){
@@ -779,8 +806,8 @@ var trial_training2_fixed = {
         type: 'blocks',
         stimulus_L: drawRectL,
         stimulus_R: drawRectR,
-        text_l: drawtext_l_fixed,
-        text_r: drawtext_r_fixed,
+        text_l: drawtext_l_incentive,
+        text_r: drawtext_r_incentive,
         coverWhite_f: coverWhite,
         choices: ['f','j', 'space'],
         on_finish: function(data){
@@ -822,8 +849,8 @@ var trial_training3_fixed = {
     type: 'blocks',
     stimulus_L: drawRectL,
     stimulus_R: drawRectR,
-    text_l: drawtext_l_fixed,
-    text_r: drawtext_r_fixed,
+    text_l: drawtext_l_incentive,
+    text_r: drawtext_r_incentive,
     coverWhite_f: coverWhite,
     choices: ['f','j', 'space'],
     on_finish: function(data){
@@ -946,11 +973,9 @@ acc_exp = []
 var idx4=0;
 //Experiment
 var experiment_fixed = {
-    type: 'blocks',
+    type: 'blocks-exp',
     stimulus_L: drawRectL,
     stimulus_R: drawRectR,
-    text_l: drawtext_l_fixed,
-    text_r: drawtext_r_fixed,
     coverWhite_f: coverWhite,
     choices: ['f','j', 'space'],
     on_finish: function(data){
@@ -996,8 +1021,10 @@ var experiment_node_fixed = {
 }
 timeline.push(experiment_node_fixed)
 
+
+//If fixed trials went first, then push the incentive ones:
 if(fixedfirst==true){
-    fixedfirst=false;
+    fixedfirst=false; //not sure if this is needed
     timeline.push(trialm)
     timeline.push(instrincentive)
     timeline.push(instr4)
