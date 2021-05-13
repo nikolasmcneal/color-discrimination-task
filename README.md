@@ -19,10 +19,11 @@
 * Canvas not perfectly centered (may not work with all resolutions)
 * Need to resolve final participant reward error
 * Need to update instructions
-* Need to remove values on the fixed reward rainbow
+* Need to fix what happens when participant fails training
 
 
 
+![blocks-rainbow-newest](/img/image4.png)
 ![blocks-rainbow-new](/img/image3.png)
 ![blocks-rainbow](/img/image2.png)
 ![blocks-old](/img/image.png)
