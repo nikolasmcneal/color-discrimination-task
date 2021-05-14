@@ -19,8 +19,6 @@
     // for their selection
     const fixation_duration = 500; 
     
-
-
     var timeline = [];
 
     // Enter fullscreen:
@@ -344,9 +342,9 @@
     var instr5 = {
         type: 'html-keyboard-response',
         stimulus:`<p>Each round, you will see two objects on the screen. Your task is to indicate which</p>
-        <p> of the two objects you want to choose. All objects will have positive values. You will be</p>
-        <p>rewarded based on your choices. In some rounds, you will gain a bonus for choosing the better</p>
-        <p>of the two options. In other rounds, you will simply gain the value of the object you selected.</p>
+        <p> of the two objects you want to choose. All objects will have positive values. You will gain</p>
+        <p>points based on your choices. In <b>fixed bonus rounds</b>, you will gain a bonus for choosing the better</p>
+        <p>of the two options . In <b>value-based rounds</b>, you will simply gain the value of the object you selected.</p>
         <p>We will always let you know which type of round you are in before you make any chocies.</p>
         <p>Press the SPACE BAR to continue.</p>`,
         choices: ['space']
@@ -355,13 +353,25 @@
 
     var instr6 = {
         type: 'html-keyboard-response',
-        stimulus:`<p>The following screen will display the colors you will see.</p>
-        <p>The values of the colors <b>increase</b> from left to right.</p>
+        stimulus:`<p>At the end of the task, you will gain a reward based on your performance in one of the two</p>
+        <p>types of rounds. You will have an equal chance of being rewarded based on the <b>fixed bonus</p>
+        <p>rounds</b> or the <b>value-based rounds</b>. If the <b>fixed bonus rounds</b> are selected</p>
+        <p>for pay out, you will gain the total number of points you earned for choosing the better option.</p>
+        <p>If the <b>value-based rounds</b> are selected for pay out, you will gain the total number of points</p>
+        <p>based on which options you selected.</p>
         <p>Press the SPACE BAR to continue.</p>`,
         choices: ['space']
     }
     timeline.push(instr6)
 
+    var instr7 = {
+        type: 'html-keyboard-response',
+        stimulus:`<p>The following screen will display the colors you will see.</p>
+        <p>The values of the colors <b>increase</b> from left to right.</p>
+        <p>Press the SPACE BAR to continue.</p>`,
+        choices: ['space']
+    }
+    timeline.push(instr7)
 
 
 var show_rainbow = {
