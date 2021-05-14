@@ -11,14 +11,12 @@
 * Rainbow is shown at beginning
 * Now two tasks
 * Randomizes selection of rainbow, direction of rainbow, and reward type
-
+* Instructions updated
 
 
 ## Needed Changes
 
-* Canvas not perfectly centered (may not work with all resolutions)
 * Need to resolve final participant reward error
-* Need to update instructions
 * Need to fix what happens when participant fails training
 
 
