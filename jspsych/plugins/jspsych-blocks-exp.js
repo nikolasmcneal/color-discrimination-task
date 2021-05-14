@@ -145,14 +145,14 @@ jsPsych.plugins["blocks-exp"] = (function () {
       var selected;
       if (String.fromCharCode(response.key) == trial.choices[0].toUpperCase()) {
         selected = '#canvas-border-left';
-        $(selected).css('border', `18px solid blue`);
+        $(selected).css('border', `18px solid gray`);
         selected2 = '#jspsych-white';
         $(selected2).remove();
         //import { j } from './index.html'
         //console.log(j);
       } else if(String.fromCharCode(response.key) == trial.choices[1].toUpperCase()) {
         selected = '#canvas-border-right';
-        $(selected).css('border', `18px solid blue`);
+        $(selected).css('border', `18px solid gray`);
         selected2 = '#jspsych-white';
         $(selected2).remove();
         //console.log(j);
