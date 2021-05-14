@@ -1,9 +1,10 @@
-<script src="jspsych/plugins/jquery-3.5.1.min.js"></script>
+<!DOCTYPE html>
 <html>
     <head>
-        <script src="jspsych/jspsych.js"></script>
-        <!DOCTYPE html>
+    <script src="jspsych/jspsych.js"></script>
+    <script src="jspsych/plugins/jquery-3.5.1.min.js"></script>
     <script src="jspsych/plugins/jspsych-blocks.js"></script>
+    <script src="jspsych/plugins/jspsych-image-keyboard-response.js"></script>
     <script src="jspsych/plugins/jspsych-blocks-exp.js"></script>
     <script src="jspsych/plugins/jspsych-rainbow.js"></script>
     <script src="jspsych/plugins/jspsych-call-function.js"></script>
@@ -38,7 +39,8 @@
         fixedfirst = false;
     }
 
-
+    //Reward
+    acc_reward = 10;
 
     var fixation = {
         type: 'html-keyboard-response',
@@ -310,35 +312,55 @@
     var instr2 = {
         type: 'html-keyboard-response',
         stimulus:`<p>Today, your task will be to choose between colorful objects. </p>
-        <p>Over 150 rounds, you will be choosing the better of two objects. The value of each</p>
-        <p>object is simply the sum of the values of the colored blocks in the object.</p>
-        <p>Each block is valued according to its color, and each color is worth a different</p>
-        <p>amount of points. In order to know the value of an object, you will need to</p>
-        <p>learn what each color is worth.</p>
-        <p>Press the SPACE BAR to continue. </p>`,
+        <p>To see an example, press the SPACE BAR. </p>`,
         choices: ['space']
     }
     timeline.push(instr2)
 
     var instr3 = {
-        type: 'html-keyboard-response',
-        stimulus:`<p>Each round, you will see two objects on the screen. Your task is to indicate which of the </p>
-        <p>two objects you want to choose. At the end of the experiment, one round will be selected</p>
-        <p>at random and you will receive the value of the object that you chose in that round.</p>
-        <p>Press the SPACE BAR to continue.</p>`,
-        choices: ['space']
+        type: 'image-keyboard-response',
+        stimulus: ['img/exampleobj.png'],
+        stimulus_height: 300,
+        stimulus_width: 450,
+        prompt: '<p>Hit the SPACE BAR to continue</p>',
+        choices: ['space'],
     }
     timeline.push(instr3)
 
     var instr4 = {
         type: 'html-keyboard-response',
-        stimulus:`<p>Some objects will have positive values, while others will have negative values. </p>
-        <p>The following screen will display the colors you will see.</p>
+        stimulus:
+        `<p>Over 200 rounds, you will be choosing the better of two objects. The value of each</p>
+        <p>object is simply the sum of the values of the colored blocks in the object.</p>
+        <p>Each block is valued according to its color, and each color is worth a different</p>
+        <p>amount of points. Also, each color is equally likely to appear. In order to know</p>
+        <p> the value of an object, you will need to learn what each color is worth.</p>
+        <p>Press the SPACE BAR to continue. </p>`,
+        choices: ['space']
+    }
+    timeline.push(instr4)
+
+
+    var instr5 = {
+        type: 'html-keyboard-response',
+        stimulus:`<p>Each round, you will see two objects on the screen. Your task is to indicate which</p>
+        <p> of the two objects you want to choose. All objects will have positive values. You will be</p>
+        <p>rewarded based on your choices. In some rounds, you will gain a bonus for choosing the better</p>
+        <p>of the two options. In other rounds, you will simply gain the value of the object you selected.</p>
+        <p>We will always let you know which type of round you are in before you make any chocies.</p>
+        <p>Press the SPACE BAR to continue.</p>`,
+        choices: ['space']
+    }
+    timeline.push(instr5)
+
+    var instr6 = {
+        type: 'html-keyboard-response',
+        stimulus:`<p>The following screen will display the colors you will see.</p>
         <p>The values of the colors <b>increase</b> from left to right.</p>
         <p>Press the SPACE BAR to continue.</p>`,
         choices: ['space']
     }
-    timeline.push(instr4)
+    timeline.push(instr6)
 
 
 
@@ -355,8 +377,8 @@ timeline.push(show_rainbow)
 
 var instrfixed = {
         type: 'html-keyboard-response',
-        stimulus:`<p>In the following task, you will receive a <b>fixed reward</b> for choosing the correct answer. </p>
-        <p>You will receive ten points for the correct answer, and zero points for the incorrect answer.</p>
+        stimulus:`<p>In the following rounds, you will receive a <b>fixed reward</b> for choosing the better option. </p>
+        <p>You will receive` + acc_reward + `points for selecting the better option, and zero points for selecting the worse option.</p>
         <p>Press the SPACE BAR to continue.</p>`,
         choices: ['space']
     }
@@ -366,8 +388,8 @@ var instrfixed = {
 
 var instrincentive = {
     type: 'html-keyboard-response',
-    stimulus:`<p>In the following task, you will receive an <b>incentive</b> for choosing the correct answer. </p>
-    <p>You will receive more points for the correct answer, and less points for the incorrect answer.</p>
+    stimulus:`<p>In the following rounds, you will receive the point value of the chosen option.</p>
+    <p>You will receive no reward for selecting the better option.</p>
     <p>Press the SPACE BAR to continue.</p>`,
     choices: ['space']
 }
@@ -722,22 +744,20 @@ if(fixedfirst==false){
 timeline.push(experiment_node)
 }
 
-
-var instr3 = {
+//@nickmcneal: Make a different version for each of the versions (i.e. accuracy and value), 
+//this way Participants learn how they did. And then repeat this at the end of the second
+//half. 
+var finish_p1 = {
         type: 'html-keyboard-response',
         stimulus:`<p>You have completed the first half of the experiment. </p>
+        <p>In this section, you earned`+acc_points+`points.</p>
         <p>In this second half, you will be choosing <b>fixed amount</b></p>
         <p>Press the SPACE BAR to continue.</p>`,
         choices: ['space']
     }
     if(fixedfirst==false){
-    timeline.push(instr3)
+    timeline.push(finish_p1)
     }
-
-    
-
-
-
 
     //Make the color spectrum different
     var myfunc = function() {
