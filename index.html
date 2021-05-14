@@ -342,9 +342,9 @@
     var instr5 = {
         type: 'html-keyboard-response',
         stimulus:`<p>Each round, you will see two objects on the screen. Your task is to indicate which</p>
-        <p> of the two objects you want to choose. All objects will have positive values. You will gain</p>
+        <p> of the two objects you want to choose. All objects will have positive values and you will gain</p>
         <p>points based on your choices. In <b>fixed bonus rounds</b>, you will gain a bonus for choosing the better</p>
-        <p>of the two options . In <b>value-based rounds</b>, you will simply gain the value of the object you selected.</p>
+        <p>of the two options. In <b>value-based rounds</b>, you will simply gain the value of the object you selected.</p>
         <p>We will always let you know which type of round you are in before you make any chocies.</p>
         <p>Press the SPACE BAR to continue.</p>`,
         choices: ['space']
@@ -366,8 +366,8 @@
 
     var instr7 = {
         type: 'html-keyboard-response',
-        stimulus:`<p>The following screen will display the colors you will see.</p>
-        <p>The values of the colors <b>increase</b> from left to right.</p>
+        stimulus:`<p>The following screen will display the colors you will see in the first</p>
+        <p>few rounds. The values of the colors <b>increase</b> from left to right.</p>
         <p>Press the SPACE BAR to continue.</p>`,
         choices: ['space']
     }
@@ -388,7 +388,7 @@ timeline.push(show_rainbow)
 var instrfixed = {
         type: 'html-keyboard-response',
         stimulus:`<p>In the following rounds, you will receive a <b>fixed reward</b> for choosing the better option. </p>
-        <p>You will receive` + acc_reward + `points for selecting the better option, and zero points for selecting the worse option.</p>
+        <p>You will receive ` + acc_reward + ` points for selecting the better option, and zero points for selecting the worse option.</p>
         <p>Press the SPACE BAR to continue.</p>`,
         choices: ['space']
     }
@@ -427,14 +427,32 @@ var instrincentive = {
 
 
 
-var pass_training = {
+var pass_training_FR = {
         type: 'html-keyboard-response',
         stimulus: `<p> You passed the training. </p> 
-        <p>You are now ready to begin the experiment.</p>
+        <p>You are now ready to begin the experiment. Remember, you will</p>
+        <p>receive `+acc_reward + `points for choosing the better option.</p>
         <p>When you are ready, rest your fingers on <b>F</b> and <b>J</b> and</p>
         <p>press the SPACE BAR to start the experiment.</p>`,
         choices: ['space']
     }
+if(fixedfirst==true){
+    timeline.push(pass_training_FR)
+}
+
+var pass_training_VB = {
+        type: 'html-keyboard-response',
+        stimulus: `<p> You passed the training. </p> 
+        <p>You are now ready to begin the experiment. Remember, you will</p>
+        <p>receive the point value of the chosen option.</p>
+        <p>When you are ready, rest your fingers on <b>F</b> and <b>J</b> and</p>
+        <p>press the SPACE BAR to start the experiment.</p>`,
+        choices: ['space']
+    }
+
+if(fixedfirst==false){
+    timeline.push(pass_training_VB)
+}
 
 var fail_training_1 = {
     type: 'html-keyboard-response',
@@ -690,7 +708,11 @@ if(fixedfirst==false){
 //I think this was assuming the program would end if participant fails training for
 //the first task. I will update this
 if(fixedfirst==false){
-    timeline.push(pass_training)
+    timeline.push(pass_training_VB)
+}
+
+if(fixedfirst==true){
+    timeline.push(pass_training_FR)
 }
 
 var reward_val;
