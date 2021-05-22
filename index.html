@@ -27,9 +27,7 @@
     // fullscreen_mode: true
     // });
 
-    // This is a boolean variable that determines if the task with a fixed
-    // reward comes first or not. The two tasks are identical, but this will
-    // help with the data logging and final reward.
+
     var fixedfirst = true;
     if(Math.random() > .5){
         fixedfirst = true;
@@ -47,34 +45,29 @@
         trial_duration: fixation_duration,
     };
 
-    // This is the pink/blue rainbow
     var colors = [
     'rgb(237,48,137)', 'rgb(226,62,153)', 'rgb(211,77,167)', 'rgb(193.5,90,177.5)', 'rgb(172,103,185)', 'rgb(149,113.5,189)', 'rgb(125,122,189)', 'rgb(100,129.5,184.5)'
     ]
-
-    // Randomize the direction of the rainbow
     if(Math.random()>.5){
      colors.reverse();
     //  console.log("Array reversed.")
-    }
-   
-    // This is the orange/green rainbow
+    }   
+
     var colors2 = [
     'rgb(82.5,142,91)', 'rgb(100,140,73)', 'rgb(117,137,56.5)', 'rgb(134,133,41)', 'rgb(152,127.5,28.5)', 'rgb(169,120,20)', 'rgb(186.5,111.5,19.5)', 'rgb(202,101,27)'
     ]
 
-    //Randomize the direction of the rainbow
     if(Math.random()>.5){
      colors2.reverse();
     //  console.log("Array reversed.")
     }
 
-    var j = 0; // This is the sum of all values for the left option
-    var w = 0; // This is the sum of all values for the right option
-    var trial_count = 1; // For data logging
+    var j = 0;
+    var w = 0; 
+    var trial_count = 1; 
     var col1 = []
 
-    //This determines which color spectrum for each experiment
+
     if(Math.random() > .5){
         col1 = colors
     } else{
@@ -82,7 +75,7 @@
     }
 
 
-    //This creates a canvas rainbow element
+
     
     function rainbow(z){
 
@@ -124,7 +117,7 @@
             // console.log("RAINBOW")
         }
    
-    //This creates a canvas element that displays the value of each color
+
     function rainbow_values(rv){
 
 
@@ -146,8 +139,7 @@
 
     }
 
-    //This creates a canvas element beneath the rainbow telling the 
-    //participant to press space to continue.
+   
     function rainbow_text(rv){
 
         var ctx = rv.getContext('2d');
@@ -159,7 +151,6 @@
 
     }
 
-    //Creates the object of six colors on the left
     function drawRectL(c){
         j = 0;
 
@@ -201,8 +192,7 @@
 
     }
 
-    //This shows the value of the objects in training.
-    //"incentive" in the var name will be removed, this is for both trainings
+
     function drawtext_l_incentive(l){
         var ctx = l.getContext('2d');
         var text = j
@@ -219,31 +209,7 @@
         ctx.fillText("   " + w, 140, 100);
             }
     var fixedvalleft = 0;
-    // var fixedvalright = 0;
-    // function drawtext_l_incentive(l){
-    //     var ctx = l.getContext('2d');
-    //     var text = j
-    //     ctx.font = "36px Times New Roman, sans-serif";
-    //     ctx.textAlign = "center";
-    //     if(j>=w){
-    //         fixedvalleft = "10";
-    //     } else{
-    //         fixedvalleft = "0";
-    //     }
-    //     ctx.fillText("   " + fixedvalleft, 140, 100);
-    //         }
 
-    // function drawtext_r_incentive(r){
-    //     var ctx = r.getContext('2d');
-    //     ctx.font = "36px Times New Roman, sans-serif";
-    //     ctx.textAlign = "center";
-    //     if(j<=w){
-    //         fixedvalright = "10";
-    //     } else{
-    //         fixedvalright = "0";
-    //     }
-    //     ctx.fillText("   " + fixedvalright, 140, 100);
-    //         }
     function drawRectR(d){
         w = 0;
 
@@ -283,9 +249,7 @@
 
     }
 
-    //This is actually now "coverBlack" technically
-    //It covers the values of the numbers in training until key press
-    //Then the numbers are shown
+
     function coverWhite(wh){
         var ctx = wh.getContext('2d');
         ctx.beginPath(); 
@@ -305,25 +269,22 @@
         <p>If you are ready to begin, please press the SPACE BAR.</p>`, //numerosity uses Space but Blair matlab code uses up arrow, which one
         choices: ['space']
     }
-    timeline.push(instr1)
 
     var instr2 = {
         type: 'html-keyboard-response',
-        stimulus:`<p>Today, your task will be to choose between colorful objects. </p>
+        stimulus:`<p>Today, your task will be to choose between two objects. </p>
         <p>To see an example, press the SPACE BAR. </p>`,
         choices: ['space']
     }
-    timeline.push(instr2)
 
     var instr3 = {
         type: 'image-keyboard-response',
         stimulus: ['img/exampleobj.png'],
         stimulus_height: 300,
         stimulus_width: 450,
-        prompt: '<p>Hit the SPACE BAR to continue</p>',
+        prompt: '<p>Press the SPACE BAR to continue</p>',
         choices: ['space'],
     }
-    timeline.push(instr3)
 
     var instr4 = {
         type: 'html-keyboard-response',
@@ -336,8 +297,6 @@
         <p>Press the SPACE BAR to continue. </p>`,
         choices: ['space']
     }
-    timeline.push(instr4)
-
 
     var instr5 = {
         type: 'html-keyboard-response',
@@ -349,7 +308,6 @@
         <p>Press the SPACE BAR to continue.</p>`,
         choices: ['space']
     }
-    timeline.push(instr5)
 
     var instr6 = {
         type: 'html-keyboard-response',
@@ -362,7 +320,6 @@
         <p>Press the SPACE BAR to continue.</p>`,
         choices: ['space']
     }
-    timeline.push(instr6)
 
     var instr7 = {
         type: 'html-keyboard-response',
@@ -371,8 +328,6 @@
         <p>Press the SPACE BAR to continue.</p>`,
         choices: ['space']
     }
-    timeline.push(instr7)
-
 
 var show_rainbow = {
     type: 'rainbow',
@@ -381,7 +336,7 @@ var show_rainbow = {
     text_parameter: rainbow_text,
     choices: ['space']
 }
-timeline.push(show_rainbow)
+
 
 
 
@@ -392,9 +347,6 @@ var instrfixed = {
         <p>Press the SPACE BAR to continue.</p>`,
         choices: ['space']
     }
-    if(fixedfirst==true){
-        timeline.push(instrfixed)
-    }
 
 var instrincentive = {
     type: 'html-keyboard-response',
@@ -403,40 +355,40 @@ var instrincentive = {
     <p>Press the SPACE BAR to continue.</p>`,
     choices: ['space']
 }
-    if(fixedfirst==false){
-        timeline.push(instrincentive)
-    }
 
 
-    //Show instructions for fixed if fixed trial is randomly assigned to come first
-    if(fixedfirst==true){
-        timeline.push(instrfixed)
-    }
 
-    var instr5 = {
+
+    var instr_start_training = {
         type: 'html-keyboard-response',
         stimulus:`<p>You will now begin the training. </p>
         <p>Six random colors will appear on the left, and six random colors will appear on the right.</p>
         <p>Press <b>F</b> to select left, and press <b>J</b> to select right</p>
         <p>When you are ready, rest your fingers on <b>F</b> and <b>J</b> and</p>
-        <p>press the SPACE BAR to continue.</p>`,
+        <p>Press the SPACE BAR to continue.</p>`,
         choices: ['space']
     }
-    timeline.push(instr5)
+
+
+
+    var instr_start_training_2 = {
+        type: 'html-keyboard-response',
+        stimulus:`<p>You will now begin the training. </p>
+        <p>When you are ready, rest your fingers on <b>F</b> and <b>J</b> and</p>
+        <p>Press the SPACE BAR to continue.</p>`,
+        choices: ['space']
+    }
 
     var pass_training_FR = {
         type: 'html-keyboard-response',
         stimulus: `<p> You passed the training. </p> 
         <p>You are now ready to begin the experiment. Remember, you will</p>
-        <p>receive `+acc_reward + `points for choosing the better option.</p>
+        <p>receive `+ acc_reward + `points for choosing the better option.</p>
         <p>When you are ready, rest your fingers on <b>F</b> and <b>J</b> and</p>
-        <p>press the SPACE BAR to start the experiment.</p>`,
+        <p>Press the SPACE BAR to start the experiment.</p>`,
         choices: ['space']
     }
     
-if(fixedfirst==true){
-    timeline.push(pass_training_FR)
-}
 
 var pass_training_VB = {
         type: 'html-keyboard-response',
@@ -448,9 +400,7 @@ var pass_training_VB = {
         choices: ['space']
     }
 
-if(fixedfirst==false){
-    timeline.push(pass_training_VB)
-}
+
 
 var fail_training_1 = {
     type: 'html-keyboard-response',
@@ -474,7 +424,7 @@ var fail_training_2 = {
 
 var fail_training_3 = {
     type: 'html-keyboard-response',
-    stimulus: `<p> You failed the training a third try. </p> 
+    stimulus: `<p> You failed the training a third try. Please do as best as you can in the experiment.</p> 
     <p></p>
     <p>Please press space to end the experiment.</p>
     `,
@@ -484,18 +434,20 @@ var fail_training_3 = {
     }
 }
 
-//These are for determining if the participant passes the training
-//as well as data logging
-var acc = [];
-var acc2 = [];
-var acc3 = [];
+
+var acc_VB = [];
+var acc2_VB = [];
+var acc3_VB = [];
+var acc_FR = [];
+var acc2_FR = [];
+var acc3_FR = []
 var idx = 0;
 var idx2 = 0;
 var idx3 = 0;
 
 
 
-//This is the training section for the trials where reward is summed (not fixed)
+
 var trial_training = {
     type: 'blocks',
     stimulus_L: drawRectL,
@@ -525,21 +477,19 @@ var trial_training = {
                 data.correct = 0;
             }
         }
-        acc[idx] = data.correct;
-        data.acc = acc;
+        acc_VB[idx] = data.correct;
+        data.acc_VB = acc_VB;
         idx++;
         data.trialN = trial_count;
         trial_count++;
     }
     //data: {shape: 'rectangle'}
 };
-var node = {
+var node_VB = {
     timeline: [fixation, trial_training],
     repetitions: n
 }
-if(fixedfirst==false){
-    timeline.push(node)
-}
+
 //Test 2
 var trial_training2 = {
         type: 'blocks',
@@ -570,8 +520,8 @@ var trial_training2 = {
                 data.correct = 0;
             }
         }
-            acc2[idx2] = data.correct;
-            data.acc2 = acc2;
+            acc2_VB[idx2] = data.correct;
+            data.acc2_VB = acc2_VB;
             idx2++;
             data.trialN = trial_count;
             trial_count++;
@@ -613,8 +563,8 @@ var trial_training3 = {
                 data.correct = 0;
             }
         }
-        acc3[idx3] = data.correct;
-        data.acc3 = acc3;
+        acc3_VB[idx3] = data.correct;
+        data.acc3_VB = acc3_VB;
         idx3++;
         data.trialN = trial_count;
         trial_count++;
@@ -630,17 +580,17 @@ var node3 = {
 
 //Conditional 1
 var accuracy;
-var conditional_1 = {
+var conditional_1_value = {
 timeline: [fail_training_1, node2],
     conditional_function: function(){
         accuracy = 0.00;
         var counter = 0;
-        for(var i = 0; i < acc.length; i++){
-            if(acc[i]==1){
+        for(var i = 0; i < acc_VB.length; i++){
+            if(acc_VB[i]==1){
                 counter++;
             }
         }
-        accuracy = counter / acc.length;
+        accuracy = counter / acc_VB.length;
         if(accuracy < 0.10){ //change to .70
             return true;
         } else{ 
@@ -648,82 +598,69 @@ timeline: [fail_training_1, node2],
         }
     }
 }
-if(fixedfirst==false){
-    timeline.push(conditional_1)
-}
+
 
 //Conditional 2
 var accuracy2 = 1;
-var conditional_2 = {
+var conditional_2_value = {
 timeline: [fail_training_2, node3],
     conditional_function: function(){
         accuracy2 = 0.00;
         var counter2 = 0;
-        for(var i = 0; i < acc2.length; i++){
-            if(acc2[i]==1){
+        for(var i = 0; i < acc2_VB.length; i++){
+            if(acc2_VB[i]==1){
                 counter2++;
             }
         }
-        accuracy2 = counter2 / acc2.length;
+        accuracy2 = counter2 / acc2_VB.length;
         if(accuracy2 < 0.70){
             return true;
         } else{ 
-            timeline.push(pass_training)
+            timeline.push(pass_training_VB)
             return false;
         }
     }
 }
-if(fixedfirst==false){
-    timeline.push(conditional_2)
-}
+
 //Conditional 3
 var accuracy3 = 1;
-var conditional_3 = {
+var conditional_3_value = {
 timeline: [fail_training_3],
     conditional_function: function(){
         accuracy3 = 0.00;
         var counter3 = 0;
-        for(var i = 0; i < acc3.length; i++){
-            if(acc3[i]==1){
+        for(var i = 0; i < acc3_VB.length; i++){
+            if(acc3_VB[i]==1){
                 counter3++;
             }
         }
-        accuracy3 = counter3 / acc3.length;
+        accuracy3 = counter3 / acc3_VB.length;
         if(accuracy3 < 0.70){
             return true;
         } else{ 
-            timeline.push(pass_training)
+            timeline.push(pass_training_VB)
             return false;
         }
     }
 }
-if(fixedfirst==false){
-    timeline.push(conditional_3)
-}
 
-//150 trials of main task
 
-//I think this was assuming the program would end if participant fails training for
-//the first task. I will update this
-if(fixedfirst==false){
-    timeline.push(pass_training_VB)
-}
-
-if(fixedfirst==true){
-    timeline.push(pass_training_FR)
-}
-
-var reward_val;
+var reward_val_VB;
+var reward_val_FR;
 var rand_reward = [];
 // var reward_val = 0;
 var left_arr = []
 var right_arr = []
 var all_arr = []
 var randidx;
-acc_exp = []
+acc_exp_FR = []
+acc_exp_VB = []
 var idx4=0;
+var left_value = []
+var right_value = []
+var valueScore;
 //Experiment
-var experiment = {
+var experiment_value = {
     type: 'blocks-exp',
     stimulus_L: drawRectL,
     stimulus_R: drawRectR,
@@ -750,46 +687,54 @@ var experiment = {
                 data.correct = 0;
             }
         }
-        acc_exp[idx4] = data.correct;
-        data.acc_exp = acc_exp;
+        acc_exp_VB[idx4] = data.correct;
+        data.acc_exp_VB = acc_exp_VB;
         data.trialN = trial_count;
         left_arr[idx4] = j;
-        data.left = left_arr;
+        left_value[idx4] = j
+        data.left_VB = left_value
         right_arr[idx4] = w;
-        data.right = right_arr;
+        right_value[idx4] = w
+        data.right_VB = right_value
         idx4++;
         data.trialN = trial_count;
         trial_count++;
         all_arr = left_arr.concat(right_arr);
+        data.all_arr_VB = all_arr
     }
-    //data: {shape: 'rectangle'}
+
 };
 
 
-var experiment_node = {
-    timeline: [fixation, experiment],
+var experiment_node_value = {
+    timeline: [fixation, experiment_value],
     repetitions: 2
 }
-if(fixedfirst==false){
-timeline.push(experiment_node)
-}
+
 
 var acc_points = 0;
+var fixed_points = 0;
+var value_points = 0;
     
-//@nickmcneal: Make a different version for each of the versions (i.e. accuracy and value), 
-//this way Participants learn how they did. And then repeat this at the end of the second
-//half. 
-var finish_p1 = {
+
+var finish_p1_fixed_done = {
         type: 'html-keyboard-response',
         stimulus:`<p>You have completed the first half of the experiment. </p>
-        <p>In this section, you earned`+acc_points+`points.</p>
-        <p>In this second half, you will be choosing <b>fixed amount</b></p>
+        <p>In this section, you earned` + fixed_points + `points.</p>
+        <p>In this second half, you will be choosing <b>value-based</b></p>
         <p>Press the SPACE BAR to continue.</p>`,
         choices: ['space']
     }
-    if(fixedfirst==false){
-    timeline.push(finish_p1)
+
+    var finish_p1_value_done = {
+        type: 'html-keyboard-response',
+        stimulus:`<p>You have completed the first half of the experiment. </p>
+        <p>In this section, you earned`+ value_points+ `points.</p>
+        <p>In this second half, you will be choosing <b>value-based</b></p>
+        <p>Press the SPACE BAR to continue.</p>`,
+        choices: ['space']
     }
+
 
     //Make the color spectrum different
     var myfunc = function() {
@@ -802,14 +747,6 @@ var finish_p1 = {
     var trialm = {
         type: 'call-function',
         func: myfunc
-    }
-    if(fixedfirst==false){
-        timeline.push(trialm)
-    }
-
-
-    if(fixedfirst==false){
-        timeline.push(show_rainbow)
     }
 
 //Test 1 incentive
@@ -842,8 +779,8 @@ var trial_training_fixed = {
                 data.correct = 0;
             }
         }
-        acc[idx] = data.correct;
-        data.acc = acc;
+        acc_FR[idx] = data.correct;
+        data.acc_FR = acc_FR;
         idx++;
         data.trialN = trial_count;
         trial_count++;
@@ -854,7 +791,7 @@ var node_fixed = {
     timeline: [fixation, trial_training_fixed],
     repetitions: n
 }
-timeline.push(node_fixed)
+
 
 //Test 2
 var trial_training2_fixed = {
@@ -886,8 +823,8 @@ var trial_training2_fixed = {
                 data.correct = 0;
             }
         }
-            acc2[idx2] = data.correct;
-            data.acc2 = acc2;
+            acc2_FR[idx2] = data.correct;
+            data.acc2_FR = acc2_FR;
             idx2++;
             data.trialN = trial_count;
             trial_count++;
@@ -929,8 +866,8 @@ var trial_training3_fixed = {
                 data.correct = 0;
             }
         }
-        acc3[idx3] = data.correct;
-        data.acc3 = acc3;
+        acc3_FR[idx3] = data.correct;
+        data.acc3_FR = acc3_FR;
         idx3++;
         data.trialN = trial_count;
         trial_count++;
@@ -943,6 +880,7 @@ var node3_fixed = {
 }
 
 
+var pass_FR;
 
 //Conditional 1
 var accuracy;
@@ -951,20 +889,21 @@ timeline: [fail_training_1, node2_fixed],
     conditional_function: function(){
         accuracy = 0.00;
         var counter = 0;
-        for(var i = 0; i < acc.length; i++){
-            if(acc[i]==1){
+        for(var i = 0; i < acc_FR.length; i++){
+            if(acc_FR[i]==1){
                 counter++;
             }
         }
-        accuracy = counter / acc.length;
+        accuracy = counter / acc_FR.length;
         if(accuracy < 0.10){ //change to .70
             return true;
         } else{ 
+            pass_FR = true;
             return false;
         }
     }
 }
-timeline.push(conditional_1_fixed)
+
 
 
 //Conditional 2
@@ -974,21 +913,22 @@ timeline: [fail_training_2, node3_fixed],
     conditional_function: function(){
         accuracy2 = 0.00;
         var counter2 = 0;
-        for(var i = 0; i < acc2.length; i++){
-            if(acc2[i]==1){
+        for(var i = 0; i < acc2_FR.length; i++){
+            if(acc2_FR[i]==1){
                 counter2++;
             }
         }
-        accuracy2 = counter2 / acc2.length;
+        accuracy2 = counter2 / acc2_FR.length;
         if(accuracy2 < 0.70){
             return true;
         } else{ 
-            timeline.push(pass_training)
+            console.log("test")
+            pass_FR = true;
             return false;
         }
     }
 }
-timeline.push(conditional_2_fixed)
+
 
 //Conditional 3
 var accuracy3 = 1;
@@ -997,26 +937,41 @@ timeline: [fail_training_3],
     conditional_function: function(){
         accuracy3 = 0.00;
         var counter3 = 0;
-        for(var i = 0; i < acc3.length; i++){
-            if(acc3[i]==1){
+        for(var i = 0; i < acc3_FR.length; i++){
+            if(acc3_FR[i]==1){
                 counter3++;
             }
         }
-        accuracy3 = counter3 / acc3.length;
+        accuracy3 = counter3 / acc3_FR.length;
         if(accuracy3 < 0.70){
             return true;
         } else{ 
-            timeline.push(pass_training)
+            console.log("test")
+            pass_FR = true;
             return false;
         }
     }
 }
-timeline.push(conditional_3_fixed)
+
 
 
 //150 trials of main task
 
-timeline.push(pass_training)
+// timeline.push(pass_training_FR) //?
+
+
+    //Make the color spectrum different
+    var myfunc2 = function() {
+        if(pass_FR){
+            timeline.push(pass_training_FR)
+        }
+    }
+    var trialm2 = {
+        type: 'call-function',
+        func: myfunc2
+    }
+
+
 var reward_val;
 var rand_reward = [];
 // var reward_val = 0;
@@ -1024,8 +979,9 @@ var left_arr = []
 var right_arr = []
 var all_arr = []
 var randidx;
-acc_exp = []
-var idx4=0;
+var idx5=0;
+var left_fixed = []
+var right_fixed = []
 //Experiment
 var experiment_fixed = {
     type: 'blocks-exp',
@@ -1054,17 +1010,20 @@ var experiment_fixed = {
                 data.correct = 0;
             }
         }
-        acc_exp[idx4] = data.correct;
-        data.acc_exp = acc_exp;
+        acc_exp_FR[idx5] = data.correct;
+        data.acc_exp_FR = acc_exp_FR;
         data.trialN = trial_count;
-        left_arr[idx4] = j;
-        data.left = left_arr;
-        right_arr[idx4] = w;
-        data.right = right_arr;
-        idx4++;
+        // left_arr[idx5] = j;
+        left_fixed[idx5] = j
+        data.left_FR = left_fixed //change to j for just one
+        // right_arr[idx5] = w;
+        right_fixed[idx5] = w
+        data.right_FR = right_fixed //change to w for just one
+        idx5++;
         data.trialN = trial_count;
         trial_count++;
-        all_arr = left_arr.concat(right_arr);
+        // all_arr = left_arr.concat(right_arr);
+        
     }
     //data: {shape: 'rectangle'}
 };
@@ -1074,67 +1033,176 @@ var experiment_node_fixed = {
     timeline: [fixation, experiment_fixed],
     repetitions: 2
 }
-timeline.push(experiment_node_fixed)
+// timeline.push(experiment_node_fixed)
 
 
-//If fixed trials went first, then push the incentive ones:
+//Instructions
+var instr_arr = [instr1, instr2, instr3, instr4, instr5, instr6, instr7]
+timeline = timeline.concat(instr_arr)
+
+
+
 if(fixedfirst==true){
-    fixedfirst=false; //not sure if this is needed
-    timeline.push(trialm)
-    timeline.push(instrincentive)
-    timeline.push(instr4)
     timeline.push(show_rainbow)
-    timeline.push()
-    timeline.push(node)
-    timeline.push(conditional_1)
-    timeline.push(conditional_2)
-    timeline.push(conditional_3)
-    timeline.push(pass_training)
-    timeline.push(experiment_node)
+    timeline.push(instrfixed)
+    timeline.push(instr_start_training)
+    timeline.push(node_fixed)
+    timeline.push(conditional_1_fixed)
+    timeline.push(conditional_2_fixed)
+    timeline.push(conditional_3_fixed)
+    timeline.push(pass_training_FR)
+    timeline.push(experiment_node_fixed)
+    timeline.push(finish_p1_fixed_done)
+    timeline.push(trialm)
+
+    timeline.push(instrincentive)
+    timeline.push(show_rainbow)
+    timeline.push(instrincentive)
+    timeline.push(instr_start_training_2)
+    timeline.push(node_VB)
+    timeline.push(conditional_1_value)
+    timeline.push(conditional_2_value)
+    timeline.push(conditional_3_value)
+    timeline.push(pass_training_VB)
+    // timeline.push(pass_training_VB)
+    timeline.push(experiment_node_value)
+} else{
+    timeline.push(show_rainbow)
+    timeline.push(instrincentive)
+    timeline.push(instr_start_training_2)
+    timeline.push(node_VB)
+    timeline.push(conditional_1_value)
+    timeline.push(conditional_2_value)
+    timeline.push(conditional_3_value)
+    timeline.push(pass_training_VB)
+    timeline.push(experiment_node_value)
+    timeline.push(finish_p1_value_done)
+    timeline.push(trialm)
+
+    timeline.push(instrfixed)
+    timeline.push(instr_start_training)
+    timeline.push(node_fixed)
+    timeline.push(conditional_1_fixed)
+    timeline.push(conditional_2_fixed)
+    timeline.push(conditional_3_fixed)
+    timeline.push(pass_training_FR)
+    timeline.push(experiment_node_fixed)
 }
 
 
+var reward_is_VB;
+var reward_is_FR;
+if(Math.random() < .5){
+    reward_is_VB = true;
+} else{
+    reward_is_FR = true;
+}
 
-
-var reward_function = function(){
+var reward_function_VB = function(){
         randidx = Math.floor(Math.random() * all_arr.length)
-        reward_val = all_arr[randidx]
-
-        // reward_val = 4;        
-        //return reward_val;
-        console.log(reward_val)
-        return reward_val
+        var reward_val_VB = all_arr[randidx]
+        console.log(reward_val_VB)
+        return reward_val_VB
 }
 
-var reward_node = {
+var reward_node_VB = {
     type: 'call-function',
-    func: reward_function,
+    func: reward_function_VB,
     on_finish: function(data){
         data.randidx = randidx;
-        data.reward_val = reward_val;
+        data.reward_val_VB = reward_val_VB;
     }
 }
-timeline.push(reward_node)
+timeline.push(reward_node_VB)
+var randidx_FR;
+var final_reward_boolean;
+var final_reward;
+var reward_function_FR = function(){
+        randidx_FR = Math.floor(Math.random() * acc_exp_FR.length)
+        var final_reward_boolean = acc_exp_FR[randidx_FR]
+        if(final_reward_boolean == 1){
+            if(left_fixed[randidx] > right_fixed[randidx_FR]){
+                final_reward_value = left_fixed[randidx_FR];
+            }else{
+                final_reward_value = right_fixed[randidx_FR]
+            }
+        } else{
+            final_reward_value = 0;
+        }
 
+        return final_reward_value;
+}
 
-var reward = { //trial onset
-        type: 'html-keyboard-response',
-        stimulus: `<p> You have completed the experiment! </p> 
-        <p>One correct trial was selected at random, and you are rewarded the value of that choice.</p>
-        <p>Your reward is $` + reward_val + `.</p>`,
-        choices: ['space'] //Need to figure out how to write JS var in HTML
+var reward_node_FR = {
+    type: 'call-function',
+    func: reward_function_FR,
+    on_finish: function(data){
+        data.randidx_FR = randidx_FR;
+        data.left_FR = left_fixed;
+        data.right_FR = right_fixed;
+        data.final_reward_value = final_reward_value;
+        data.final_reward_boolean = final_reward_boolean
+        data.fixed_acc = acc_exp_FR
     }
-timeline.push(reward)
-// if(reward_val != 0){
-//     timeline.push(reward)
-// }
+}
+timeline.push(reward_node_FR)
+
+
+
+var reward_VB = {
+        type: 'html-keyboard-response',
+        choices: ['space'],
+        on_start: function(trial){
+            trial.stimulus = `<p> You have completed the experiment! </p> 
+        <p>Your reward will be from the value-based trials..</p>    
+        <p>One correct trial was selected at random, and you are rewarded the value of that choice.</p>
+        <p>Your reward is $` + reward_function_VB() + `.</p>`
+        }
+    }
+if(reward_is_VB){
+    timeline.push(reward_VB)
+}
+
+var reward_FR_correct = {
+        type: 'html-keyboard-response',
+        choices: ['space'],
+        on_start: function(trial){
+            trial.stimulus = `<p> You have completed the experiment! </p> \
+        <p>Your reward will be from the fixed-reward trials..</p>    
+        <p>One trial was selected at random, which you got correct!.</p>
+        <p>Your reward is $` + reward_function_FR() + `.</p>`
+        }
+    }
+
+var reward_FR_incorrect = {
+        type: 'html-keyboard-response',
+        choices: ['space'],
+        on_start: function(trial){
+            trial.stimulus = `<p> You have completed the experiment! </p> \
+        <p>Your reward will be from the fixed-reward trials..</p>    
+        <p>One trial was selected at random, which you unfortunately did not get correct.</p>
+        <p>Your reward is $` + reward_function_FR() + `.</p>`
+        }
+    }
+
+if(reward_is_FR){
+    if(reward_val_FR == 0){
+        timeline.push(reward_FR_incorrect)
+    } else{
+        timelien.push(reward_FR_correct)
+    }
+}
+
+
+
 
 
 
     jsPsych.init({
         timeline,
         on_finish: function () { 
-            jsPsych.data.displayData(); 
+            jsPsych.data.displayData();
+            jsPsych.data.get().localSave('csv','mydata.csv'); 
         }
     });
 </script>
