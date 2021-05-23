@@ -1,6 +1,6 @@
 # Color-Discrimination-Task
 
-## Progress (May 14 2021)
+## Progress (May 22 2021)
 
 * Now coded with 'jspsych-blocks' and 'jspsych-rainbow'
 * Fixation cross added
@@ -12,13 +12,12 @@
 * Now two tasks
 * Randomizes selection of rainbow, direction of rainbow, and reward type
 * Instructions updated
-
+* Reward system fixed
 
 ## Needed Changes
 
-* Need to resolve final participant reward error
 * Need to fix what happens when participant fails training
-
+* Instructions need extra update
 
 
 ![blocks-rainbow-newest](/img/image4.png)
