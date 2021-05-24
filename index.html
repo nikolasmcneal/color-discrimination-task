@@ -27,7 +27,6 @@
     // fullscreen_mode: true
     // });
 
-
     var fixedfirst = true;
     if(Math.random() > .5){
         fixedfirst = true;
@@ -302,7 +301,7 @@
         type: 'html-keyboard-response',
         stimulus:`<p>Each round, you will see two objects on the screen. Your task is to indicate which</p>
         <p> of the two objects you want to choose. All objects will have positive values and you will gain</p>
-        <p>points based on your choices. In <b>fixed bonus rounds</b>, you will gain a bonus for choosing the better</p>
+        <p>points based on your choices. In <b>accuracy-based rounds</b>, you will gain a bonus for choosing the better</p>
         <p>of the two options. In <b>value-based rounds</b>, you will simply gain the value of the object you selected.</p>
         <p>We will always let you know which type of round you are in before you make any chocies.</p>
         <p>Press the SPACE BAR to continue.</p>`,
@@ -311,12 +310,13 @@
 
     var instr6 = {
         type: 'html-keyboard-response',
-        stimulus:`<p>At the end of the task, you will gain a reward based on your performance in one of the two</p>
-        <p>types of rounds. You will have an equal chance of being rewarded based on the <b>fixed bonus</p>
-        <p>rounds</b> or the <b>value-based rounds</b>. If the <b>fixed bonus rounds</b> are selected</p>
-        <p>for pay out, you will gain the total number of points you earned for choosing the better option.</p>
-        <p>If the <b>value-based rounds</b> are selected for pay out, you will gain the total number of points</p>
-        <p>based on which options you selected.</p>
+        stimulus:
+        `<p>At the end of the task, you will gain a reward based on your performance in one of the two types</p>
+        <p>of rounds. You will have an equal chance of being rewarded based on the <b>accuracy-based rounds</b></p>
+        <p>or the <b>value-based rounds</b>. If a <b>accuracy-based round</b> is selected for pay out, you will</p>
+        <p>gain `+acc_reward+` points if you selected the better option in that round, but 0 points of you selected </p>
+        <p>the worse option. If a <b>value-based round</b> is selected, you will gain the point value of the option</p>
+        <p>you selected, regardless of whether it is the better or worse option.</p>
         <p>Press the SPACE BAR to continue.</p>`,
         choices: ['space']
     }
@@ -342,7 +342,7 @@ var show_rainbow = {
 
 var instrfixed = {
         type: 'html-keyboard-response',
-        stimulus:`<p>In the following rounds, you will receive a <b>fixed reward</b> for choosing the better option. </p>
+        stimulus:`<p>In the following rounds, you will receive an <b>accuracy-based reward</b> for choosing the better option. </p>
         <p>You will receive ` + acc_reward + ` points for selecting the better option, and zero points for selecting the worse option.</p>
         <p>Press the SPACE BAR to continue.</p>`,
         choices: ['space']
@@ -719,18 +719,16 @@ var value_points = 0;
 
 var finish_p1_fixed_done = {
         type: 'html-keyboard-response',
-        stimulus:`<p>You have completed the first half of the experiment. </p>
-        <p>In this section, you earned` + fixed_points + `points.</p>
-        <p>In this second half, you will be choosing <b>value-based</b></p>
+        stimulus:`<p>You have completed the first half of the experiment. In this section,</p>
+        <p>you earned ` + fixed_points + ` points. In this half, your bonus will be <b>value-based</b>.</p>
         <p>Press the SPACE BAR to continue.</p>`,
         choices: ['space']
     }
 
     var finish_p1_value_done = {
         type: 'html-keyboard-response',
-        stimulus:`<p>You have completed the first half of the experiment. </p>
-        <p>In this section, you earned`+ value_points+ `points.</p>
-        <p>In this second half, you will be choosing <b>value-based</b></p>
+        stimulus:`<p>You have completed the first half of the experiment. In this section,</p>
+        <p>you earned `+ value_points+ ` points. In this half, your bonus will be <b>accuracy-based</b>.</p>
         <p>Press the SPACE BAR to continue.</p>`,
         choices: ['space']
     }
@@ -1080,6 +1078,7 @@ if(fixedfirst==true){
     timeline.push(trialm)
 
     timeline.push(instrfixed)
+    timeline.push(show_rainbow)
     timeline.push(instr_start_training)
     timeline.push(node_fixed)
     timeline.push(conditional_1_fixed)
@@ -1154,8 +1153,8 @@ var reward_VB = {
         choices: ['space'],
         on_start: function(trial){
             trial.stimulus = `<p> You have completed the experiment! </p> 
-        <p>Your reward will be from the value-based trials..</p>    
-        <p>One correct trial was selected at random, and you are rewarded the value of that choice.</p>
+        <p>Your reward will be from the value-based trials.</p>    
+        <p>One trial was selected at random, and you are rewarded the value of that choice.</p>
         <p>Your reward is $` + reward_function_VB() + `.</p>`
         }
     }
@@ -1168,7 +1167,7 @@ var reward_FR_correct = {
         choices: ['space'],
         on_start: function(trial){
             trial.stimulus = `<p> You have completed the experiment! </p> \
-        <p>Your reward will be from the fixed-reward trials..</p>    
+        <p>Your reward will be from the accuracy-based trials.</p>    
         <p>One trial was selected at random, which you got correct!.</p>
         <p>Your reward is $` + reward_function_FR() + `.</p>`
         }
@@ -1179,7 +1178,7 @@ var reward_FR_incorrect = {
         choices: ['space'],
         on_start: function(trial){
             trial.stimulus = `<p> You have completed the experiment! </p> \
-        <p>Your reward will be from the fixed-reward trials..</p>    
+        <p>Your reward will be from the accuracy-based trials.</p>    
         <p>One trial was selected at random, which you unfortunately did not get correct.</p>
         <p>Your reward is $` + reward_function_FR() + `.</p>`
         }
@@ -1193,6 +1192,18 @@ if(reward_is_FR){
     }
 }
 
+//Intro demographic screen
+var demo_trial = {
+    type: 'survey-text',
+    preamble: "<p>Please answer the following demographic questions</p>",
+    questions: [
+        {prompt: "What is your worker ID?", name: 'workerID'}, 
+        {prompt: "What is your age?", name: 'Age'},
+        {prompt: "What is your gender identify? (Female/Male/Non-binary/Other/Prefer not to say", name: "Gender"},
+        {prompt: "Do you have full color vision? (Yes/No)", name: 'colorblind'}
+    ],
+};
+timeline.push(demo_trial);
 
 
 
