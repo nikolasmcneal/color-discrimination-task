@@ -14,10 +14,6 @@
 * Instructions updated
 * Reward system fixed
 
-## Needed Changes
-
-* Need to fix what happens when participant fails training
-* Instructions need extra update
 
 
 ![blocks-rainbow-newest](/img/image4.png)
