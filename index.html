@@ -74,9 +74,23 @@
         col1 = colors2
     }
 
+// var a;
+// var b;
+// var c;
+// var d;
+// var e;
+// var f;
 
+// var g;
+// var h;
+// var i;
+// var j;
+// var k;
+// var l;
 
-    
+var arr_L
+var arr_R
+
     function rainbow(z){
 
             var test=0;
@@ -182,13 +196,11 @@
         ctx.fillRect(250, 125, 100, 100);
 
 
-        var arr_L = [a, b, c, d, e, f]
+        arr_L = [a, b, c, d, e, f]
         for(var i = 0; i < arr_L.length; ++i){
             j += (arr_L[i]+1); 
         }
-        console.log("arr_L :" + j)
-        // export { j };
-        
+        arr_L = [a+1, b+1, c+1, d+1, e+1, f+1]
 
     }
 
@@ -210,41 +222,48 @@
             }
     var fixedvalleft = 0;
 
-    function drawRectR(d){
+    function drawRectR(d, arr_right){
         w = 0;
 
         var ctx = d.getContext('2d');
         ctx.beginPath();
         
-        var g = Math.floor(Math.random()*8);
-        ctx.fillStyle = col1[g];
+        // var g = Math.floor(Math.random()*8);
+        // ctx.fillStyle = col1[g];
+        ctx.fillStyle = col1[arr_right[0]]
         ctx.fillRect(0, 0, 100, 100);
 
-        var h = Math.floor(Math.random()*8);
-        ctx.fillStyle = col1[h];
+        // var h = Math.floor(Math.random()*8);
+        // ctx.fillStyle = col1[h];
+        ctx.fillStyle = col1[arr_right[1]]
         ctx.fillRect(125, 0, 100, 100);
         
-        var i = Math.floor(Math.random()*8);
-        ctx.fillStyle = col1[i];
+        // var i = Math.floor(Math.random()*8);
+        // ctx.fillStyle = col1[i];
+        ctx.fillStyle = col1[arr_right[2]]
         ctx.fillRect(250, 0, 100, 100);
 
-        var j = Math.floor(Math.random()*8);
-        ctx.fillStyle = col1[j];
+        // var j = Math.floor(Math.random()*8);
+        // ctx.fillStyle = col1[j];
+        ctx.fillStyle = col1[arr_right[3]]
         ctx.fillRect(0, 125, 100, 100);
 
-        var k = Math.floor(Math.random()*8);
-        ctx.fillStyle = col1[k];
+        // var k = Math.floor(Math.random()*8);
+        // ctx.fillStyle = col1[k];
+        ctx.fillStyle = col1[arr_right[4]]
         ctx.fillRect(125, 125, 100, 100);
 
-        var l = Math.floor(Math.random()*8);
-        ctx.fillStyle = col1[l];
+        // var l = Math.floor(Math.random()*8);
+        // ctx.fillStyle = col1[l];
+        ctx.fillStyle = col1[arr_right[5]]
         ctx.fillRect(250, 125, 100, 100);
         
-        var arr_R = [g, h, i, j, k, l]
-        for(var z = 0; z < arr_R.length; ++z){
-            w += (arr_R[z]+1); 
+        for(var z = 0; z < arr_right.length; ++z){
+            w += (arr_right[z]+1);
+            // arr_right[z] = arr_right[z]+1
         }
-        console.log("arr_R :" + w)
+        // arr_right = [arr_right[0]+1, arr_right[1]+1, arr_right[2]+1, arr_right[3]+1, arr_right[4]+1, arr_right[5]+1]
+        // console.log("arr_R :" + w)
 
 
     }
@@ -718,6 +737,21 @@ var experiment_value = {
         data.left_experiment_VB_value = j
         right_value[idx4] = w
         data.right_experiment_VB_value = w
+        // data.l_topleft = a
+        // data.l_topmiddle = b
+        // data.l_topright = c
+        // data.l_bottomleft = d
+        // data.l_bottommiddle = e
+        // data.l_bottomright = f
+
+        // data.r_topleft = g
+        // data.r_topmiddle = h
+        // data.r_topright = i
+        // data.r_bottomleft = j
+        // data.r_bottommiddle = k
+        // data.r_bottomright = l
+        data.arr_L = arr_L
+        data.arr_R = arr_R
         idx4++;
         data.trialN = trial_count;
         trial_count++;
@@ -1048,6 +1082,21 @@ var experiment_fixed = {
         right_fixed[idxt] = w
         // data.right_FR = right_fixed //change to w for just one
         data.experiment_FR_right = w
+        // data.l_topleft = a
+        // data.l_topmiddle = b
+        // data.l_topright = c
+        // data.l_bottomleft = d
+        // data.l_bottommiddle = e
+        // data.l_bottomright = f
+
+        // data.r_topleft = g
+        // data.r_topmiddle = h
+        // data.r_topright = i
+        // data.r_bottomleft = j
+        // data.r_bottommiddle = k
+        // data.r_bottomright = l
+        data.arr_L = arr_L
+        data.arr_R = arr_R
         idxt++;
         data.trialN = trial_count;
         trial_count++;
@@ -1223,34 +1272,48 @@ var reward_FR_incorrect = {
 
 
 
-var determine_FR_reward_type = function(){
-    if(reward_is_FR){
-    if(final_reward_value == 0){
-        timeline.push(reward_FR_incorrect)
-    } else{
-        timeline.push(reward_FR_correct)
-    }
-}
+    // var determine_FR_reward_type = function(){
+    //     if(reward_is_FR){
+    //         if(final_reward_value == 0){
+    //             timeline.push(reward_FR_incorrect)
+    //         } else{
+    //             timeline.push(reward_FR_correct)
+    //         }
+    //     }
+    // }
 
 
-}
 
-var node_FR_reward = {
-    type: 'call-function',
-    func: determine_FR_reward_type,
-    on_start: function(timeline){
-        //what goes here
+    //CODE
+    // var node_FR_reward = {
+    //     type: 'call-function',
+    //     // func: determine_FR_reward_type,
+    //     on_start: function(timeline){
+    //             if(reward_is_FR){
+    //             if(final_reward_value == 0){
+    //                 timeline.push(reward_FR_incorrect)
+    //             } else{
+    //                 timeline.push(reward_FR_correct)
+    //             }
+    //         }
+    //     }
+    // }
     
-    }
-}
-timeline.push(node_FR_reward)
+    // timeline.push(node_FR_reward)
 
 
 
 
 
 
+//add values during training
+//split array into indices
+//add color rainbow direction BP or OG
+//filter data for blocks and blocks-exp only
+//restart trial_indx for training and exp
+//replace 70, 74, 32 L, R, Space
 
+//training don't let value of both objects be the same
 
 
 
