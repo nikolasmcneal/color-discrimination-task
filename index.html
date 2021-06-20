@@ -358,13 +358,13 @@ var arr_R
     }
 
 
-var show_rainbow = {
-    type: 'rainbow',
-    rainbow_parameter: rainbow,
-    rainbow_values_parameter: rainbow_values,
-    text_parameter: rainbow_text,
-    choices: ['space']
-}
+    var show_rainbow = {
+        type: 'rainbow',
+        rainbow_parameter: rainbow,
+        rainbow_values_parameter: rainbow_values,
+        text_parameter: rainbow_text,
+        choices: ['space']
+    }
 
 
 
@@ -1270,36 +1270,76 @@ var reward_FR_incorrect = {
 
 
 
+    var reward_FR_is_correct
+
+    var determine_FR_reward_type = function(){
+        if(reward_is_FR){
+            if(final_reward_value == 0){
+                reward_FR_is_correct = false;
+            } else{
+                reward_FR_is_correct = true;
+            }
+        }
+    }
 
 
-    // var determine_FR_reward_type = function(){
-    //     if(reward_is_FR){
-    //         if(final_reward_value == 0){
-    //             timeline.push(reward_FR_incorrect)
-    //         } else{
+
+
+    // var functest = function(){
+    //     console.log("test")
+    // }
+
+
+    // CODE
+    var node_FR_reward = {
+        type: 'call-function',
+        func: determine_FR_reward_type,
+
+    //     on_start: function(timeline){
+    //         if(reward_FR_is_correct){
     //             timeline.push(reward_FR_correct)
     //         }
-    //     }
-    // }
-
-
-
-    //CODE
-    // var node_FR_reward = {
-    //     type: 'call-function',
-    //     // func: determine_FR_reward_type,
-    //     on_start: function(timeline){
-    //             if(reward_is_FR){
-    //             if(final_reward_value == 0){
-    //                 timeline.push(reward_FR_incorrect)
-    //             } else{
-    //                 timeline.push(reward_FR_correct)
-    //             }
+    //         if(reward_FR_is_correct == false){
+    //             timeline.push(reward_FR_incorrect)
     //         }
-    //     }
-    // }
-    
-    // timeline.push(node_FR_reward)
+    //     },
+    }
+        
+    timeline.push(node_FR_reward)
+
+
+
+    var if_node = {
+    timeline: [reward_FR_correct],
+    conditional_function: function(){
+        // get the data from the previous trial,
+        // and check which key was pressed
+        // var data = jsPsych.data.get().last(1).values()[0];
+        if(reward_FR_is_correct){
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
+
+    var if_node_2 = {
+    timeline: [reward_FR_incorrect],
+    conditional_function: function(){
+        // get the data from the previous trial,
+        // and check which key was pressed
+        // var data = jsPsych.data.get().last(1).values()[0];
+        if(reward_FR_is_correct == false){
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
+timeline.push(if_node)
+timeline.push(if_node_2)
 
 
 
