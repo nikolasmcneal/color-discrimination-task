@@ -8,6 +8,8 @@
     <script src="jspsych/plugins/jspsych-blocks-exp.js"></script>
     <script src="jspsych/plugins/jspsych-rainbow.js"></script>
     <script src="jspsych/plugins/jspsych-call-function.js"></script>
+    <script src="jspsych/plugins/jspsych-reward-function.js"></script>
+    <script src="jspsych/plugins/jspsych-call.js"></script>
     <script src="jspsych/plugins/jspsych-fullscreen.js"></script>
     <script src="jspsych/plugins/jspsych-html-keyboard-response.js"></script>
     <script src="jspsych/plugins/jspsych-survey-text.js"></script>
@@ -21,6 +23,16 @@
     const fixation_duration = 100; //to 500
 
     var timeline = [];
+    var col1 = [];
+
+    var cursor_off = {
+      type: "call-function",
+      func: function () {
+        document.body.style.cursor = "none";
+      },
+    };
+
+    timeline.push(cursor_off);
 
     // Enter fullscreen:
     // timeline.push({
@@ -45,6 +57,11 @@
       trial_duration: fixation_duration,
     };
 
+    var pinktoblue = true;
+    var bluetopink = false;
+    var greentoorange = true;
+    var orangetogreen = false;
+    //pink to blue
     var colors = [
       "rgb(237,48,137)",
       "rgb(226,62,153)",
@@ -55,11 +72,15 @@
       "rgb(125,122,189)",
       "rgb(100,129.5,184.5)",
     ];
+
+    //blue to pink
     if (Math.random() > 0.5) {
       colors.reverse();
-      //  console.log("Array reversed.")
+      pinktoblue = false;
+      bluetopink = true;
     }
 
+    //green to orange
     var colors2 = [
       "rgb(82.5,142,91)",
       "rgb(100,140,73)",
@@ -71,21 +92,63 @@
       "rgb(202,101,27)",
     ];
 
+    //orange to green
     if (Math.random() > 0.5) {
+      greentoorange = false;
+      orangetogreen = true;
       colors2.reverse();
-      //  console.log("Array reversed.")
     }
+
+    var BPfirst = false;
+    var GOfirst = false;
+
+    if (Math.random() > 0.5) {
+      col1 = colors; //BP
+      BPfirst = true;
+    } else {
+      col1 = colors2; //GO
+      GOfirst = true;
+    }
+
+    var log_rainbow = {
+      type: "call",
+      func: function () {},
+      on_finish: function (data) {
+        if (BPfirst) {
+          if (bluetopink) {
+            data.first_rainbow = "Blue to Pink";
+          }
+          if (pinktoblue) {
+            data.first_rainbow = "Pink to Blue";
+          }
+          if (greentoorange) {
+            data.second_rainbow = "Green to Orange";
+          }
+          if (orangetogreen) {
+            data.second_rainbow = "Orange to Green";
+          }
+        }
+        if (GOfirst) {
+          if (greentoorange) {
+            data.first_rainbow = "Green to Orange";
+          }
+          if (orangetogreen) {
+            data.first_rainbow = "Orange to Green";
+          }
+          if (bluetopink) {
+            data.second_rainbow = "Blue to Pink";
+          }
+          if (pinktoblue) {
+            data.second_rainbow = "Pink to Blue";
+          }
+        }
+      },
+    };
+    timeline.push(log_rainbow);
 
     var j = 0;
     var w = 0;
     var trial_count = 1;
-    var col1 = [];
-
-    if (Math.random() > 0.5) {
-      col1 = colors;
-    } else {
-      col1 = colors2;
-    }
 
     // var a;
     // var b;
@@ -210,7 +273,14 @@
       for (var i = 0; i < arr_left.length; ++i) {
         j += arr_left[i] + 1;
       }
-      // arr_L = [a+1, b+1, c+1, d+1, e+1, f+1]
+      arr_L = [
+        arr_left[0] + 1,
+        arr_left[1] + 1,
+        arr_left[2] + 1,
+        arr_left[3] + 1,
+        arr_left[4] + 1,
+        arr_left[5] + 1,
+      ];
     }
 
     function drawtext_l_incentive(l) {
@@ -270,7 +340,14 @@
         w += arr_right[z] + 1;
         // arr_right[z] = arr_right[z]+1
       }
-      // arr_right = [arr_right[0]+1, arr_right[1]+1, arr_right[2]+1, arr_right[3]+1, arr_right[4]+1, arr_right[5]+1]
+      arr_R = [
+        arr_right[0] + 1,
+        arr_right[1] + 1,
+        arr_right[2] + 1,
+        arr_right[3] + 1,
+        arr_right[4] + 1,
+        arr_right[5] + 1,
+      ];
       // console.log("arr_R :" + w)
     }
 
@@ -283,6 +360,7 @@
     }
 
     var n = 5; //number of training trials
+    var rep = 2;
 
     var instr1 = {
       type: "html-keyboard-response",
@@ -508,10 +586,12 @@
         acc_VB[idx] = data.training_VB_accuracy;
         data.VB_left_sum = j;
         data.VB_right_sum = w;
+        data.arr_L = arr_L;
+        data.arr_R = arr_R;
         // data.training_VB_accuracy = acc_VB[idx];
         idx++;
-        data.trialN = trial_count;
-        trial_count++;
+        data.trialN = idx;
+        // trial_count++;
       },
       //data: {shape: 'rectangle'}
     };
@@ -553,9 +633,11 @@
         acc2_VB[idx2] = data.training_VB_accuracy_2;
         data.VB_left_sum = j;
         data.VB_right_sum = w;
+        data.arr_L = arr_L;
+        data.arr_R = arr_R;
         idx2++;
-        data.trialN = trial_count;
-        trial_count++;
+        data.trialN = idx2;
+        // trial_count++;
       },
       //data: {shape: 'rectangle'}
     };
@@ -596,10 +678,12 @@
         acc3_VB[idx3] = data.training_VB_accuracy_3;
         data.VB_left_sum = j;
         data.VB_right_sum = w;
+        data.arr_L = arr_L;
+        data.arr_R = arr_R;
         // data.acc3_VB = acc3_VB;
         idx3++;
-        data.trialN = trial_count;
-        trial_count++;
+        data.trialN = idx3;
+        // trial_count++;
       },
       //data: {shape: 'rectangle'}
     };
@@ -680,7 +764,7 @@
     // var reward_val = 0;
     var left_arr = [];
     var right_arr = [];
-    var all_arr = [];
+    var all_arr = []; 
     var randidx;
     acc_exp_FR = [];
     acc_exp_VB = [];
@@ -700,8 +784,10 @@
         if (j == w) {
           if (Math.random() > 0.5) {
             data.experiment_VB_accuracy = 1;
+            left_arr[idx4] = j;
           } else {
             data.experiment_VB_accuracy = 0;
+            right_arr[idx4] = w;
           }
         }
         if (j > w) {
@@ -746,8 +832,8 @@
         data.arr_L = arr_L;
         data.arr_R = arr_R;
         idx4++;
-        data.trialN = trial_count;
-        trial_count++;
+        data.trialN = idx4;
+        // trial_count++;
         all_arr = left_arr.concat(right_arr);
         // data.experiment_selections_VB = all_arr[idx4]
       },
@@ -755,7 +841,7 @@
 
     var experiment_node_value = {
       timeline: [fixation, experiment_value],
-      repetitions: 2,
+      repetitions: rep,
     };
 
     var acc_points = 0;
@@ -825,9 +911,11 @@
         // data.fixed_FR = fixed_FR[idx5];
         data.FR_left_sum = j;
         data.FR_right_sum = w;
+        data.arr_L = arr_L;
+        data.arr_R = arr_R;
         idx5++;
-        data.trialN = trial_count;
-        trial_count++;
+        data.trialN = idx5;
+        // trial_count++;
       },
       //data: {shape: 'rectangle'}
     };
@@ -869,10 +957,12 @@
         fixed2_FR[idx6] = data.training_FR_accuracy_2;
         data.FR_left_sum = j;
         data.FR_right_sum = w;
+        data.arr_L = arr_L;
+        data.arr_R = arr_R;
         // data.fixed2_FR = fixed2_FR;
         idx6++;
-        data.trialN = trial_count;
-        trial_count++;
+        data.trialN = idx6;
+        // trial_count++;
       },
       //data: {shape: 'rectangle'}
     };
@@ -917,8 +1007,8 @@
         data.FR_left_sum = j;
         data.FR_right_sum = w;
         idx7++;
-        data.trialN = trial_count;
-        trial_count++;
+        data.trialN = idx7;
+        // trial_count++;
       },
       //data: {shape: 'rectangle'}
     };
@@ -1014,9 +1104,9 @@
     var reward_val;
     var rand_reward = [];
     // var reward_val = 0;
-    var left_arr = [];
-    var right_arr = [];
-    var all_arr = [];
+    // var left_arr = [];
+    // var right_arr = [];
+    // var all_arr = [];
     var randidx;
     var idxt = 0;
     var left_fixed = [];
@@ -1080,8 +1170,8 @@
         data.arr_L = arr_L;
         data.arr_R = arr_R;
         idxt++;
-        data.trialN = trial_count;
-        trial_count++;
+        data.trialN = idxt;
+        // trial_count++;
         // all_arr = left_arr.concat(right_arr);
       },
       //data: {shape: 'rectangle'}
@@ -1161,8 +1251,8 @@
     }
 
     var reward_function_VB = function () {
-      randidx = Math.floor(Math.random() * all_arr.length);
-      var reward_val_VB = all_arr[randidx];
+      randidx = Math.floor(Math.random() * 2);
+      reward_val_VB = all_arr[randidx];
       // if(all_arr.length == 0){
       //     reward_val_VB = 0;
       // }
@@ -1171,7 +1261,7 @@
     };
 
     var reward_node_VB = {
-      type: "call-function",
+      type: "reward-function",
       func: reward_function_VB,
       on_finish: function (data) {
         data.randidx_VB = randidx;
@@ -1179,7 +1269,9 @@
         data.trialN = "NA";
       },
     };
-    timeline.push(reward_node_VB);
+    if (reward_is_VB) {
+      timeline.push(reward_node_VB);
+    }
     var randidx_FR;
     var final_reward_boolean;
     var final_reward;
@@ -1200,14 +1292,16 @@
     };
 
     var reward_node_FR = {
-      type: "call-function",
+      type: "reward-function",
       func: reward_function_FR,
       on_finish: function (data) {
         data.randidx_FR = randidx_FR;
         data.trialN = "NA";
       },
     };
-    timeline.push(reward_node_FR);
+    if (reward_is_FR) {
+      timeline.push(reward_node_FR);
+    }
 
     var reward_VB = {
       type: "html-keyboard-response",
@@ -1218,13 +1312,26 @@
         <p>Your reward will be from the value-based trials.</p>    
         <p>One trial was selected at random, and you are rewarded the value of that choice.</p>
         <p>Your reward is $` +
-          reward_function_VB() +
+          reward_val_VB +
           `.</p>`;
       },
     };
-    if (reward_is_VB) {
-      timeline.push(reward_VB);
-    }
+    // if (reward_is_VB) {
+    //   timeline.push(reward_VB);
+    // }
+
+    var if_node_VB = {
+      timeline: [reward_VB],
+      conditional_function: function () {
+        if (reward_is_VB) {
+          return true;
+        } else {
+          return false;
+        }
+      },
+    };
+
+    timeline.push(if_node_VB);
 
     var reward_FR_correct = {
       type: "html-keyboard-response",
@@ -1263,11 +1370,6 @@
       }
     };
 
-    // var functest = function(){
-    //     console.log("test")
-    // }
-
-    // CODE
     var node_FR_reward = {
       type: "call-function",
       func: determine_FR_reward_type,
@@ -1282,14 +1384,13 @@
       //     },
     };
 
-    timeline.push(node_FR_reward);
+    if (reward_is_FR) {
+      timeline.push(node_FR_reward);
+    }
 
     var if_node = {
       timeline: [reward_FR_correct],
       conditional_function: function () {
-        // get the data from the previous trial,
-        // and check which key was pressed
-        // var data = jsPsych.data.get().last(1).values()[0];
         if (reward_FR_is_correct) {
           return true;
         } else {
@@ -1301,9 +1402,6 @@
     var if_node_2 = {
       timeline: [reward_FR_incorrect],
       conditional_function: function () {
-        // get the data from the previous trial,
-        // and check which key was pressed
-        // var data = jsPsych.data.get().last(1).values()[0];
         if (reward_FR_is_correct == false) {
           return true;
         } else {
@@ -1315,14 +1413,17 @@
     timeline.push(if_node);
     timeline.push(if_node_2);
 
-    //add values during training
-    //split array into indices
-    //add color rainbow direction BP or OG
-    //restart trial_indx for training and exp
-    //replace 70, 74, 32 L, R, Space
-    //fix Value Based reward
+    //log data for demographic info
+    //what happens when fail a training
 
-    //Intro demographic screen
+    var cursor_on = {
+      type: "call-function",
+      func: function () {
+        document.body.style.cursor = "auto";
+      },
+    };
+    timeline.push(cursor_on);
+
     var demo_trial = {
       type: "survey-text",
       preamble: "<p>Please answer the following demographic questions</p>",
@@ -1351,7 +1452,9 @@
           .filter([
             { trial_type: "blocks" },
             { trial_type: "blocks-exp" },
-            { trial_type: "call-function" },
+            { trial_type: "reward-function" },
+            { trial_type: "call" },
+            { trial_type: "survey-text" },
           ])
           .ignore("trial_index")
           .ignore("internal_node_id")
