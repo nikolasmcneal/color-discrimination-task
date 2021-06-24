@@ -1,6 +1,6 @@
 # Color-Discrimination-Task
 
-## Progress (June 19 2021)
+## Progress (June 24 2021)
 
 * Now coded with 'jspsych-blocks' and 'jspsych-rainbow'
 * Fixation cross added
