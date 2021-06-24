@@ -252,7 +252,7 @@ jsPsych.plugins["blocks"] = (function () {
             kill_timers();
             response = info;
             display_selection();
-            setTimeout(() => end_trial(false), 500);
+            setTimeout(() => end_trial(false), 100); //set to 500
           },
         });
       }
@@ -299,7 +299,7 @@ jsPsych.plugins["blocks"] = (function () {
       // TO END TRIAL:
 
       if (trial.response_ends_trial) {
-        setTimeout(() => end_trial(false), 1500); //changed to 1500
+        setTimeout(() => end_trial(false), 100); //changed to 1500
       }
     };
 
