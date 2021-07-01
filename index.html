@@ -145,24 +145,1345 @@
       },
     };
     timeline.push(log_rainbow);
+    var arr_left;
+
+    //Code to generate arrays
+    // var arrays = new Array();
+    // for (var m = 0; m < 12; m++) {
+    //   arrays[m] = new Array();
+    // }
+    // for (var x = 0; x < 2; x++) {
+    //   for (var i = 0; i < 11; i++) {
+    //     var arr = [];
+    //     for (var j = 0; j < 6; j++) {
+    //       arr[j] = Math.floor(Math.random() * 8);
+    //       arrays[i][x] = arr;
+    //     }
+    //   }
+    // }
+
+    var arrays = [
+      [
+        [5, 6, 3, 2, 4, 4],
+        [7, 5, 7, 3, 1, 2],
+      ],
+      [
+        [1, 6, 0, 7, 2, 4],
+        [6, 1, 7, 5, 0, 5],
+      ],
+      [
+        [7, 7, 7, 5, 3, 6],
+        [1, 5, 3, 1, 4, 6],
+      ],
+      [
+        [2, 0, 4, 3, 5, 6],
+        [7, 6, 5, 0, 1, 0],
+      ],
+      [
+        [0, 0, 1, 1, 0, 7],
+        [6, 0, 7, 0, 5, 0],
+      ],
+      [
+        [1, 0, 4, 1, 2, 5],
+        [1, 2, 0, 3, 1, 2],
+      ],
+      [
+        [3, 0, 3, 5, 1, 3],
+        [5, 4, 6, 4, 1, 2],
+      ],
+      [
+        [6, 6, 3, 4, 6, 3],
+        [4, 6, 7, 1, 6, 3],
+      ],
+      [
+        [4, 2, 6, 4, 0, 5],
+        [4, 1, 1, 5, 2, 3],
+      ],
+      [
+        [4, 1, 6, 6, 3, 1],
+        [2, 6, 0, 5, 1, 0],
+      ],
+      [
+        [3, 0, 7, 4, 0, 3],
+        [0, 2, 3, 3, 6, 4],
+      ],
+      [
+        [2, 1, 1, 3, 0, 2],
+        [0, 3, 1, 1, 6, 7],
+      ],
+      [
+        [5, 7, 5, 3, 2, 1],
+        [6, 0, 2, 2, 1, 4],
+      ],
+      [
+        [1, 6, 4, 1, 3, 2],
+        [5, 4, 3, 0, 5, 7],
+      ],
+      [
+        [0, 3, 0, 2, 3, 3],
+        [5, 6, 1, 1, 6, 0],
+      ],
+      [
+        [5, 6, 7, 4, 2, 1],
+        [4, 0, 1, 2, 6, 2],
+      ],
+      [
+        [5, 6, 4, 2, 5, 2],
+        [5, 7, 3, 1, 3, 7],
+      ],
+      [
+        [2, 4, 6, 6, 1, 4],
+        [3, 4, 7, 4, 6, 0],
+      ],
+      [
+        [7, 0, 3, 2, 0, 2],
+        [2, 6, 4, 4, 6, 2],
+      ],
+      [
+        [7, 4, 2, 7, 0, 0],
+        [0, 4, 2, 7, 6, 7],
+      ],
+      [
+        [2, 5, 1, 4, 0, 4],
+        [1, 0, 6, 4, 2, 7],
+      ],
+      [
+        [3, 1, 4, 4, 4, 4],
+        [3, 4, 2, 3, 0, 7],
+      ],
+      [
+        [0, 0, 3, 4, 5, 2],
+        [0, 3, 6, 4, 6, 2],
+      ],
+      [
+        [7, 4, 4, 4, 0, 5],
+        [7, 7, 2, 5, 2, 2],
+      ],
+      [
+        [6, 4, 5, 3, 6, 3],
+        [7, 5, 7, 3, 5, 4],
+      ],
+      [
+        [7, 5, 0, 6, 7, 7],
+        [4, 3, 5, 7, 6, 7],
+      ],
+      [
+        [7, 6, 6, 6, 0, 0],
+        [6, 4, 2, 7, 2, 7],
+      ],
+      [
+        [4, 7, 7, 5, 1, 0],
+        [1, 1, 7, 3, 0, 3],
+      ],
+      [
+        [4, 3, 5, 0, 4, 7],
+        [4, 4, 2, 4, 7, 5],
+      ],
+      [
+        [2, 7, 5, 6, 1, 2],
+        [1, 2, 3, 6, 3, 5],
+      ],
+      [
+        [7, 5, 4, 0, 4, 7],
+        [2, 0, 0, 5, 5, 0],
+      ],
+      [
+        [6, 6, 2, 4, 0, 6],
+        [3, 5, 1, 2, 3, 2],
+      ],
+      [
+        [2, 2, 7, 4, 2, 5],
+        [5, 4, 0, 0, 4, 1],
+      ],
+      [
+        [3, 0, 1, 1, 6, 1],
+        [4, 7, 6, 4, 4, 2],
+      ],
+      [
+        [3, 7, 3, 0, 0, 2],
+        [4, 1, 4, 7, 7, 1],
+      ],
+      [
+        [6, 6, 0, 4, 5, 4],
+        [5, 1, 6, 5, 2, 6],
+      ],
+      [
+        [6, 5, 4, 2, 1, 5],
+        [6, 6, 7, 5, 7, 4],
+      ],
+      [
+        [1, 5, 4, 4, 7, 0],
+        [7, 2, 1, 4, 4, 0],
+      ],
+      [
+        [3, 5, 6, 0, 4, 4],
+        [2, 1, 5, 1, 7, 6],
+      ],
+      [
+        [3, 5, 5, 0, 2, 5],
+        [0, 7, 3, 4, 7, 6],
+      ],
+      [
+        [2, 2, 6, 2, 4, 0],
+        [6, 6, 3, 5, 5, 4],
+      ],
+      [
+        [7, 2, 4, 6, 0, 3],
+        [0, 6, 2, 2, 2, 5],
+      ],
+      [
+        [6, 4, 4, 1, 0, 5],
+        [3, 4, 3, 1, 4, 0],
+      ],
+      [
+        [0, 1, 5, 6, 5, 1],
+        [3, 4, 4, 3, 6, 7],
+      ],
+      [
+        [4, 6, 3, 7, 4, 1],
+        [1, 1, 4, 6, 7, 3],
+      ],
+      [
+        [2, 2, 1, 1, 1, 7],
+        [6, 1, 4, 5, 2, 1],
+      ],
+      [
+        [0, 5, 1, 2, 4, 4],
+        [5, 7, 6, 3, 2, 6],
+      ],
+      [
+        [6, 6, 3, 5, 4, 5],
+        [5, 6, 5, 3, 7, 6],
+      ],
+      [
+        [3, 2, 1, 3, 1, 6],
+        [1, 3, 3, 0, 7, 5],
+      ],
+      [
+        [5, 0, 7, 3, 6, 4],
+        [1, 0, 5, 2, 5, 3],
+      ],
+      [
+        [3, 3, 2, 1, 7, 2],
+        [6, 5, 7, 0, 2, 7],
+      ],
+      [
+        [1, 1, 0, 5, 4, 1],
+        [3, 3, 2, 1, 1, 5],
+      ],
+      [
+        [3, 7, 4, 2, 1, 2],
+        [1, 1, 3, 1, 7, 2],
+      ],
+      [
+        [1, 0, 5, 6, 5, 2],
+        [1, 3, 2, 7, 0, 0],
+      ],
+      [
+        [0, 2, 3, 5, 5, 3],
+        [5, 2, 4, 0, 1, 5],
+      ],
+      [
+        [5, 6, 4, 5, 0, 0],
+        [4, 2, 1, 0, 2, 3],
+      ],
+      [
+        [1, 4, 1, 2, 4, 2],
+        [3, 0, 5, 4, 5, 5],
+      ],
+      [
+        [7, 5, 4, 4, 1, 4],
+        [3, 7, 2, 6, 2, 0],
+      ],
+      [
+        [2, 7, 1, 0, 5, 1],
+        [6, 2, 5, 7, 3, 5],
+      ],
+      [
+        [4, 7, 1, 4, 4, 6],
+        [1, 5, 2, 4, 1, 7],
+      ],
+      [
+        [4, 6, 6, 0, 1, 1],
+        [0, 1, 1, 2, 2, 7],
+      ],
+      [
+        [6, 6, 2, 6, 6, 5],
+        [1, 7, 5, 5, 1, 5],
+      ],
+      [
+        [1, 0, 2, 3, 0, 3],
+        [0, 1, 4, 4, 2, 2],
+      ],
+      [
+        [2, 0, 1, 3, 5, 5],
+        [7, 1, 5, 5, 6, 1],
+      ],
+      [
+        [1, 7, 4, 5, 3, 5],
+        [3, 6, 4, 6, 7, 4],
+      ],
+      [
+        [2, 4, 7, 3, 5, 1],
+        [5, 2, 1, 6, 2, 7],
+      ],
+      [
+        [6, 6, 2, 2, 4, 3],
+        [5, 1, 4, 1, 0, 2],
+      ],
+      [
+        [2, 0, 2, 1, 7, 3],
+        [5, 5, 4, 0, 2, 5],
+      ],
+      [
+        [1, 3, 0, 5, 3, 2],
+        [0, 1, 6, 3, 4, 3],
+      ],
+      [
+        [2, 0, 4, 2, 5, 4],
+        [6, 4, 3, 6, 0, 0],
+      ],
+      [
+        [1, 5, 3, 2, 6, 1],
+        [7, 3, 2, 2, 0, 7],
+      ],
+      [
+        [3, 5, 5, 7, 7, 2],
+        [4, 3, 3, 5, 1, 5],
+      ],
+      [
+        [0, 0, 5, 1, 0, 5],
+        [2, 4, 1, 6, 3, 5],
+      ],
+      [
+        [4, 1, 3, 1, 5, 5],
+        [4, 0, 6, 5, 1, 6],
+      ],
+      [
+        [6, 3, 1, 2, 3, 4],
+        [3, 2, 4, 4, 5, 2],
+      ],
+      [
+        [1, 1, 1, 3, 5, 6],
+        [1, 2, 1, 2, 7, 7],
+      ],
+      [
+        [3, 1, 7, 6, 4, 0],
+        [2, 1, 1, 3, 5, 1],
+      ],
+      [
+        [3, 3, 4, 6, 7, 7],
+        [7, 5, 2, 2, 5, 4],
+      ],
+      [
+        [3, 7, 3, 3, 4, 2],
+        [7, 6, 5, 0, 0, 6],
+      ],
+      [
+        [0, 7, 5, 5, 4, 5],
+        [5, 7, 2, 2, 6, 6],
+      ],
+      [
+        [5, 0, 2, 2, 6, 2],
+        [4, 2, 1, 3, 6, 6],
+      ],
+      [
+        [1, 5, 1, 1, 2, 7],
+        [1, 7, 4, 4, 2, 6],
+      ],
+      [
+        [3, 4, 6, 1, 2, 7],
+        [0, 4, 1, 6, 4, 1],
+      ],
+      [
+        [2, 6, 0, 1, 5, 1],
+        [2, 3, 0, 3, 7, 6],
+      ],
+      [
+        [6, 3, 7, 2, 6, 2],
+        [2, 7, 3, 6, 0, 0],
+      ],
+      [
+        [1, 4, 2, 4, 3, 6],
+        [3, 1, 7, 3, 3, 5],
+      ],
+      [
+        [6, 0, 7, 4, 5, 6],
+        [7, 3, 6, 5, 4, 4],
+      ],
+      [
+        [5, 7, 4, 4, 4, 7],
+        [4, 7, 5, 7, 1, 0],
+      ],
+      [
+        [4, 4, 0, 1, 1, 6],
+        [3, 1, 4, 7, 3, 0],
+      ],
+      [
+        [5, 0, 4, 4, 1, 2],
+        [5, 2, 0, 0, 7, 6],
+      ],
+      [
+        [1, 2, 4, 1, 3, 4],
+        [4, 4, 1, 1, 6, 3],
+      ],
+      [
+        [4, 6, 6, 5, 7, 7],
+        [7, 6, 4, 1, 3, 1],
+      ],
+      [
+        [4, 1, 4, 1, 2, 0],
+        [2, 2, 0, 1, 7, 7],
+      ],
+      [
+        [2, 7, 3, 5, 1, 4],
+        [5, 4, 0, 5, 6, 7],
+      ],
+      [
+        [3, 0, 5, 6, 3, 3],
+        [0, 6, 0, 2, 2, 2],
+      ],
+      [
+        [2, 3, 5, 5, 0, 0],
+        [7, 4, 0, 4, 3, 3],
+      ],
+      [
+        [3, 6, 1, 4, 0, 1],
+        [3, 7, 4, 7, 6, 3],
+      ],
+      [
+        [5, 3, 1, 5, 7, 6],
+        [5, 6, 1, 5, 2, 1],
+      ],
+      [
+        [5, 7, 0, 4, 5, 4],
+        [0, 5, 6, 2, 7, 6],
+      ],
+      [
+        [0, 5, 0, 6, 0, 7],
+        [6, 0, 7, 6, 6, 5],
+      ],
+      [
+        [2, 4, 5, 5, 1, 2],
+        [5, 2, 4, 6, 4, 1],
+      ],
+      [
+        [7, 1, 0, 2, 5, 6],
+        [1, 3, 7, 3, 5, 2],
+      ],
+      [
+        [4, 4, 5, 3, 7, 1],
+        [3, 3, 1, 7, 3, 7],
+      ],
+      [
+        [3, 2, 6, 4, 4, 1],
+        [6, 6, 0, 5, 4, 5],
+      ],
+      [
+        [4, 2, 0, 4, 0, 1],
+        [0, 4, 2, 0, 3, 3],
+      ],
+      [
+        [1, 5, 1, 6, 7, 5],
+        [0, 2, 6, 6, 3, 3],
+      ],
+      [
+        [5, 4, 3, 6, 2, 0],
+        [7, 7, 4, 0, 4, 5],
+      ],
+      [
+        [6, 3, 0, 6, 5, 0],
+        [4, 4, 2, 7, 5, 0],
+      ],
+      [
+        [0, 1, 7, 1, 1, 5],
+        [4, 4, 7, 1, 5, 1],
+      ],
+      [
+        [0, 3, 7, 6, 0, 6],
+        [5, 1, 4, 1, 6, 7],
+      ],
+      [
+        [1, 3, 5, 3, 7, 2],
+        [1, 3, 7, 5, 4, 1],
+      ],
+      [
+        [2, 4, 4, 0, 5, 1],
+        [5, 5, 4, 2, 3, 6],
+      ],
+      [
+        [6, 7, 6, 5, 6, 6],
+        [7, 5, 4, 5, 2, 6],
+      ],
+      [
+        [2, 3, 2, 7, 1, 4],
+        [5, 6, 7, 3, 5, 2],
+      ],
+      [
+        [3, 4, 4, 0, 6, 7],
+        [3, 3, 0, 7, 7, 5],
+      ],
+      [
+        [2, 4, 0, 4, 1, 5],
+        [3, 7, 0, 3, 1, 0],
+      ],
+      [
+        [0, 2, 7, 0, 0, 4],
+        [1, 2, 6, 1, 6, 2],
+      ],
+      [
+        [3, 5, 1, 3, 1, 1],
+        [0, 3, 7, 5, 6, 6],
+      ],
+      [
+        [2, 6, 3, 2, 3, 4],
+        [4, 1, 3, 2, 6, 7],
+      ],
+      [
+        [6, 6, 4, 5, 5, 0],
+        [5, 1, 1, 3, 1, 0],
+      ],
+      [
+        [1, 5, 0, 7, 3, 0],
+        [1, 1, 0, 2, 7, 3],
+      ],
+      [
+        [7, 7, 5, 6, 3, 2],
+        [1, 3, 6, 3, 4, 1],
+      ],
+      [
+        [7, 4, 1, 5, 1, 5],
+        [7, 6, 3, 2, 5, 7],
+      ],
+      [
+        [0, 2, 2, 4, 0, 7],
+        [2, 0, 4, 3, 0, 5],
+      ],
+      [
+        [2, 3, 7, 0, 7, 3],
+        [7, 2, 7, 7, 6, 7],
+      ],
+      [
+        [5, 1, 3, 4, 3, 7],
+        [6, 0, 4, 1, 6, 3],
+      ],
+      [
+        [4, 3, 2, 2, 1, 2],
+        [7, 0, 0, 4, 4, 1],
+      ],
+      [
+        [1, 5, 7, 1, 6, 1],
+        [4, 5, 2, 0, 2, 7],
+      ],
+      [
+        [1, 0, 4, 0, 7, 1],
+        [4, 7, 5, 2, 2, 3],
+      ],
+      [
+        [6, 1, 3, 4, 1, 1],
+        [5, 2, 1, 2, 0, 3],
+      ],
+      [
+        [3, 0, 1, 4, 0, 4],
+        [0, 4, 3, 4, 2, 1],
+      ],
+      [
+        [3, 3, 0, 5, 1, 1],
+        [3, 5, 5, 4, 2, 4],
+      ],
+      [
+        [3, 4, 1, 0, 0, 4],
+        [7, 2, 6, 5, 4, 4],
+      ],
+      [
+        [3, 4, 7, 1, 2, 4],
+        [6, 0, 7, 4, 7, 7],
+      ],
+      [
+        [6, 1, 1, 0, 3, 5],
+        [6, 0, 4, 0, 3, 2],
+      ],
+      [
+        [7, 7, 3, 4, 1, 4],
+        [5, 1, 7, 0, 5, 1],
+      ],
+      [
+        [4, 5, 7, 0, 7, 4],
+        [7, 0, 6, 1, 7, 7],
+      ],
+      [
+        [7, 7, 1, 1, 1, 0],
+        [2, 7, 2, 1, 2, 3],
+      ],
+      [
+        [0, 7, 5, 3, 0, 2],
+        [0, 5, 1, 5, 4, 1],
+      ],
+      [
+        [4, 4, 4, 3, 3, 7],
+        [2, 1, 4, 7, 5, 1],
+      ],
+      [
+        [2, 2, 0, 7, 1, 6],
+        [4, 3, 2, 7, 5, 2],
+      ],
+      [
+        [6, 1, 1, 3, 0, 3],
+        [0, 2, 3, 5, 1, 1],
+      ],
+      [
+        [5, 1, 2, 6, 1, 4],
+        [3, 5, 4, 7, 4, 2],
+      ],
+      [
+        [0, 6, 1, 7, 2, 4],
+        [0, 0, 5, 4, 1, 7],
+      ],
+      [
+        [0, 5, 2, 0, 3, 2],
+        [1, 3, 6, 3, 2, 7],
+      ],
+      [
+        [1, 1, 7, 4, 6, 4],
+        [3, 4, 1, 2, 3, 6],
+      ],
+      [
+        [5, 2, 6, 6, 5, 3],
+        [4, 3, 7, 3, 7, 4],
+      ],
+      [
+        [2, 4, 4, 7, 7, 2],
+        [4, 7, 5, 3, 4, 7],
+      ],
+      [
+        [4, 3, 2, 5, 2, 2],
+        [7, 5, 1, 0, 1, 3],
+      ],
+      [
+        [5, 5, 5, 4, 4, 3],
+        [6, 0, 6, 4, 0, 7],
+      ],
+      [
+        [7, 2, 1, 0, 5, 0],
+        [5, 6, 5, 5, 3, 2],
+      ],
+      [
+        [1, 2, 5, 5, 5, 3],
+        [4, 6, 2, 5, 1, 5],
+      ],
+      [
+        [2, 1, 3, 2, 7, 3],
+        [4, 2, 7, 2, 0, 7],
+      ],
+      [
+        [5, 1, 3, 1, 5, 5],
+        [6, 7, 0, 1, 0, 5],
+      ],
+      [
+        [0, 3, 5, 2, 6, 4],
+        [0, 4, 1, 5, 0, 7],
+      ],
+      [
+        [5, 2, 4, 1, 4, 7],
+        [4, 1, 5, 2, 3, 1],
+      ],
+      [
+        [3, 4, 2, 7, 6, 7],
+        [0, 5, 5, 6, 1, 7],
+      ],
+      [
+        [5, 2, 0, 7, 4, 6],
+        [5, 3, 4, 6, 2, 7],
+      ],
+      [
+        [6, 6, 4, 1, 4, 6],
+        [3, 3, 1, 6, 6, 4],
+      ],
+      [
+        [4, 0, 6, 7, 5, 2],
+        [5, 2, 7, 6, 7, 2],
+      ],
+      [
+        [0, 3, 0, 4, 1, 6],
+        [2, 2, 2, 1, 7, 5],
+      ],
+      [
+        [0, 7, 6, 3, 6, 1],
+        [0, 3, 0, 2, 7, 5],
+      ],
+      [
+        [7, 2, 3, 5, 2, 0],
+        [2, 1, 1, 1, 3, 4],
+      ],
+      [
+        [1, 3, 5, 7, 0, 3],
+        [1, 5, 4, 2, 6, 7],
+      ],
+      [
+        [6, 5, 3, 1, 2, 5],
+        [2, 2, 6, 0, 1, 3],
+      ],
+      [
+        [7, 6, 6, 6, 5, 2],
+        [0, 4, 3, 7, 6, 5],
+      ],
+      [
+        [4, 7, 1, 1, 2, 0],
+        [0, 3, 4, 5, 3, 3],
+      ],
+      [
+        [0, 4, 4, 5, 2, 7],
+        [2, 7, 4, 5, 0, 4],
+      ],
+      [
+        [3, 5, 4, 5, 6, 1],
+        [2, 3, 4, 3, 1, 6],
+      ],
+      [
+        [1, 3, 0, 7, 1, 2],
+        [0, 0, 3, 2, 2, 1],
+      ],
+      [
+        [3, 3, 7, 4, 0, 5],
+        [5, 2, 4, 2, 1, 6],
+      ],
+      [
+        [2, 1, 4, 5, 3, 6],
+        [7, 4, 3, 2, 3, 1],
+      ],
+      [
+        [1, 2, 2, 2, 3, 2],
+        [5, 1, 0, 0, 0, 1],
+      ],
+      [
+        [2, 5, 6, 1, 1, 3],
+        [4, 5, 2, 6, 2, 5],
+      ],
+      [
+        [4, 3, 4, 1, 1, 0],
+        [2, 2, 5, 4, 7, 2],
+      ],
+      [
+        [7, 4, 5, 3, 1, 1],
+        [5, 3, 0, 6, 3, 0],
+      ],
+      [
+        [7, 2, 2, 1, 7, 1],
+        [3, 3, 6, 4, 7, 0],
+      ],
+      [
+        [5, 3, 7, 6, 5, 3],
+        [3, 2, 7, 3, 5, 3],
+      ],
+      [
+        [6, 6, 1, 3, 6, 7],
+        [6, 1, 0, 1, 7, 1],
+      ],
+      [
+        [4, 5, 4, 0, 7, 7],
+        [5, 3, 6, 2, 5, 6],
+      ],
+      [
+        [3, 7, 4, 3, 2, 7],
+        [1, 6, 1, 5, 5, 0],
+      ],
+      [
+        [2, 0, 1, 2, 6, 2],
+        [1, 1, 3, 0, 5, 7],
+      ],
+      [
+        [0, 4, 4, 1, 0, 1],
+        [0, 6, 5, 2, 5, 0],
+      ],
+      [
+        [2, 5, 6, 7, 3, 2],
+        [5, 7, 1, 6, 4, 7],
+      ],
+      [
+        [1, 2, 2, 1, 3, 5],
+        [1, 1, 0, 6, 0, 3],
+      ],
+      [
+        [0, 7, 2, 2, 1, 3],
+        [3, 7, 5, 1, 4, 6],
+      ],
+      [
+        [5, 2, 3, 7, 1, 1],
+        [3, 3, 6, 6, 0, 3],
+      ],
+      [
+        [1, 7, 7, 2, 4, 3],
+        [2, 7, 3, 2, 1, 4],
+      ],
+      [
+        [3, 4, 6, 0, 6, 1],
+        [7, 2, 2, 7, 0, 2],
+      ],
+      [
+        [2, 1, 2, 4, 0, 2],
+        [7, 0, 5, 3, 2, 0],
+      ],
+      [
+        [5, 1, 0, 6, 0, 0],
+        [7, 1, 0, 0, 5, 0],
+      ],
+      [
+        [7, 5, 0, 0, 0, 0],
+        [3, 3, 0, 7, 4, 2],
+      ],
+      [
+        [3, 0, 1, 7, 2, 0],
+        [5, 3, 4, 6, 0, 3],
+      ],
+      [
+        [5, 1, 5, 5, 7, 0],
+        [3, 3, 0, 3, 5, 3],
+      ],
+      [
+        [3, 4, 0, 2, 2, 4],
+        [4, 5, 1, 6, 7, 5],
+      ],
+      [
+        [4, 6, 2, 2, 2, 0],
+        [2, 3, 2, 3, 7, 3],
+      ],
+      [
+        [3, 3, 7, 6, 1, 7],
+        [0, 5, 3, 6, 5, 5],
+      ],
+      [
+        [0, 5, 3, 2, 0, 0],
+        [4, 2, 5, 1, 6, 5],
+      ],
+      [
+        [2, 3, 0, 3, 7, 0],
+        [0, 1, 6, 7, 6, 4],
+      ],
+      [
+        [2, 2, 2, 7, 3, 3],
+        [0, 1, 1, 7, 0, 7],
+      ],
+      [
+        [4, 0, 5, 7, 6, 0],
+        [0, 4, 4, 3, 7, 7],
+      ],
+      [
+        [5, 2, 2, 1, 5, 6],
+        [7, 6, 7, 6, 2, 4],
+      ],
+      [
+        [2, 6, 3, 4, 6, 2],
+        [1, 5, 1, 5, 5, 5],
+      ],
+      [
+        [4, 7, 1, 4, 2, 3],
+        [6, 7, 6, 5, 4, 1],
+      ],
+      [
+        [2, 4, 3, 2, 5, 5],
+        [1, 3, 3, 2, 7, 5],
+      ],
+      [
+        [6, 2, 6, 4, 4, 5],
+        [3, 7, 0, 2, 2, 7],
+      ],
+      [
+        [0, 5, 0, 7, 3, 5],
+        [7, 4, 6, 3, 4, 4],
+      ],
+      [
+        [4, 0, 5, 2, 5, 0],
+        [6, 4, 7, 2, 3, 6],
+      ],
+      [
+        [3, 3, 3, 4, 0, 1],
+        [5, 4, 1, 0, 1, 2],
+      ],
+      [
+        [7, 2, 1, 0, 3, 6],
+        [2, 1, 5, 5, 1, 0],
+      ],
+      [
+        [1, 7, 4, 4, 2, 6],
+        [4, 5, 2, 2, 1, 2],
+      ],
+      [
+        [3, 1, 7, 3, 0, 5],
+        [4, 3, 5, 1, 5, 1],
+      ],
+      [
+        [5, 1, 4, 7, 6, 4],
+        [6, 2, 0, 4, 0, 0],
+      ],
+      [
+        [2, 3, 2, 4, 4, 6],
+        [4, 3, 5, 6, 7, 3],
+      ],
+      [
+        [6, 1, 6, 4, 3, 7],
+        [4, 1, 2, 6, 2, 7],
+      ],
+      [
+        [2, 4, 0, 6, 5, 0],
+        [4, 1, 6, 1, 1, 7],
+      ],
+      [
+        [1, 2, 0, 2, 0, 1],
+        [2, 5, 4, 4, 6, 0],
+      ],
+      [
+        [4, 0, 0, 0, 1, 5],
+        [0, 1, 5, 3, 0, 2],
+      ],
+      [
+        [5, 4, 0, 6, 7, 4],
+        [6, 6, 3, 1, 4, 3],
+      ],
+      [
+        [3, 3, 7, 1, 6, 2],
+        [7, 1, 3, 7, 7, 1],
+      ],
+      [
+        [5, 6, 3, 6, 3, 2],
+        [2, 6, 4, 2, 2, 3],
+      ],
+      [
+        [7, 3, 1, 5, 1, 3],
+        [0, 4, 0, 6, 4, 4],
+      ],
+      [
+        [1, 7, 7, 4, 3, 6],
+        [0, 3, 0, 5, 0, 3],
+      ],
+      [
+        [7, 4, 0, 7, 2, 6],
+        [0, 2, 1, 7, 4, 7],
+      ],
+      [
+        [6, 6, 6, 7, 7, 4],
+        [3, 6, 6, 7, 5, 0],
+      ],
+      [
+        [5, 2, 4, 4, 7, 3],
+        [0, 0, 3, 7, 0, 2],
+      ],
+      [
+        [4, 6, 5, 1, 1, 1],
+        [7, 7, 5, 0, 6, 4],
+      ],
+      [
+        [0, 0, 0, 3, 6, 6],
+        [4, 2, 6, 4, 0, 0],
+      ],
+      [
+        [2, 3, 0, 5, 2, 3],
+        [2, 6, 5, 0, 3, 7],
+      ],
+      [
+        [5, 6, 7, 5, 5, 7],
+        [0, 1, 1, 4, 4, 3],
+      ],
+      [
+        [5, 7, 5, 7, 7, 2],
+        [3, 7, 2, 4, 0, 1],
+      ],
+      [
+        [7, 2, 5, 6, 0, 4],
+        [6, 5, 0, 7, 0, 2],
+      ],
+      [
+        [3, 0, 5, 4, 2, 3],
+        [4, 2, 2, 4, 6, 2],
+      ],
+      [
+        [3, 0, 6, 5, 2, 4],
+        [3, 3, 4, 4, 2, 5],
+      ],
+      [
+        [1, 3, 7, 1, 0, 6],
+        [6, 0, 0, 2, 0, 6],
+      ],
+      [
+        [3, 0, 0, 4, 5, 1],
+        [7, 2, 1, 5, 3, 2],
+      ],
+      [
+        [2, 7, 4, 3, 3, 6],
+        [1, 3, 4, 0, 7, 1],
+      ],
+      [
+        [1, 7, 5, 6, 0, 0],
+        [7, 1, 5, 5, 4, 5],
+      ],
+      [
+        [5, 7, 6, 4, 3, 7],
+        [7, 3, 2, 1, 6, 5],
+      ],
+      [
+        [4, 5, 5, 7, 0, 6],
+        [0, 1, 1, 5, 3, 7],
+      ],
+      [
+        [7, 7, 7, 7, 5, 5],
+        [3, 7, 2, 2, 4, 1],
+      ],
+      [
+        [6, 5, 4, 2, 0, 2],
+        [6, 5, 4, 0, 1, 3],
+      ],
+      [
+        [2, 3, 0, 4, 4, 2],
+        [2, 4, 2, 2, 2, 0],
+      ],
+      [
+        [3, 6, 7, 6, 5, 2],
+        [2, 5, 1, 0, 5, 3],
+      ],
+      [
+        [1, 5, 3, 6, 3, 6],
+        [2, 5, 6, 5, 6, 7],
+      ],
+      [
+        [1, 1, 1, 3, 4, 3],
+        [3, 1, 0, 5, 2, 0],
+      ],
+      [
+        [0, 4, 7, 2, 3, 4],
+        [6, 1, 4, 5, 2, 5],
+      ],
+      [
+        [6, 4, 6, 6, 5, 1],
+        [2, 4, 7, 4, 6, 4],
+      ],
+      [
+        [6, 7, 5, 2, 2, 5],
+        [3, 7, 2, 1, 4, 0],
+      ],
+      [
+        [1, 1, 2, 5, 2, 0],
+        [3, 6, 1, 1, 3, 2],
+      ],
+      [
+        [1, 4, 3, 7, 0, 3],
+        [2, 7, 5, 2, 2, 0],
+      ],
+      [
+        [6, 0, 1, 5, 2, 6],
+        [1, 6, 2, 4, 4, 5],
+      ],
+      [
+        [2, 5, 0, 1, 1, 4],
+        [0, 7, 7, 3, 6, 7],
+      ],
+      [
+        [2, 3, 0, 6, 4, 5],
+        [0, 6, 1, 3, 6, 4],
+      ],
+      [
+        [4, 1, 6, 2, 2, 7],
+        [7, 2, 2, 4, 1, 4],
+      ],
+      [
+        [6, 1, 1, 6, 6, 0],
+        [4, 1, 5, 4, 1, 6],
+      ],
+      [
+        [5, 5, 6, 7, 0, 5],
+        [7, 1, 2, 5, 6, 0],
+      ],
+      [
+        [3, 2, 6, 7, 3, 1],
+        [0, 6, 3, 4, 0, 7],
+      ],
+      [
+        [0, 5, 6, 4, 7, 1],
+        [7, 4, 1, 2, 1, 3],
+      ],
+      [
+        [5, 2, 6, 6, 7, 7],
+        [1, 5, 1, 1, 2, 6],
+      ],
+      [
+        [4, 2, 5, 5, 0, 0],
+        [4, 6, 4, 1, 1, 5],
+      ],
+      [
+        [6, 2, 1, 3, 4, 0],
+        [4, 4, 4, 5, 6, 0],
+      ],
+      [
+        [5, 2, 2, 0, 5, 7],
+        [0, 2, 3, 0, 3, 5],
+      ],
+      [
+        [2, 0, 5, 4, 7, 3],
+        [3, 2, 5, 6, 2, 4],
+      ],
+      [
+        [1, 2, 7, 3, 7, 7],
+        [4, 0, 0, 3, 4, 0],
+      ],
+      [
+        [5, 2, 7, 2, 2, 4],
+        [7, 7, 6, 4, 6, 1],
+      ],
+      [
+        [5, 6, 3, 6, 1, 6],
+        [1, 0, 4, 6, 1, 2],
+      ],
+      [
+        [4, 6, 4, 2, 1, 4],
+        [2, 1, 2, 7, 5, 1],
+      ],
+      [
+        [7, 7, 0, 4, 7, 1],
+        [5, 2, 5, 0, 2, 5],
+      ],
+      [
+        [2, 2, 0, 5, 3, 7],
+        [7, 1, 6, 3, 6, 4],
+      ],
+      [
+        [3, 2, 5, 3, 3, 6],
+        [3, 0, 5, 5, 4, 1],
+      ],
+      [
+        [2, 0, 1, 3, 4, 3],
+        [6, 2, 5, 0, 2, 0],
+      ],
+      [
+        [4, 3, 0, 1, 1, 1],
+        [6, 4, 3, 2, 2, 5],
+      ],
+      [
+        [5, 5, 5, 0, 1, 5],
+        [3, 6, 4, 0, 0, 1],
+      ],
+      [
+        [5, 7, 5, 5, 7, 7],
+        [4, 7, 3, 4, 3, 2],
+      ],
+      [
+        [0, 5, 5, 3, 4, 6],
+        [6, 1, 4, 7, 3, 0],
+      ],
+      [
+        [2, 7, 7, 1, 7, 1],
+        [0, 7, 5, 3, 2, 2],
+      ],
+      [
+        [6, 3, 0, 4, 7, 7],
+        [1, 0, 5, 6, 5, 2],
+      ],
+      [
+        [5, 1, 7, 5, 2, 0],
+        [3, 1, 0, 6, 4, 2],
+      ],
+      [
+        [3, 1, 6, 5, 3, 3],
+        [6, 7, 5, 2, 2, 7],
+      ],
+      [
+        [3, 6, 4, 4, 7, 3],
+        [1, 1, 0, 2, 2, 5],
+      ],
+      [
+        [6, 5, 5, 3, 5, 7],
+        [5, 7, 1, 7, 0, 5],
+      ],
+      [
+        [6, 3, 2, 3, 4, 1],
+        [5, 5, 0, 3, 6, 6],
+      ],
+      [
+        [1, 6, 0, 5, 6, 2],
+        [0, 2, 3, 7, 2, 3],
+      ],
+      [
+        [6, 1, 4, 3, 7, 7],
+        [6, 3, 7, 3, 4, 2],
+      ],
+      [
+        [0, 5, 1, 3, 4, 5],
+        [1, 3, 4, 3, 6, 7],
+      ],
+      [
+        [0, 0, 4, 5, 3, 4],
+        [6, 3, 5, 2, 6, 0],
+      ],
+      [
+        [0, 7, 4, 3, 0, 7],
+        [4, 7, 1, 7, 6, 0],
+      ],
+      [
+        [5, 7, 2, 6, 1, 2],
+        [2, 2, 6, 6, 6, 2],
+      ],
+      [
+        [3, 2, 7, 1, 0, 4],
+        [4, 3, 3, 6, 4, 7],
+      ],
+      [
+        [2, 1, 5, 0, 3, 2],
+        [4, 3, 1, 5, 1, 7],
+      ],
+      [
+        [2, 3, 7, 0, 3, 1],
+        [4, 0, 7, 6, 5, 7],
+      ],
+      [
+        [6, 0, 3, 6, 1, 7],
+        [7, 4, 2, 2, 0, 3],
+      ],
+      [
+        [3, 5, 1, 0, 0, 5],
+        [2, 6, 4, 3, 6, 2],
+      ],
+      [
+        [1, 5, 1, 1, 4, 6],
+        [4, 3, 4, 5, 0, 5],
+      ],
+      [
+        [6, 3, 5, 5, 4, 7],
+        [7, 7, 5, 4, 1, 5],
+      ],
+      [
+        [1, 1, 6, 0, 1, 4],
+        [1, 7, 3, 5, 1, 4],
+      ],
+      [
+        [1, 7, 0, 0, 7, 6],
+        [2, 1, 4, 5, 2, 0],
+      ],
+      [
+        [0, 0, 2, 3, 0, 2],
+        [5, 2, 4, 3, 4, 3],
+      ],
+      [
+        [5, 0, 4, 5, 1, 2],
+        [5, 7, 5, 6, 4, 1],
+      ],
+    ];
+
+
+    
+    function shuffle(arr) {
+      var currentIndex = arr.length,
+        randomIndex;
+      while (0 !== currentIndex) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+
+        [arr[currentIndex], arr[randomIndex]] = [
+          arr[randomIndex],
+          arr[currentIndex],
+        ];
+      }
+
+      return arr;
+    }
+
+    shuffle(arrays);
+
+    var indexx = 0;
+    var indexx2 = 0;
+
+    function rnd_array(arrays) {
+      var idx_array = arrays[indexx];
+      indexx++;
+      return idx_array;
+    }
+
+    function rnd_array2(arrays) {
+      var idx_array = arrays[indexx2];
+      indexx2++;
+      return idx_array;
+    }
+    var empt = [];
+
+    function drawRectLexp(c) {
+      j = 0;
+      var arr_left = rnd_array(arrays_left);
+      empt[indexx] = arr_left;
+      var ctx = c.getContext("2d");
+      ctx.beginPath();
+
+      ctx.fillStyle = col1[arr_left[0]];
+      ctx.fillRect(0, 0, 100, 100);
+
+      ctx.fillStyle = col1[arr_left[1]];
+      ctx.fillRect(125, 0, 100, 100);
+
+      ctx.fillStyle = col1[arr_left[2]];
+      ctx.fillRect(250, 0, 100, 100);
+
+      ctx.fillStyle = col1[arr_left[3]];
+      ctx.fillRect(0, 125, 100, 100);
+
+      ctx.fillStyle = col1[arr_left[4]];
+      ctx.fillRect(125, 125, 100, 100);
+
+      ctx.fillStyle = col1[arr_left[5]];
+      ctx.fillRect(250, 125, 100, 100);
+
+      for (var i = 0; i < 6; ++i) {
+        j += arr_left[i] + 1;
+      }
+      arr_L = [
+        arr_left[0] + 1,
+        arr_left[1] + 1,
+        arr_left[2] + 1,
+        arr_left[3] + 1,
+        arr_left[4] + 1,
+        arr_left[5] + 1,
+      ];
+    }
+
+    function drawRectRexp(d) {
+      w = 0;
+
+      var arr_right = rnd_array2(arrays_right);
+      empt[indexx2] = arr_right;
+
+      var ctx = d.getContext("2d");
+      ctx.beginPath();
+
+      ctx.fillStyle = col1[arr_right[0]];
+      ctx.fillRect(0, 0, 100, 100);
+
+      ctx.fillStyle = col1[arr_right[1]];
+      ctx.fillRect(125, 0, 100, 100);
+
+      ctx.fillStyle = col1[arr_right[2]];
+      ctx.fillRect(250, 0, 100, 100);
+
+      ctx.fillStyle = col1[arr_right[3]];
+      ctx.fillRect(0, 125, 100, 100);
+
+      ctx.fillStyle = col1[arr_right[4]];
+      ctx.fillRect(125, 125, 100, 100);
+
+      ctx.fillStyle = col1[arr_right[5]];
+      ctx.fillRect(250, 125, 100, 100);
+
+      for (var z = 0; z < arr_right.length; ++z) {
+        w += arr_right[z] + 1;
+        // arr_right[z] = arr_right[z]+1
+      }
+      arr_R = [
+        arr_right[0] + 1,
+        arr_right[1] + 1,
+        arr_right[2] + 1,
+        arr_right[3] + 1,
+        arr_right[4] + 1,
+        arr_right[5] + 1,
+      ];
+      // console.log("arr_R :" + w)
+    }
 
     var j = 0;
     var w = 0;
     var trial_count = 1;
-
-    // var a;
-    // var b;
-    // var c;
-    // var d;
-    // var e;
-    // var f;
-
-    // var g;
-    // var h;
-    // var i;
-    // var j;
-    // var k;
-    // var l;
 
     var arr_L;
     var arr_R;
@@ -360,20 +1681,20 @@
     }
 
     var n = 5; //number of training trials
-    var rep = 2;
+    var rep = 5;
 
     var instr1 = {
       type: "html-keyboard-response",
       stimulus: `<p>Welcome to the study! </p>
-        <p>Today, you will make some decisions about colorful objects.</p>
-        <p>If you are ready to begin, please press the SPACE BAR.</p>`, //numerosity uses Space but Blair matlab code uses up arrow, which one
+            <p>Today, you will make some decisions about colorful objects.</p>
+            <p>If you are ready to begin, please press the SPACE BAR.</p>`, //numerosity uses Space but Blair matlab code uses up arrow, which one
       choices: ["space"],
     };
 
     var instr2 = {
       type: "html-keyboard-response",
       stimulus: `<p>Today, your task will be to choose between two objects. </p>
-        <p>To see an example, press the SPACE BAR. </p>`,
+            <p>To see an example, press the SPACE BAR. </p>`,
       choices: ["space"],
     };
 
@@ -389,22 +1710,22 @@
     var instr4 = {
       type: "html-keyboard-response",
       stimulus: `<p>Over 200 rounds, you will be choosing the better of two objects. The value of each</p>
-        <p>object is simply the sum of the values of the colored blocks in the object.</p>
-        <p>Each block is valued according to its color, and each color is worth a different</p>
-        <p>amount of points. Also, each color is equally likely to appear. In order to know</p>
-        <p> the value of an object, you will need to learn what each color is worth.</p>
-        <p>Press the SPACE BAR to continue. </p>`,
+            <p>object is simply the sum of the values of the colored blocks in the object.</p>
+            <p>Each block is valued according to its color, and each color is worth a different</p>
+            <p>amount of points. Also, each color is equally likely to appear. In order to know</p>
+            <p> the value of an object, you will need to learn what each color is worth.</p>
+            <p>Press the SPACE BAR to continue. </p>`,
       choices: ["space"],
     };
 
     var instr5 = {
       type: "html-keyboard-response",
       stimulus: `<p>Each round, you will see two objects on the screen. Your task is to indicate which</p>
-        <p> of the two objects you want to choose. All objects will have positive values and you will gain</p>
-        <p>points based on your choices. In <b>accuracy-based rounds</b>, you will gain a bonus for choosing the better</p>
-        <p>of the two options. In <b>value-based rounds</b>, you will simply gain the value of the object you selected.</p>
-        <p>We will always let you know which type of round you are in before you make any chocies.</p>
-        <p>Press the SPACE BAR to continue.</p>`,
+            <p> of the two objects you want to choose. All objects will have positive values and you will gain</p>
+            <p>points based on your choices. In <b>accuracy-based rounds</b>, you will gain a bonus for choosing the better</p>
+            <p>of the two options. In <b>value-based rounds</b>, you will simply gain the value of the object you selected.</p>
+            <p>We will always let you know which type of round you are in before you make any chocies.</p>
+            <p>Press the SPACE BAR to continue.</p>`,
       choices: ["space"],
     };
 
@@ -412,30 +1733,30 @@
       type: "html-keyboard-response",
       stimulus:
         `<p>At the end of the task, you will gain a reward based on your performance in one of the two types</p>
-        <p>of rounds. You will have an equal chance of being rewarded based on the <b>accuracy-based rounds</b></p>
-        <p>or the <b>value-based rounds</b>. If an <b>accuracy-based round</b> is selected for pay out, you will</p>
-        <p>gain ` +
+            <p>of rounds. You will have an equal chance of being rewarded based on the <b>accuracy-based rounds</b></p>
+            <p>or the <b>value-based rounds</b>. If an <b>accuracy-based round</b> is selected for pay out, you will</p>
+            <p>gain ` +
         acc_reward +
         ` points if you selected the better option in that round, but 0 points if you selected </p>
-        <p>the worse option. If a <b>value-based round</b> is selected, you will gain the point value of the option</p>
-        <p>you selected, regardless of whether it is the better or worse option.</p>
-        <p>Press the SPACE BAR to continue.</p>`,
+            <p>the worse option. If a <b>value-based round</b> is selected, you will gain the point value of the option</p>
+            <p>you selected, regardless of whether it is the better or worse option.</p>
+            <p>Press the SPACE BAR to continue.</p>`,
       choices: ["space"],
     };
 
     var instr7 = {
       type: "html-keyboard-response",
       stimulus: `<p>The following screen will display the colors you will see in the first</p>
-        <p>few rounds. The values of the colors <b>increase</b> from left to right.</p>
-        <p>Press the SPACE BAR to continue.</p>`,
+            <p>few rounds. The values of the colors <b>increase</b> from left to right.</p>
+            <p>Press the SPACE BAR to continue.</p>`,
       choices: ["space"],
     };
 
     var instr7v2 = {
       type: "html-keyboard-response",
       stimulus: `<p>The following screen will display the new colors you will use in the second</p>
-        <p>half of this experiment. As before, the values of the colors <b>increase</b> from left to right.</p>
-        <p>Press the SPACE BAR to continue.</p>`,
+            <p>half of this experiment. As before, the values of the colors <b>increase</b> from left to right.</p>
+            <p>Press the SPACE BAR to continue.</p>`,
       choices: ["space"],
     };
 
@@ -451,88 +1772,86 @@
       type: "html-keyboard-response",
       stimulus:
         `<p>In the following rounds, you will receive an <b>accuracy-based reward</b> for choosing the better option. </p>
-        <p>You will receive ` +
+            <p>You will receive ` +
         acc_reward +
         ` points for selecting the better option, and zero points for selecting the worse option.</p>
-        <p>Press the SPACE BAR to continue.</p>`,
+            <p>Press the SPACE BAR to continue.</p>`,
       choices: ["space"],
     };
 
     var instrincentive = {
       type: "html-keyboard-response",
       stimulus: `<p>In the following rounds, you will receive a <b>value-based reward</b> for your choices.</p>
-    <p>You will receive the point value of the option you select, regardless of whether or not it is the better option.</p>
-    <p>Press the SPACE BAR to continue.</p>`,
+        <p>You will receive the point value of the option you select, regardless of whether or not it is the better option.</p>
+        <p>Press the SPACE BAR to continue.</p>`,
       choices: ["space"],
     };
 
     var instr_start_training = {
       type: "html-keyboard-response",
       stimulus: `<p>You will now begin the training. </p>
-        <p>Six random colors will appear on the left, and six random colors will appear on the right.</p>
-        <p>Press <b>F</b> to select left, and press <b>J</b> to select right.</p>
-        <p>When you are ready, rest your fingers on <b>F</b> and <b>J</b>.</p>
-        <p>Press the SPACE BAR to continue.</p>`,
+            <p>Six random colors will appear on the left, and six random colors will appear on the right.</p>
+            <p>Press <b>F</b> to select left, and press <b>J</b> to select right.</p>
+            <p>When you are ready, rest your fingers on <b>F</b> and <b>J</b>.</p>
+            <p>Press the SPACE BAR to continue.</p>`,
       choices: ["space"],
     };
 
     var instr_start_training_2 = {
       type: "html-keyboard-response",
       stimulus: `<p>You will now begin the training. </p>
-        <p>When you are ready, rest your fingers on <b>F</b> and <b>J</b>.</p>
-        <p>Press the SPACE BAR to continue.</p>`,
+            <p>When you are ready, rest your fingers on <b>F</b> and <b>J</b>.</p>
+            <p>Press the SPACE BAR to continue.</p>`,
       choices: ["space"],
     };
 
     var pass_training_FR = {
       type: "html-keyboard-response",
       stimulus:
-        `<p> You passed the training. </p> 
-        <p>You are now ready to begin the experiment. Remember, you will</p>
-        <p>receive ` +
+        `<p>You are now ready to begin the experiment. Remember, you will</p>
+            <p>receive ` +
         acc_reward +
         ` points for choosing the better option.</p>
-        <p>When you are ready, rest your fingers on <b>F</b> and <b>J</b>.</p>
-        <p>Press the SPACE BAR to start the experiment.</p>`,
+            <p>When you are ready, rest your fingers on <b>F</b> and <b>J</b>.</p>
+            <p>Press the SPACE BAR to start the experiment.</p>`,
       choices: ["space"],
     };
 
     var pass_training_VB = {
       type: "html-keyboard-response",
-      stimulus: `<p> You passed the training. </p> 
-        <p>You are now ready to begin the experiment. Remember, you will</p>
-        <p>receive the point value of the chosen option.</p>
-        <p>When you are ready, rest your fingers on <b>F</b> and <b>J</b>.</p>
-        <p>Press the SPACE BAR to start the experiment.</p>`,
+      stimulus: `<p>You are now ready to begin the experiment. Remember, you will</p>
+            <p>receive the point value of the chosen option.</p>
+            <p>When you are ready, rest your fingers on <b>F</b> and <b>J</b>.</p>
+            <p>Press the SPACE BAR to start the experiment.</p>`,
       choices: ["space"],
     };
 
     var fail_training_1 = {
       type: "html-keyboard-response",
-      stimulus: `<p> You failed the training. </p> 
-    <p>Please remember to select the object with the higher value sum.</p>
-    <p>Press <b>F</b> to select left, and press <b>J</b> to select right</p>
-    <p>When you are ready, press the SPACE BAR to try the training again.</p>
-    `,
+      stimulus: `<p> You failed the training. </p>
+        <p>Please remember to select the object with the higher value sum.</p>
+        <p>Press <b>F</b> to select left, and press <b>J</b> to select right</p>
+        <p>When you are ready, press the SPACE BAR to try the training again.</p>
+        `,
       choices: ["space"],
     };
 
     var fail_training_2 = {
       type: "html-keyboard-response",
-      stimulus: `<p> You failed the training. </p> 
-    <p>Please remember to select the object with the higher value sum.</p>
-    <p>Press <b>F</b> to select left, and press <b>J</b> to select right</p>
-    <p>When you are ready, press the SPACE BAR to try the training one more time.</p>
-    `,
+      stimulus: `<p> You failed the training. </p>
+        <p>Please remember to select the object with the higher value sum.</p>
+        <p>Press <b>F</b> to select left, and press <b>J</b> to select right</p>
+        <p>When you are ready, press the SPACE BAR to try the training one more time.</p>
+        `,
       choices: ["space"],
     };
 
     var fail_training_3 = {
       type: "html-keyboard-response",
-      stimulus: `<p> You failed the training a third try. Please do as best as you can in the experiment.</p> 
-    <p></p>
-    <p>Please press space to continue.</p>
-    `,
+      stimulus: `<p> You failed the training a third try. Please do as best as you can in the experiment.</p>
+        <p></p>
+        <p>Please press space to continue.</p>
+        `,
       choices: ["space"],
       // on_finish: function (data) {
       //   jsPsych.endExperiment("The experiment was ended after three failures.");
@@ -566,29 +1885,29 @@
       on_finish: function (data) {
         data.task = "training_VB";
         if (j == w) {
-          data.training_VB_accuracy = 1;
+          data.accuracy = 1;
         }
         if (j > w) {
           //if left is greater than right
           if (data.key_press == 70) {
-            data.training_VB_accuracy = 1;
+            data.accuracy = 1;
           } else {
-            data.training_VB_accuracy = 0;
+            data.accuracy = 0;
           }
         }
         if (w > j) {
           if (data.key_press == 74) {
-            data.training_VB_accuracy = 1;
+            data.accuracy = 1;
           } else {
-            data.training_VB_accuracy = 0;
+            data.accuracy = 0;
           }
         }
-        acc_VB[idx] = data.training_VB_accuracy;
-        data.VB_left_sum = j;
-        data.VB_right_sum = w;
+        acc_VB[idx] = data.accuracy;
+        data.Left_sum = j;
+        data.Right_sum = w;
         data.arr_L = arr_L;
         data.arr_R = arr_R;
-        // data.training_VB_accuracy = acc_VB[idx];
+        // data.accuracy = acc_VB[idx];
         idx++;
         data.trialN = idx;
         // trial_count++;
@@ -617,22 +1936,22 @@
         if (j > w) {
           //if left is greater than right
           if (data.key_press == 70) {
-            data.training_VB_accuracy_2 = 1;
+            data.accuracy = 1;
           } else {
-            data.training_VB_accuracy_2 = 0;
+            data.accuracy = 0;
           }
         }
         if (w > j) {
           if (data.acc2_VB == 74) {
-            data.training_VB_accuracy_2 = 1;
+            data.accuracy = 1;
           } else {
-            data.training_VB_accuracy_2 = 0;
+            data.accuracy = 0;
           }
         }
         // data.acc2_VB = acc2_VB;
-        acc2_VB[idx2] = data.training_VB_accuracy_2;
-        data.VB_left_sum = j;
-        data.VB_right_sum = w;
+        acc2_VB[idx2] = data.accuracy;
+        data.Left_sum = j;
+        data.Right_sum = w;
         data.arr_L = arr_L;
         data.arr_R = arr_R;
         idx2++;
@@ -658,26 +1977,26 @@
       on_finish: function (data) {
         data.task = "training_VB";
         if (j == w) {
-          data.training_VB_accuracy_3 = 1;
+          data.accuracy = 1;
         }
         if (j > w) {
           //if left is greater than right
           if (data.key_press == 70) {
-            data.training_VB_accuracy_3 = 1;
+            data.accuracy = 1;
           } else {
-            data.training_VB_accuracy_3 = 0;
+            data.accuracy = 0;
           }
         }
         if (w > j) {
           if (data.key_press == 74) {
-            data.training_VB_accuracy_3 = 1;
+            data.accuracy = 1;
           } else {
-            data.training_VB_accuracy_3 = 0;
+            data.accuracy = 0;
           }
         }
-        acc3_VB[idx3] = data.training_VB_accuracy_3;
-        data.VB_left_sum = j;
-        data.VB_right_sum = w;
+        acc3_VB[idx3] = data.accuracy;
+        data.Left_sum = j;
+        data.Right_sum = w;
         data.arr_L = arr_L;
         data.arr_R = arr_R;
         // data.acc3_VB = acc3_VB;
@@ -739,7 +2058,7 @@
     //Conditional 3
     var accuracy3 = 1;
     var conditional_3_value = {
-      timeline: [fail_training_3, pass_training_FR],
+      timeline: [fail_training_3],
       conditional_function: function () {
         accuracy3 = 0.0;
         var counter3 = 0;
@@ -775,37 +2094,37 @@
     //Experiment
     var experiment_value = {
       type: "blocks-exp",
-      stimulus_L: drawRectL,
-      stimulus_R: drawRectR,
+      stimulus_L: drawRectLexp,
+      stimulus_R: drawRectRexp,
       coverWhite_f: coverWhite,
       choices: ["f", "j"],
       on_finish: function (data) {
         data.task = "experiment_VB";
         if (j == w) {
           if (Math.random() > 0.5) {
-            data.experiment_VB_accuracy = 1;
+            data.accuracy = 1;
             left_arr[idx4] = j;
           } else {
-            data.experiment_VB_accuracy = 0;
+            data.accuracy = 0;
             right_arr[idx4] = w;
           }
         }
         if (j > w) {
           //if left is greater than right
           if (data.key_press == 70) {
-            data.experiment_VB_accuracy = 1;
+            data.accuracy = 1;
             left_arr[idx4] = j;
           } else {
-            data.experiment_VB_accuracy = 0;
+            data.accuracy = 0;
             right_arr[idx4] = w;
           }
         }
         if (w > j) {
           if (data.key_press == 74) {
-            data.experiment_VB_accuracy = 1;
+            data.accuracy = 1;
             right_arr[idx4] = w;
           } else {
-            data.experiment_VB_accuracy = 0;
+            data.accuracy = 0;
             left_arr[idx4] = j;
           }
         }
@@ -813,9 +2132,9 @@
         // data.experiment_VB_accuracy = acc_exp_VB[idx4];
         data.trialN = trial_count;
         left_value[idx4] = j;
-        data.VB_left_sum = j;
+        data.Left_sum = j;
         right_value[idx4] = w;
-        data.VB_right_sum = w;
+        data.Right_sum = w;
         // data.l_topleft = a
         // data.l_topmiddle = b
         // data.l_topright = c
@@ -851,16 +2170,16 @@
     var finish_p1_fixed_done = {
       type: "html-keyboard-response",
       stimulus: `<p>You have completed the first half of the experiment.</p>
-        <p>In these next rounds, your bonus will be <b>value-based</b>.</p>
-        <p>Press the SPACE BAR to continue.</p>`,
+            <p>In these next rounds, your bonus will be <b>value-based</b>.</p>
+            <p>Press the SPACE BAR to continue.</p>`,
       choices: ["space"],
     };
 
     var finish_p1_value_done = {
       type: "html-keyboard-response",
       stimulus: `<p>You have completed the first half of the experiment.</p>
-        <p>In these next rounds, your bonus will be <b>accuracy-based</b>.</p>
-        <p>Press the SPACE BAR to continue.</p>`,
+            <p>In these next rounds, your bonus will be <b>accuracy-based</b>.</p>
+            <p>Press the SPACE BAR to continue.</p>`,
       choices: ["space"],
     };
 
@@ -890,27 +2209,27 @@
       on_finish: function (data) {
         data.task = "training_FR";
         if (j == w) {
-          data.training_FR_accuracy = 1;
+          data.accuracy = 1;
         }
         if (j > w) {
           //if left is greater than right
           if (data.key_press == 70) {
-            data.training_FR_accuracy = 1;
+            data.accuracy = 1;
           } else {
-            data.training_FR_accuracy = 0;
+            data.accuracy = 0;
           }
         }
         if (w > j) {
           if (data.key_press == 74) {
-            data.training_FR_accuracy = 1;
+            data.accuracy = 1;
           } else {
-            data.training_FR_accuracy = 0;
+            data.accuracy = 0;
           }
         }
-        fixed_FR[idx5] = data.training_FR_accuracy;
+        fixed_FR[idx5] = data.accuracy;
         // data.fixed_FR = fixed_FR[idx5];
-        data.FR_left_sum = j;
-        data.FR_right_sum = w;
+        data.Left_sum = j;
+        data.Right_sum = w;
         data.arr_L = arr_L;
         data.arr_R = arr_R;
         idx5++;
@@ -1016,7 +2335,6 @@
       timeline: [fixation, trial_training3_fixed],
       repetitions: n,
     };
-
     var pass_FR;
 
     //Conditional 1
@@ -1068,7 +2386,7 @@
     //Conditional 3
     var accuracy3 = 1;
     var conditional_3_fixed = {
-      timeline: [fail_training_3, pass_training_VB],
+      timeline: [fail_training_3],
       conditional_function: function () {
         accuracy3 = 0.0;
         var counter3 = 0;
@@ -1091,15 +2409,15 @@
     //150 trials of main task
 
     //Make the color spectrum different
-    var myfunc2 = function () {
-      if (pass_FR) {
-        timeline.push(pass_training_FR);
-      }
-    };
-    var trialm2 = {
-      type: "call-function",
-      func: myfunc2,
-    };
+    // var myfunc2 = function () {
+    //   if (pass_FR) {
+    //     timeline.push(pass_training_FR);
+    //   }
+    // };
+    // var trialm2 = {
+    //   type: "call-function",
+    //   func: myfunc2,
+    // };
 
     var reward_val;
     var rand_reward = [];
@@ -1114,32 +2432,32 @@
     //Experiment
     var experiment_fixed = {
       type: "blocks-exp",
-      stimulus_L: drawRectL,
-      stimulus_R: drawRectR,
+      stimulus_L: drawRectLexp,
+      stimulus_R: drawRectRexp,
       coverWhite_f: coverWhite,
       choices: ["f", "j"],
       on_finish: function (data) {
         data.task = "experiment_FR";
         if (j == w) {
           if (Math.random() > 0.5) {
-            data.experiment_FR_accuracy = 1;
+            data.accuracy = 1;
           } else {
-            data.experiment_FR_accuracy = 0;
+            data.accuracy = 0;
           }
         }
         if (j > w) {
           //if left is greater than right
           if (data.key_press == 70) {
-            data.experiment_FR_accuracy = 1;
+            data.accuracy = 1;
           } else {
-            data.experiment_FR_accuracy = 0;
+            data.accuracy = 0;
           }
         }
         if (w > j) {
           if (data.key_press == 74) {
-            data.experiment_FR_accuracy = 1;
+            data.accuracy = 1;
           } else {
-            data.experiment_FR_accuracy = 0;
+            data.accuracy = 0;
           }
         }
         // acc_exp_FR[idx5] = data.correct;
@@ -1149,11 +2467,11 @@
         // left_arr[idx5] = j;
         left_fixed[idxt] = j;
         // data.left_FR = left_fixed //change to j for just one
-        data.FR_left_sum = j;
+        data.Left_sum = j;
         // right_arr[idx5] = w;
         right_fixed[idxt] = w;
         // data.right_FR = right_fixed //change to w for just one
-        data.FR_right_sum = w;
+        data.Right_sum = w;
         // data.l_topleft = a
         // data.l_topmiddle = b
         // data.l_topright = c
@@ -1179,7 +2497,7 @@
 
     var experiment_node_fixed = {
       timeline: [fixation, experiment_fixed],
-      repetitions: 2,
+      repetitions: rep,
     };
     // timeline.push(experiment_node_fixed)
 
@@ -1308,10 +2626,10 @@
       choices: ["space"],
       on_start: function (trial) {
         trial.stimulus =
-          `<p> You have completed the experiment! </p> 
-        <p>Your reward will be from the value-based trials.</p>    
-        <p>One trial was selected at random, and you are rewarded the value of that choice.</p>
-        <p>Your reward is $` +
+          `<p> You have completed the experiment! </p>
+            <p>Your reward will be from the value-based trials.</p>
+            <p>One trial was selected at random, and you are rewarded the value of that choice.</p>
+            <p>Your reward is $` +
           reward_val_VB +
           `.</p>`;
       },
@@ -1339,9 +2657,9 @@
       on_start: function (trial) {
         trial.stimulus =
           `<p> You have completed the experiment! </p> \
-        <p>Your reward will be from the accuracy-based trials.</p>    
-        <p>One trial was selected at random, which you got correct!</p>
-        <p>Your reward is $` +
+            <p>Your reward will be from the accuracy-based trials.</p>
+            <p>One trial was selected at random, which you got correct!</p>
+            <p>Your reward is $` +
           acc_reward +
           `.</p>`;
       },
@@ -1352,9 +2670,9 @@
       choices: ["space"],
       on_start: function (trial) {
         trial.stimulus = `<p> You have completed the experiment! </p> \
-        <p>Your reward will be from the accuracy-based trials.</p>    
-        <p>One trial was selected at random, which you unfortunately did not get correct.</p>
-        <p>Your reward is $0.</p>`;
+            <p>Your reward will be from the accuracy-based trials.</p>
+            <p>One trial was selected at random, which you unfortunately did not get correct.</p>
+            <p>Your reward is $0.</p>`;
       },
     };
 
@@ -1415,7 +2733,6 @@
 
     //log data for demographic info
 
-
     var cursor_on = {
       type: "call-function",
       func: function () {
@@ -1458,7 +2775,6 @@
           ])
           .ignore("trial_index")
           .ignore("internal_node_id")
-          .ignore("time_elapsed")
           .localSave("csv", "mydata.csv");
       },
     });
