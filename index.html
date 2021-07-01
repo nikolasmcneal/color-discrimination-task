@@ -1366,7 +1366,7 @@
     ];
 
 
-    
+
     function shuffle(arr) {
       var currentIndex = arr.length,
         randomIndex;
@@ -1389,13 +1389,13 @@
     var indexx2 = 0;
 
     function rnd_array(arrays) {
-      var idx_array = arrays[indexx];
+      var idx_array = arrays[indexx][0];
       indexx++;
       return idx_array;
     }
 
     function rnd_array2(arrays) {
-      var idx_array = arrays[indexx2];
+      var idx_array = arrays[indexx2][1];
       indexx2++;
       return idx_array;
     }
@@ -1403,7 +1403,7 @@
 
     function drawRectLexp(c) {
       j = 0;
-      var arr_left = rnd_array(arrays_left);
+      var arr_left = rnd_array(arrays);
       empt[indexx] = arr_left;
       var ctx = c.getContext("2d");
       ctx.beginPath();
@@ -1442,7 +1442,7 @@
     function drawRectRexp(d) {
       w = 0;
 
-      var arr_right = rnd_array2(arrays_right);
+      var arr_right = rnd_array2(arrays);
       empt[indexx2] = arr_right;
 
       var ctx = d.getContext("2d");
