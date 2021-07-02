@@ -2578,12 +2578,11 @@
     //   ],
     // ];
 
+    var arrays;
 
-var arrays;
-
-    if(Math.random() > .5){
+    if (Math.random() > 0.5) {
       arrays = arrays1;
-    } else{
+    } else {
       arrays = arrays2;
     }
 
@@ -2635,6 +2634,7 @@ var arrays;
     function drawRectLexp(c) {
       j = 0;
       var arr_left = rnd_array(arrays);
+      arr_left = shuffle(arr_left);
       empt[indexx] = arr_left;
       var ctx = c.getContext("2d");
       ctx.beginPath();
@@ -2674,6 +2674,7 @@ var arrays;
       w = 0;
 
       var arr_right = rnd_array2(arrays);
+      arr_right = shuffle(arr_right);
       empt[indexx2] = arr_right;
 
       var ctx = d.getContext("2d");
@@ -3422,10 +3423,10 @@ var arrays;
         col1 = colors;
       }
 
-      if(arrays == arrays1){
+      if (arrays == arrays1) {
         arrays = arrays2;
-      }else{
-        arrays = arrays1
+      } else {
+        arrays = arrays1;
       }
     };
     var trialm = {
