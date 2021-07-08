@@ -116,21 +116,21 @@ jsPsych.plugins["blocks-exp"] = (function () {
     var leftsum = 0;
     var rightsum = 0;
 
-    for(var i = 0; i < arr_left.length; i++){
-      arr_left[i] = Math.floor(Math.random() * 8)
-      leftsum += arr_left[i]
-    }
-    for(var j = 0; j < arr_right.length; j++){
-      arr_right[j] = Math.floor(Math.random() * 8)
-      rightsum += arr_right[j]
-    }
+//     for(var i = 0; i < arr_left.length; i++){
+//       arr_left[i] = Math.floor(Math.random() * 8)
+//       leftsum += arr_left[i]
+//     }
+//     for(var j = 0; j < arr_right.length; j++){
+//       arr_right[j] = Math.floor(Math.random() * 8)
+//       rightsum += arr_right[j]
+//     }
 
 
     let c = document.getElementById("jspsych-canvas-stimulus-left")
-    trial.stimulus_L(c, arr_left)
+    trial.stimulus_L(c)
 
     let d = document.getElementById("jspsych-canvas-stimulus-right")
-    trial.stimulus_R(d, arr_right)
+    trial.stimulus_R(d)
 
     let l = document.getElementById("jspsych-text-left")
     // trial.text_l(l)
