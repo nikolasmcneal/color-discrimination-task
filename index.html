@@ -2941,7 +2941,7 @@
 
     var instr4 = {
       type: "html-keyboard-response",
-      stimulus: `<p>Over 200 rounds, you will be choosing the better of two objects. The value of each</p>
+      stimulus: `<p>Over `+rep+ ` rounds, you will be choosing the better of two objects. The value of each</p>
             <p>object is simply the sum of the values of the colored blocks in the object.</p>
             <p>Each block is valued according to its color, and each color is worth a different</p>
             <p>amount of points. Also, each color is equally likely to appear. In order to know</p>
@@ -3869,7 +3869,7 @@
             <p>One trial was selected at random, and you are rewarded the value of that choice.</p>
             <p>Your reward is $` +
           reward_val_VB +
-          `.</p>`;
+          `.</p><p>Press the SPACE BAR to continue.</p>`;
       },
     };
     // if (reward_is_VB) {
@@ -3899,7 +3899,7 @@
             <p>One trial was selected at random, which you got correct!</p>
             <p>Your reward is $` +
           acc_reward +
-          `.</p>`;
+          `.</p><p>Press the SPACE BAR to continue.</p>`;
       },
     };
 
@@ -3910,7 +3910,8 @@
         trial.stimulus = `<p> You have completed the experiment! </p> \
             <p>Your reward will be from the accuracy-based trials.</p>
             <p>One trial was selected at random, which you unfortunately did not get correct.</p>
-            <p>Your reward is $0.</p>`;
+            <p>Your reward is $0.</p>
+            <p>Press the SPACE BAR to continue.</p>`;
       },
     };
 
