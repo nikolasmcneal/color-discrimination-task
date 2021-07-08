@@ -3385,6 +3385,8 @@
         idx4++;
         data.trialN = idx4;
         // trial_count++;
+        left_arr.filter(Number)
+        right_arr.filter(Number)
         all_arr = left_arr.concat(right_arr);
         // data.experiment_selections_VB = all_arr[idx4]
       },
@@ -3807,7 +3809,7 @@
     }
 
     var reward_function_VB = function () {
-      randidx = Math.floor(Math.random() * 2);
+      randidx = Math.floor(Math.random() * rep);
       reward_val_VB = all_arr[randidx];
       // if(all_arr.length == 0){
       //     reward_val_VB = 0;
