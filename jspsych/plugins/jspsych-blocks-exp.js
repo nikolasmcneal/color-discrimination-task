@@ -120,9 +120,9 @@ jsPsych.plugins["blocks-exp"] = (function () {
       arr_left[i] = Math.floor(Math.random() * 8)
       leftsum += arr_left[i]
     }
-    for(var j = 0; j < arr_left.length; j++){
-      arr_left[j] = Math.floor(Math.random() * 8)
-      leftsum += arr_left[j]
+    for(var j = 0; j < arr_right.length; j++){
+      arr_right[j] = Math.floor(Math.random() * 8)
+      rightsum += arr_right[j]
     }
 
 
