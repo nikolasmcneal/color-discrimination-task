@@ -17,6 +17,8 @@
   </head>
   <body></body>
   <script>
+    var subject_id = jsPsych.randomization.randomID(9);
+
     // Fixation duration, this is also currently used if the participant selects
     // "Space" -- neither Left or Right -- and no border is shown
     // for their selection
@@ -24,11 +26,11 @@
 
     var timeline = [];
     var col1 = [];
-    
+
     // Enter fullscreen:
     timeline.push({
-    type: 'fullscreen',
-    fullscreen_mode: true
+      type: "fullscreen",
+      fullscreen_mode: true,
     });
 
     var cursor_off = {
@@ -39,7 +41,6 @@
     };
 
     timeline.push(cursor_off);
-
 
     var fixedfirst = true;
     if (Math.random() > 0.5) {
@@ -1742,7 +1743,10 @@
 
     var instr4 = {
       type: "html-keyboard-response",
-      stimulus: `<p>Over `+rep+ ` rounds, you will be choosing the better of two objects. The value of each</p>
+      stimulus:
+        `<p>Over ` +
+        rep +
+        ` rounds, you will be choosing the better of two objects. The value of each</p>
             <p>object is simply the sum of the values of the colored blocks in the object.</p>
             <p>Each block is valued according to its color, and each color is worth a different</p>
             <p>amount of points. Also, each color is equally likely to appear. In order to know</p>
@@ -2186,8 +2190,8 @@
         idx4++;
         data.trialN = idx4;
         // trial_count++;
-        left_arr.filter(Number)
-        right_arr.filter(Number)
+        left_arr.filter(Number);
+        right_arr.filter(Number);
         all_arr = left_arr.concat(right_arr);
         // data.experiment_selections_VB = all_arr[idx4]
       },
@@ -2234,7 +2238,6 @@
 
       indexx = 0;
       indexx2 = 0;
-
     };
     var trialm = {
       type: "call-function",
@@ -2614,7 +2617,7 @@
     }
 
     var reward_function_VB = function () {
-      while(reward_val_VB == 0 || !(reward_val_VB > 0)){
+      while (reward_val_VB == 0 || !(reward_val_VB > 0)) {
         randidx = Math.floor(Math.random() * rep);
         reward_val_VB = all_arr[randidx];
       }
@@ -2824,6 +2827,9 @@
           .ignore("trial_index")
           .ignore("internal_node_id")
           .localSave("csv", "mydata.csv");
+          jsPsych.data.addProperties({
+            subject: subject_id
+          })
       },
     });
   </script>
