@@ -74,7 +74,7 @@ jsPsych.plugins["rainbow"] = (function () {
     var leftbool = false;
     var rightbool = false;
     var new_html;
-    new_html = '<div id="jspsych-canvas-keyboard-response-stimulus" style = "position: absolute; margin-left: auto; margin-right: auto; left: 0; right: 0; text-align: center;">' 
+    new_html = '<div id="jspsych-canvas-keyboard-response-stimulus" style = "position: absolute; margin-left: auto; margin-right: auto; left: 0; right: 0; top: 450px; text-align: center;">' 
     new_html += '<canvas id="jspsych-rainbow"  height="' + 150 + '" width="' + 1300 + '"style = "padding: 0; margin: auto; display: block; width = 350px; height = 225px; position: absolute; top: 100; bottom: 0; left: 60px; right: 0; text-align: center;" ></canvas>'
     new_html += '<canvas id="jspsych-rainbow-values"  height="' + 150 + '" width="' + 1300 + '"style = "padding: 0; margin: auto; display: block; width = 350px; height = 225px; position: absolute; top: -100; bottom: 0; left: 60px; right: 0; text-align: center;" ></canvas>'
     new_html += '<canvas id="jspsych-text"  height="' + 150 + '" width="' + 1300 + '"style = "padding: 0; margin: auto; display: block; width = 350px; height = 225px; position: relative; top: 200; bottom: 0; left: 60px; right: 0; text-align: center;" ></canvas>'
