@@ -18,13 +18,9 @@
   <body></body>
   <script>
     var subject_id = jsPsych.randomization.randomID(9);
-    var n = 30; //number of training trials
-    var rep = 150; //number of experiment trials (MAX is 150)
-    const fixation_duration = 500; 
-
-
-
-
+    var n = 10; //number of training trials
+    var rep = 15; //number of experiment trials (MAX is 150)
+    const fixation_duration = 500;
 
     // Fixation duration, this is also currently used if the participant selects
     // "Space" -- neither Left or Right -- and no border is shown
@@ -1720,8 +1716,6 @@
       ctx.fillRect(0, 0, 200, 200);
     }
 
-
-
     var instr1 = {
       type: "html-keyboard-response",
       stimulus: `<p>Welcome to the study! </p>
@@ -1850,23 +1844,22 @@
     var pass_training_FR = {
       type: "html-keyboard-response",
       stimulus:
-        `<p>You are now ready to begin the experiment. Remember, you will</p>
-            <p>receive ` +
-        acc_reward +
-        ` points for choosing the better option.</p>
-            <p>When you are ready, rest your fingers on <b>F</b> and <b>J</b>.</p>
-            <p>Press the SPACE BAR to start the experiment.</p>`,
+        `<p>You are now ready to begin the experiment. Remember, if this section is chosen</p>
+        <p>for payout, one random trial will be selected and you will receive ` + acc_reward + ` points for choosing the better option.</p>
+        <p>When you are ready, rest your fingers on <b>F</b> and <b>J</b>.</p>
+        <p>Press the SPACE BAR to start the experiment.</p>`,
       choices: ["space"],
     };
 
     var pass_training_VB = {
+
       type: "html-keyboard-response",
-      stimulus: `<p>You are now ready to begin the experiment. Remember, you will</p>
-            <p>receive the point value of the chosen option.</p>
-            <p>When you are ready, rest your fingers on <b>F</b> and <b>J</b>.</p>
-            <p>Press the SPACE BAR to start the experiment.</p>`,
+      stimulus: `<p>You are now ready to begin the experiment. Remember, if this section is chosen</p>
+          <p>for payout, one random trial will be selected and you will receive the point value of the chosen option.</p>
+          <p>When you are ready, rest your fingers on <b>F</b> and <b>J</b>.</p>
+          <p>Press the SPACE BAR to start the experiment.</p>`,
       choices: ["space"],
-    };
+      };
 
     var fail_training_1 = {
       type: "html-keyboard-response",
@@ -2832,9 +2825,9 @@
           .ignore("trial_index")
           .ignore("internal_node_id")
           .localSave("csv", "mydata.csv");
-          jsPsych.data.addProperties({
-            subject: subject_id
-          })
+        jsPsych.data.addProperties({
+          subject: subject_id,
+        });
       },
     });
   </script>
