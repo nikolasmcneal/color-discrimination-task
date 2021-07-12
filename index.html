@@ -18,11 +18,17 @@
   <body></body>
   <script>
     var subject_id = jsPsych.randomization.randomID(9);
+    var n = 10; //number of training trials
+    var rep = 15; //number of experiment trials (MAX is 150)
+    const fixation_duration = 500; 
+
+
+
+
 
     // Fixation duration, this is also currently used if the participant selects
     // "Space" -- neither Left or Right -- and no border is shown
     // for their selection
-    const fixation_duration = 1; //to 500
 
     var timeline = [];
     var col1 = [];
@@ -1714,8 +1720,7 @@
       ctx.fillRect(0, 0, 200, 200);
     }
 
-    var n = 10; //number of training trials
-    var rep = 150; //number of experiment trials
+
 
     var instr1 = {
       type: "html-keyboard-response",
