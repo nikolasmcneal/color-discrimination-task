@@ -6,6 +6,7 @@
     <script src="jspsych/plugins/jspsych-blocks.js"></script>
     <script src="jspsych/plugins/jspsych-image-keyboard-response.js"></script>
     <script src="jspsych/plugins/jspsych-blocks-exp.js"></script>
+    <script src="jspsych/plugins/jspsych-image-button-response.js"></script>
     <script src="jspsych/plugins/jspsych-rainbow.js"></script>
     <script src="jspsych/plugins/jspsych-call-function.js"></script>
     <script src="jspsych/plugins/jspsych-reward-function.js"></script>
@@ -13,13 +14,14 @@
     <script src="jspsych/plugins/jspsych-fullscreen.js"></script>
     <script src="jspsych/plugins/jspsych-html-keyboard-response.js"></script>
     <script src="jspsych/plugins/jspsych-survey-text.js"></script>
+    <script src="jspsych/plugins/jspsych-image-slider-response.js"></script>
     <link rel="stylesheet" href="jspsych/css/jspsych.css" />
   </head>
   <body></body>
   <script>
     var subject_id = jsPsych.randomization.randomID(9);
-    var n = 10; //number of training trials
-    var rep = 15; //number of experiment trials (MAX is 150)
+    var n = 5; //number of training trials
+    var rep = 8; //number of experiment trials (MAX is 150)
     const fixation_duration = 500;
 
     // Fixation duration, this is also currently used if the participant selects
@@ -44,6 +46,13 @@
 
     timeline.push(cursor_off);
 
+    var cursor_on = {
+      type: "call-function",
+      func: function () {
+        document.body.style.cursor = "auto";
+      },
+    };
+
     var fixedfirst = true;
     if (Math.random() > 0.5) {
       fixedfirst = true;
@@ -65,6 +74,7 @@
     var bluetopink = false;
     var greentoorange = true;
     var orangetogreen = false;
+
     //pink to blue
     var colors = [
       "rgb(237,48,137)",
@@ -1638,6 +1648,7 @@
         arr_left[4] + 1,
         arr_left[5] + 1,
       ];
+      console.log(j);
     }
 
     function drawtext_l_incentive(l) {
@@ -1845,21 +1856,22 @@
       type: "html-keyboard-response",
       stimulus:
         `<p>You are now ready to begin the experiment. Remember, if this section is chosen</p>
-        <p>for payout, one random trial will be selected and you will receive ` + acc_reward + ` points for choosing the better option.</p>
+        <p>for payout, one random trial will be selected and you will receive ` +
+        acc_reward +
+        ` points for choosing the better option.</p>
         <p>When you are ready, rest your fingers on <b>F</b> and <b>J</b>.</p>
         <p>Press the SPACE BAR to start the experiment.</p>`,
       choices: ["space"],
     };
 
     var pass_training_VB = {
-
       type: "html-keyboard-response",
       stimulus: `<p>You are now ready to begin the experiment. Remember, if this section is chosen</p>
           <p>for payout, one random trial will be selected and you will receive the point value of the chosen option.</p>
           <p>When you are ready, rest your fingers on <b>F</b> and <b>J</b>.</p>
           <p>Press the SPACE BAR to start the experiment.</p>`,
       choices: ["space"],
-      };
+    };
 
     var fail_training_1 = {
       type: "html-keyboard-response",
@@ -2203,6 +2215,59 @@
     var acc_points = 0;
     var fixed_points = 0;
     var value_points = 0;
+
+    var ordermemtask;
+    var testset;
+    var testsetchoice;
+    var checkOrder = function () {
+      console.log("santiy, checkordercall");
+      if (col1 == colors) {
+        //PB
+        if (pinktoblue) {
+          ordermemtask = pinktoblue;
+          console.log("pinktoblue");
+          testset = PB;
+        }
+        if (bluetopink) {
+          ordermemtask = bluetopink;
+          console.log("bluetopink");
+          testset = PB;
+        }
+      }
+      if (col1 == colors2) {
+        if (orangetogreen) {
+          ordermemtask = orangetogreen;
+          ("orangetogreen");
+          testset = OG;
+        }
+        if (greentoorange) {
+          ordermemtask = orangetogreen;
+          ("greentoorange");
+          testset = OG;
+        }
+      }
+    };
+    var checkOrdercall = {
+      type: "call-function",
+      func: checkOrder,
+    };
+
+    var OG = [
+      "img/OG/18.jpg",
+      "img/OG/20.jpg",
+      "img/OG/23.jpg",
+      "img/OG/28.jpg",
+      "img/OG/32.jpg",
+    ];
+
+    var PB = [
+      "img/PB/14.jpg",
+      "img/PB/23.jpg",
+      "img/PB/26.jpg",
+      "img/PB/33.jpg",
+      "img/PB/35.jpg",
+    ];
+
 
     var finish_p1_fixed_done = {
       type: "html-keyboard-response",
@@ -2551,6 +2616,67 @@
     var instr_arr = [instr1, instr2, instr3, instr4, instr5, instr6];
     timeline = timeline.concat(instr_arr);
 
+    var memslider_instr = {
+      type: "html-keyboard-response",
+      stimulus: `<p>In the following section, we will show you a few more color objects.</p>
+            <p>Each of these objects come from the previous phase that you just completed.</p>
+            <p>Use the slider to estimate the value of each object.</p>
+            <p>Press the SPACE BAR to continue.</p>`,
+      choices: ["space"],
+    };
+
+    var memchoice_instr = {
+      type: "html-keyboard-response",
+      stimulus: `<p>In the following section, we will show you the same color objects again.</p>
+            <p>We will show you two possible values of the object. Select which one you think is correct.</p>
+            <p>Press the SPACE BAR to continue.</p>`,
+      choices: ["space"],
+    };
+
+    var memslidertmp = {
+      type: "image-slider-response",
+      stimulus_height: 542 / 2,
+      stimulus_width: 854 / 2,
+      stimulus: function(){
+        var randomstim = jsPsych.randomization.sampleWithReplacement(testset, 1)
+        return randomstim;
+        },
+      min: 0,
+      max: 50,
+      slider_number: true,
+      require_movement: true,
+      labels: ["0", "50"],
+    };
+
+    var memslider = {
+      timeline: [memslidertmp],
+      repetitions: 5,
+    };
+    var randomstim2 = ""
+    var randomstim2str = ""
+    var memchoicetmp = {
+      type: "image-button-response",
+      stimulus_height: 542 / 2,
+      stimulus_width: 854 / 2,
+      stimulus: function() {
+        randomstim2 = jsPsych.randomization.sampleWithReplacement(testset, 1)
+        console.log(randomstim2.join())
+        randomstim2str = randomstim2.join().slice(7,9)
+        return randomstim2;
+      },
+      choices: ["Correct", "Incorrect"],
+      prompt: function() {
+        "The value of this object is ?"
+      },
+      margin_vertical: "0px",
+      margin_horizontal: "50px",
+    };
+
+    var memchoice = {
+      timeline: [memchoicetmp],
+      repetitions: 5
+    }
+
     if (fixedfirst == true) {
       timeline.push(instrfixed);
       timeline.push(instr7);
@@ -2562,21 +2688,37 @@
       timeline.push(conditional_3_fixed);
       timeline.push(pass_training_FR);
       timeline.push(experiment_node_fixed);
+      timeline.push(checkOrdercall);
+      timeline.push(memslider_instr);
+      timeline.push(cursor_on);
+      timeline.push(memslider);
+      timeline.push(cursor_off);
+      timeline.push(memchoice_instr);
+      timeline.push(cursor_on);
+      timeline.push(memchoice);
+      timeline.push(cursor_off);
       timeline.push(finish_p1_fixed_done);
       timeline.push(trialm);
 
       timeline.push(instrincentive);
       timeline.push(instr7v2);
       timeline.push(show_rainbow);
-      // timeline.push(instrincentive)
       timeline.push(instr_start_training_2);
       timeline.push(node_VB);
       timeline.push(conditional_1_value);
       timeline.push(conditional_2_value);
       timeline.push(conditional_3_value);
       timeline.push(pass_training_VB);
-      // timeline.push(pass_training_VB)
       timeline.push(experiment_node_value);
+      timeline.push(checkOrdercall);
+      timeline.push(memslider_instr);
+      timeline.push(cursor_on);
+      timeline.push(memslider);
+      timeline.push(cursor_off);
+      timeline.push(memchoice_instr);
+      timeline.push(cursor_on)
+      timeline.push(memchoice);
+      timeline.push(cursor_off);
     } else {
       timeline.push(instrincentive);
       timeline.push(instr7);
@@ -2588,6 +2730,15 @@
       timeline.push(conditional_3_value);
       timeline.push(pass_training_VB);
       timeline.push(experiment_node_value);
+      timeline.push(checkOrdercall);
+      timeline.push(memslider_instr);
+      timeline.push(cursor_on);
+      timeline.push(memslider);
+      timeline.push(cursor_off);
+      timeline.push(memchoice_instr);
+      timeline.push(cursor_on)
+      timeline.push(memchoice);
+      timeline.push(cursor_off)
       timeline.push(finish_p1_value_done);
       timeline.push(trialm);
 
@@ -2601,6 +2752,15 @@
       timeline.push(conditional_3_fixed);
       timeline.push(pass_training_FR);
       timeline.push(experiment_node_fixed);
+      timeline.push(checkOrdercall);
+      timeline.push(memslider_instr);
+      timeline.push(cursor_on);
+      timeline.push(memslider);
+      timeline.push(cursor_off);
+      timeline.push(memchoice_instr);
+      timeline.push(cursor_on);
+      timeline.push(memchoice);
+      timeline.push(cursor_off);
     }
     var final_reward_value;
 
@@ -2782,12 +2942,6 @@
 
     //log data for demographic info
 
-    var cursor_on = {
-      type: "call-function",
-      func: function () {
-        document.body.style.cursor = "auto";
-      },
-    };
     timeline.push(cursor_on);
 
     var demo_trial = {
