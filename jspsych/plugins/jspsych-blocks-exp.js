@@ -204,7 +204,7 @@ jsPsych.plugins["blocks-exp"] = (function () {
             kill_timers();
             response = info;
             display_selection();
-            setTimeout(() => end_trial(false), 100); //500
+            setTimeout(() => end_trial(false), 500); //500
           },
         });
       }
@@ -255,7 +255,7 @@ jsPsych.plugins["blocks-exp"] = (function () {
       // TO END TRIAL:
       
       if (trial.response_ends_trial) {
-         setTimeout(() => end_trial(false), 100); //change to 500
+         setTimeout(() => end_trial(false), 500); //change to 500
        }
     };
 
