@@ -22,9 +22,21 @@
   <body></body>
   <script>
     var subject_id = jsPsych.randomization.randomID(9);
-    var n = 15; //number of training trials
-    var rep = 15; //number of experiment trials (MAX is 150)
+    var n = 1; //number of training trials
+    var rep = 1; //number of experiment trials (MAX is 150)
+
+
+
+
+
     const fixation_duration = 500;
+
+    //send version once its tested
+
+    // is chrome
+    // change timing
+    // questionnaire after ?
+
 
     // Fixation duration, this is also currently used if the participant selects
     // "Space" -- neither Left or Right -- and no border is shown
@@ -32,6 +44,52 @@
 
     var timeline = [];
     var col1 = [];
+
+
+    //chrome, opera, edge, firefox
+    var isChrome;
+    var checkBrowser = function () {
+      if (navigator.userAgent.indexOf("Chrome") != -1) {
+        isChrome = true;
+        console.log("Chrome");
+      } else {
+        isChrome = false;
+        console.log("unknown");
+      }
+    };
+    var checkBrowsercall = {
+      type: "call-function",
+      func: checkBrowser,
+    };
+    timeline.push(checkBrowsercall)
+
+
+    var browser_fail = {
+      type: 'html-keyboard-response',      
+      stimulus: `<p>Oops! It looks like you aren't using the Google Chrome browser.  </p>
+            <p>Please make sure that you complete this experiment in Google Chrome.</p>
+            <p>The experiment will now end. Press any key to continue.</p>`,
+      choices: jsPsych.ALL_KEYS,
+      on_finish: function(data){
+        jsPsych.endExperiment();
+      }
+    }
+
+
+    //Conditional Browser
+    var conditional_browser = {
+      timeline: [browser_fail],
+      conditional_function: function () {
+        if (!isChrome) {
+          //change to .70
+          return true;
+        } else {
+          return false;
+        }
+      },
+    };
+    timeline.push(conditional_browser)
+
 
     // Enter fullscreen:
     timeline.push({
@@ -1757,7 +1815,7 @@
       type: "html-keyboard-response",
       stimulus:
         `<p>Over ` +
-        rep +
+        rep * 2 +
         ` rounds, you will be choosing the better of two objects. The value of each</p>
             <p>object is simply the sum of the values of the colored blocks in the object.</p>
             <p>Each block is valued according to its color, and each color is worth a different</p>
@@ -1877,7 +1935,7 @@
 
     var fail_training_1 = {
       type: "html-keyboard-response",
-      stimulus: `<p> You failed the training. </p>
+      stimulus: `<p> Whoops! Looks like you made a couple of mistakes. Let's try that again. </p>
         <p>Please remember to select the object with the higher value sum.</p>
         <p>Press <b>F</b> to select left, and press <b>J</b> to select right</p>
         <p>When you are ready, press the SPACE BAR to try the training again.</p>
@@ -1887,7 +1945,7 @@
 
     var fail_training_2 = {
       type: "html-keyboard-response",
-      stimulus: `<p> You failed the training. </p>
+      stimulus: `<p> Whoops! Looks like you made a couple of mistakes. Let's try that again. </p>
         <p>Please remember to select the object with the higher value sum.</p>
         <p>Press <b>F</b> to select left, and press <b>J</b> to select right</p>
         <p>When you are ready, press the SPACE BAR to try the training one more time.</p>
@@ -1897,7 +1955,7 @@
 
     var fail_training_3 = {
       type: "html-keyboard-response",
-      stimulus: `<p> You failed the training a third try. Please do as best as you can in the experiment.</p>
+      stimulus: `<p> Whoops! Looks like you made a couple of mistakes. Please do as best as you can in the experiment.</p>
         <p></p>
         <p>Please press space to continue.</p>
         `,
@@ -2663,7 +2721,7 @@
       },
       min: 0,
       max: 50,
-      slider_start: Math.floor(Math.random()*51),
+      slider_start: Math.floor(Math.random() * 51),
       slider_number: true,
       require_movement: true,
       labels: ["0", "50"],
@@ -2678,7 +2736,7 @@
       },
       min: 0,
       max: 50,
-      slider_start: Math.floor(Math.random()*51),
+      slider_start: Math.floor(Math.random() * 51),
       slider_number: true,
       require_movement: true,
       labels: ["0", "50"],
@@ -2693,7 +2751,7 @@
       },
       min: 0,
       max: 50,
-      slider_start: Math.floor(Math.random()*51),
+      slider_start: Math.floor(Math.random() * 51),
       slider_number: true,
       require_movement: true,
       labels: ["0", "50"],
@@ -2704,11 +2762,11 @@
       stimulus_height: 542 / 2,
       stimulus_width: 854 / 2,
       stimulus: function () {
-        return testset[3]
+        return testset[3];
       },
       min: 0,
       max: 50,
-      slider_start: Math.floor(Math.random()*51),
+      slider_start: Math.floor(Math.random() * 51),
       slider_number: true,
       require_movement: true,
       labels: ["0", "50"],
@@ -2719,11 +2777,11 @@
       stimulus_height: 542 / 2,
       stimulus_width: 854 / 2,
       stimulus: function () {
-        return testset[4]
+        return testset[4];
       },
       min: 0,
       max: 50,
-      slider_start: Math.floor(Math.random()*51),
+      slider_start: Math.floor(Math.random() * 51),
       slider_number: true,
       require_movement: true,
       labels: ["0", "50"],
@@ -2741,7 +2799,12 @@
       },
       choices: ["F", "J"],
       prompt: function () {
-        return "<p>The value of this object is " + testsetchoice[0].value + ".</p><p>Press <b>F</b> if you believe this is <b>correct</b>.</p>" + "</p>Press <b>J</b> if you believe this is <b>incorrect</b>.</p>";
+        return (
+          "<p>The value of this object is " +
+          testsetchoice[0].value +
+          ".</p><p>Press <b>F</b> if you believe this is <b>correct</b>.</p>" +
+          "</p>Press <b>J</b> if you believe this is <b>incorrect</b>.</p>"
+        );
       },
     };
 
@@ -2754,7 +2817,12 @@
       },
       choices: ["F", "J"],
       prompt: function () {
-        return "<p>The value of this object is " + testsetchoice[1].value  + ".</p><p>Press <b>F</b> if you believe this is <b>correct</b>.</p>" + "</p>Press <b>J</b> if you believe this is <b>incorrect</b>.</p>";
+        return (
+          "<p>The value of this object is " +
+          testsetchoice[1].value +
+          ".</p><p>Press <b>F</b> if you believe this is <b>correct</b>.</p>" +
+          "</p>Press <b>J</b> if you believe this is <b>incorrect</b>.</p>"
+        );
       },
     };
 
@@ -2767,7 +2835,12 @@
       },
       choices: ["F", "J"],
       prompt: function () {
-        return "<p>The value of this object is " + testsetchoice[2].value + ".</p><p>Press <b>F</b> if you believe this is <b>correct</b>.</p>" + "</p>Press <b>J</b> if you believe this is <b>incorrect</b>.</p>";
+        return (
+          "<p>The value of this object is " +
+          testsetchoice[2].value +
+          ".</p><p>Press <b>F</b> if you believe this is <b>correct</b>.</p>" +
+          "</p>Press <b>J</b> if you believe this is <b>incorrect</b>.</p>"
+        );
       },
     };
 
@@ -2780,7 +2853,12 @@
       },
       choices: ["F", "J"],
       prompt: function () {
-        return "<p>The value of this object is " + testsetchoice[3].value + ".</p><p>Press <b>F</b> if you believe this is <b>correct</b>.</p>" + "</p>Press <b>J</b> if you believe this is <b>incorrect</b>.</p>";
+        return (
+          "<p>The value of this object is " +
+          testsetchoice[3].value +
+          ".</p><p>Press <b>F</b> if you believe this is <b>correct</b>.</p>" +
+          "</p>Press <b>J</b> if you believe this is <b>incorrect</b>.</p>"
+        );
       },
     };
 
@@ -2793,7 +2871,12 @@
       },
       choices: ["F", "J"],
       prompt: function () {
-        return "<p>The value of this object is " + testsetchoice[4].value + ".</p><p>Press <b>F</b> if you believe this is <b>correct</b>.</p>" + "</p>Press <b>J</b> if you believe this is <b>incorrect</b>.</p>";
+        return (
+          "<p>The value of this object is " +
+          testsetchoice[4].value +
+          ".</p><p>Press <b>F</b> if you believe this is <b>correct</b>.</p>" +
+          "</p>Press <b>J</b> if you believe this is <b>incorrect</b>.</p>"
+        );
       },
     };
 
@@ -3110,26 +3193,33 @@
     jsPsych.init({
       timeline,
       on_finish: function () {
-        jsPsych.data.displayData();
-        jsPsych.data
+        jsPsych.data.addProperties({
+                subject: subject_id,
+            });
+          $.ajax({
+          type: "POST",
+          url: "/experiment-data",
+          data: JSON.stringify(jsPsych.data
           .get()
           .filter([
-            { trial_type: "blocks" },
-            { trial_type: "blocks-exp" },
-            { trial_type: "reward-function" },
-            { trial_type: "call" },
-            { trial_type: "survey-text" },
-            { trial_type: "memslider" },
-            { trial_type: "memchoice" },
-          ])
+          { trial_type: "blocks" },
+          { trial_type: "blocks-exp" },
+          { trial_type: "reward-function" },
+          { trial_type: "call" },
+          { trial_type: "survey-text" },
+          { trial_type: "memslider" },
+          { trial_type: "memchoice" }])
           .ignore("trial_index")
           .ignore("internal_node_id")
-          .ignore("slider_start")
-          .localSave("csv", "mydata.csv");
-        jsPsych.data.addProperties({
-          subject: subject_id,
+          .values()   
+          ),
+          contentType: "application/json",
+          success: window.location.href = "finish"
+        }).fail(function() {
+          alert("A problem occurred while writing to the database. Please contact the researcher for more information.")
+          window.location.href = "finish";
         });
-      },
+        }
     });
   </script>
 </html>
