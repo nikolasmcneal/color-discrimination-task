@@ -182,6 +182,14 @@
       GOfirst = true;
     }
 
+
+    rainbow_one = []
+    rainbow_two = []
+    rainbow_BP = ["rainbows/BP.jpg", "blue", "pink"]
+    rainbow_PB = ["rainbows/PB.jpg", "pink", "blue"]
+    rainbow_OG = ["rainbows/OG.jpg", "orange", "green"]
+    rainbow_GO = ["rainbows/GO.jpg", "green", "orange"]
+
     var log_rainbow = {
       type: "call",
       func: function () {},
@@ -191,21 +199,25 @@
             data.first_rainbow = "Blue to Pink";
             anchors = ['anchors/blue.jpg', 'anchors/pink.jpg']
             example_current = example_BP
+            rainbow_one = rainbow_BP
           }
           if (pinktoblue) {
             data.first_rainbow = "Pink to Blue";
             anchors = ['anchors/pink.jpg', 'anchors/blue.jpg']
             example_current = example_PB
+            rainbow_one = rainbow_PB
           }
           if (greentoorange) {
             data.second_rainbow = "Green to Orange";
             anchors_two = ['anchors/green.jpg', 'anchors/orange.jpg']
             example_current_2 = example_GO
+            rainbow_two = rainbow_GO
           }
           if (orangetogreen) {
             data.second_rainbow = "Orange to Green";
             anchors_two = ['anchors/orange.jpg', 'anchors/green.jpg']
             example_current_2 = example_OG
+            rainbow_two = rainbow_OG
           }
         }
         if (GOfirst) {
@@ -213,21 +225,25 @@
             data.first_rainbow = "Green to Orange";
             anchors = ['anchors/green.jpg', 'anchors/orange.jpg']
             example_current = example_GO
+            rainbow_one = rainbow_GO
           }
           if (orangetogreen) {
             data.first_rainbow = "Orange to Green";
             anchors = ['anchors/orange.jpg', 'anchors/green.jpg']
             example_current = example_OG
+            rainbow_one = rainbow_OG
           }
           if (bluetopink) {
             data.second_rainbow = "Blue to Pink";
             anchors_two = ['anchors/blue.jpg', 'anchors/pink.jpg']
             example_current_2 = example_BP
+            rainbow_two = rainbow_BP
           }
           if (pinktoblue) {
             data.second_rainbow = "Pink to Blue";
             anchors_two = ['anchors/pink.jpg', 'anchors/blue.jpg']
             example_current_2 = example_PB
+            rainbow_two = rainbow_PB
           }
         }
       },
@@ -1869,7 +1885,7 @@
     var instr7 = {
       type: "html-keyboard-response",
       stimulus: `<p>The following screen will display the colors you will see in the first</p>
-            <p>few rounds. The values of the colors <b>increase</b> from left to right.</p>
+            <p>few rounds.</p>
             <p>Press the SPACE BAR to continue.</p>`,
       choices: ["space"],
     };
@@ -1877,18 +1893,18 @@
     var instr7v2 = {
       type: "html-keyboard-response",
       stimulus: `<p>The following screen will display the new colors you will use in the second</p>
-            <p>half of this experiment. As before, the values of the colors <b>increase</b> from left to right.</p>
+            <p>half of this experiment.</p>
             <p>Press the SPACE BAR to continue.</p>`,
       choices: ["space"],
     };
 
-    var show_rainbow = {
-      type: "rainbow",
-      rainbow_parameter: rainbow,
-      rainbow_values_parameter: rainbow_values,
-      text_parameter: rainbow_text,
-      choices: ["space"],
-    };
+    // var show_rainbow = {
+    //   type: "rainbow",
+    //   rainbow_parameter: rainbow,
+    //   rainbow_values_parameter: rainbow_values,
+    //   text_parameter: rainbow_text,
+    //   choices: ["space"],
+    // };
 
     var instrfixed = {
       type: "html-keyboard-response",
@@ -2079,20 +2095,20 @@
         if (j > w) {
           //if left is greater than right
           if (data.key_press == 70) {
-            data.accuracy = 1;
+            data.acc2_VB = 1;
           } else {
-            data.accuracy = 0;
+            data.acc2_VB = 0;
           }
         }
         if (w > j) {
           if (data.acc2_VB == 74) {
-            data.accuracy = 1;
+            data.acc2_VB = 1;
           } else {
-            data.accuracy = 0;
+            data.acc2_VB = 0;
           }
         }
         // data.acc2_VB = acc2_VB;
-        acc2_VB[idx2] = data.accuracy;
+        acc2_VB[idx2] = data.acc2_VB;
         data.Left_sum = j;
         data.Right_sum = w;
         data.arr_L = arr_L;
@@ -2120,24 +2136,24 @@
       on_finish: function (data) {
         data.task = "training_VB";
         if (j == w) {
-          data.accuracy = 1;
+          data.acc3_VB = 1;
         }
         if (j > w) {
           //if left is greater than right
           if (data.key_press == 70) {
-            data.accuracy = 1;
+            data.acc3_VB = 1;
           } else {
-            data.accuracy = 0;
+            data.acc3_VB = 0;
           }
         }
         if (w > j) {
           if (data.key_press == 74) {
-            data.accuracy = 1;
+            data.acc3_VB = 1;
           } else {
-            data.accuracy = 0;
+            data.acc3_VB = 0;
           }
         }
-        acc3_VB[idx3] = data.accuracy;
+        acc3_VB[idx3] = data.acc3_VB;
         data.Left_sum = j;
         data.Right_sum = w;
         data.arr_L = arr_L;
@@ -2403,19 +2419,19 @@
     var example_current = [0, 0]
     var example_current_2 = [0, 0];
     
-    var example_PB = ["examples/PB.jpg", "right", "20", "23"]
-    //left 20, right 23
+    var example_PB = ["examples/PB.jpg", "right", "25", "35"]
+    //left 25, right 35
 
-    var example_BP = ["examples/BP.jpg", "right", "23", "29"]
-    //left 23, right 29
-
-
-    var example_GO = ["examples/GO.jpg", "right", "18", "33"]
-    //left 18, right 33
+    var example_BP = ["examples/BP.jpg", "right", "13", "33"]
+    //left 13, right 33
 
 
-    var example_OG = ["examples/OG.jpg", "left", "29", "32"]
-    //left 29, right 32
+    var example_GO = ["examples/GO.jpg", "right", "19", "33"]
+    //left 19, right 33
+
+
+    var example_OG = ["examples/OG.jpg", "left", "29", "34"]
+    //left 29, right 34
 
   
 
@@ -2978,7 +2994,7 @@
         return example_current[0];
       },
       stimulus_height: 400,
-      stimulus_width: 1000,
+      stimulus_width: 1400,
       //prompt: "<p>In this example, the total value of the left object is " + example_current[2] + " and the total value of the right object is " + example_current[3] + ". Press the SPACE BAR to continue</p>",
       on_start: function (trial) {
         if(fixedfirst){
@@ -3010,7 +3026,7 @@
         return example_current_2[0];
       },
       stimulus_height: 400,
-      stimulus_width: 1000,
+      stimulus_width: 1400,
       //prompt: "<p>In this example, the total value of the left object is " + example_current[2] + " and the total value of the right object is " + example_current[3] + ". Press the SPACE BAR to continue</p>",
       on_start: function (trial) {
         if(fixedfirst){
@@ -3037,12 +3053,44 @@
 
 
 
+    var show_rainbow_one = {
+      type: "image-keyboard-response",
+      stimulus: function () {
+        return rainbow_one[0];
+      },
+      stimulus_height: 100*2,
+      stimulus_width: 1000*1.5,
+      on_start: function(trial) {
+          trial.prompt = 
+          `<p> The values of the colors increase across the spectrum, from ` + rainbow_one[1] + ` to ` + rainbow_one[2] + `.</p>
+          <p> Press the SPACE BAR to continue.</p> `
+      },
+      choices: ["space"],
+    };
+
+
+
+    var show_rainbow_two = {
+      type: "image-keyboard-response",
+      stimulus: function () {
+        return rainbow_two[0];
+      },
+      stimulus_height: 100*2,
+      stimulus_width: 1000*1.5,
+      on_start: function(trial) {
+          trial.prompt = 
+          `<p> The values of the colors increase across the spectrum, from ` + rainbow_two[1] + ` to ` + rainbow_two[2] + `.</p>
+          <p> Press the SPACE BAR to continue.</p> `
+      },
+      choices: ["space"],
+    };
+
 
     if (fixedfirst == true) {
       //instr_tmp = lets do some practice trials now so you become familiar with the task. the following screen will show a rainbow. (instr 7) 
       
       timeline.push(instr7);
-      timeline.push(show_rainbow);
+      timeline.push(show_rainbow_one);
       timeline.push(instr_start_training);
       timeline.push(node_fixed);
       timeline.push(conditional_1_fixed);
@@ -3081,7 +3129,7 @@
 
 
       timeline.push(instr7v2);
-      timeline.push(show_rainbow);
+      timeline.push(show_rainbow_two);
       timeline.push(instr_start_training_2);
       timeline.push(node_VB);
       timeline.push(conditional_1_value);
@@ -3089,7 +3137,7 @@
       timeline.push(conditional_3_value);
       timeline.push(instrincentive);
       //example incentive
-      timeilne.push(instr_example_2)
+      timeline.push(instr_example_2)
       timeline.push(pass_training_VB);
       timeline.push(experiment_node_value);
       timeline.push(checkOrdercall);
@@ -3114,7 +3162,7 @@
     } else {
       //instr_tmp = lets do some practice trials now so you become familiar with the task. the following screen will show a rainbow. (instr 7) 
       timeline.push(instr7);
-      timeline.push(show_rainbow);
+      timeline.push(show_rainbow_one);
       timeline.push(instr_start_training_2);
       timeline.push(node_VB);
       timeline.push(conditional_1_value);
@@ -3152,7 +3200,7 @@
       timeline.push(trialm);
 
       timeline.push(instr7v2);
-      timeline.push(show_rainbow);
+      timeline.push(show_rainbow_two);
       timeline.push(instr_start_training);
       timeline.push(node_fixed);
       timeline.push(conditional_1_fixed);
