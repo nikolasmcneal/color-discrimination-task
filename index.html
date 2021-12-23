@@ -17,14 +17,17 @@
     <script src="jspsych/plugins/jspsych-html-keyboard-response.js"></script>
     <script src="jspsych/plugins/jspsych-survey-text.js"></script>
     <script src="jspsych/plugins/jspsych-image-slider-response.js"></script>
+    <script src="jspsych/plugins/jspsych-blocks-prac-fixed.js"></script>
+    <script src="jspsych/plugins/jspsych-blocks-prac-VB.js"></script>
     
     <link rel="stylesheet" href="jspsych/css/jspsych.css" />
   </head>
   <body></body>
   <script>
     var subject_id = jsPsych.randomization.randomID(9);
-    var n = 1; //number of training trials
-    var rep = 1; //number of experiment trials (MAX is 150)
+    var n = 2; //number of training trials
+    var z = 2 //number of practice trials
+    var rep = 2; //number of experiment trials (MAX is 150)
 
 
 
@@ -185,10 +188,10 @@
 
     rainbow_one = []
     rainbow_two = []
-    rainbow_BP = ["rainbows/BP.jpg", "blue", "pink"]
-    rainbow_PB = ["rainbows/PB.jpg", "pink", "blue"]
-    rainbow_OG = ["rainbows/OG.jpg", "orange", "green"]
-    rainbow_GO = ["rainbows/GO.jpg", "green", "orange"]
+    rainbow_BP = ["img/rainbows/BP.jpg", "blue", "pink"]
+    rainbow_PB = ["img/rainbows/PB.jpg", "pink", "blue"]
+    rainbow_OG = ["img/rainbows/OG.jpg", "orange", "green"]
+    rainbow_GO = ["img/rainbows/GO.jpg", "green", "orange"]
 
     var log_rainbow = {
       type: "call",
@@ -197,25 +200,25 @@
         if (BPfirst) {
           if (bluetopink) {
             data.first_rainbow = "Blue to Pink";
-            anchors = ['anchors/blue.jpg', 'anchors/pink.jpg']
+            anchors = ['img/anchors/blue.jpg', 'img/anchors/pink.jpg']
             example_current = example_BP
             rainbow_one = rainbow_BP
           }
           if (pinktoblue) {
             data.first_rainbow = "Pink to Blue";
-            anchors = ['anchors/pink.jpg', 'anchors/blue.jpg']
+            anchors = ['img/anchors/pink.jpg', 'img/anchors/blue.jpg']
             example_current = example_PB
             rainbow_one = rainbow_PB
           }
           if (greentoorange) {
             data.second_rainbow = "Green to Orange";
-            anchors_two = ['anchors/green.jpg', 'anchors/orange.jpg']
+            anchors_two = ['img/anchors/green.jpg', 'img/anchors/orange.jpg']
             example_current_2 = example_GO
             rainbow_two = rainbow_GO
           }
           if (orangetogreen) {
             data.second_rainbow = "Orange to Green";
-            anchors_two = ['anchors/orange.jpg', 'anchors/green.jpg']
+            anchors_two = ['img/anchors/orange.jpg', 'img/anchors/green.jpg']
             example_current_2 = example_OG
             rainbow_two = rainbow_OG
           }
@@ -223,25 +226,25 @@
         if (GOfirst) {
           if (greentoorange) {
             data.first_rainbow = "Green to Orange";
-            anchors = ['anchors/green.jpg', 'anchors/orange.jpg']
+            anchors = ['img/anchors/green.jpg', 'img/anchors/orange.jpg']
             example_current = example_GO
             rainbow_one = rainbow_GO
           }
           if (orangetogreen) {
             data.first_rainbow = "Orange to Green";
-            anchors = ['anchors/orange.jpg', 'anchors/green.jpg']
+            anchors = ['img/anchors/orange.jpg', 'img/anchors/green.jpg']
             example_current = example_OG
             rainbow_one = rainbow_OG
           }
           if (bluetopink) {
             data.second_rainbow = "Blue to Pink";
-            anchors_two = ['anchors/blue.jpg', 'anchors/pink.jpg']
+            anchors_two = ['img/anchors/blue.jpg', 'img/anchors/pink.jpg']
             example_current_2 = example_BP
             rainbow_two = rainbow_BP
           }
           if (pinktoblue) {
             data.second_rainbow = "Pink to Blue";
-            anchors_two = ['anchors/pink.jpg', 'anchors/blue.jpg']
+            anchors_two = ['img/anchors/pink.jpg', 'img/anchors/blue.jpg']
             example_current_2 = example_PB
             rainbow_two = rainbow_PB
           }
@@ -1739,7 +1742,7 @@
         arr_left[4] + 1,
         arr_left[5] + 1,
       ];
-      console.log("left " + j);
+      // console.log("left " + j);
     }
 
     function drawtext_l_incentive(l) {
@@ -1757,6 +1760,58 @@
       ctx.fillStyle = "white";
       ctx.fillText("   " + w, 140, 100);
     }
+
+
+
+    function drawtext_l_fixed_prac(l) {
+      var ctx = l.getContext("2d");
+      var text = j;
+      ctx.font = "36px Times New Roman, sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillStyle = "white";
+      tmp = 0
+      if(j > w){
+        tmp = 27
+      }
+      ctx.fillText("  " + tmp + " points", 140, 100);
+    }
+    function drawtext_r_fixed_prac(r) {
+      var ctx = r.getContext("2d");
+      ctx.font = "36px Times New Roman, sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillStyle = "white";
+      tmp2 = 0
+      if(w > j){
+        tmp2 = 27
+      }
+      ctx.fillText("  " + tmp2 + " points", 140, 100);
+    }
+
+
+    function drawtext_l_incentive_prac(l) {
+      var ctx = l.getContext("2d");
+      var text = j;
+      ctx.font = "36px Times New Roman, sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillStyle = "white";
+      tmp = 0
+      ctx.fillText("  " + j + " points", 140, 100);
+    }
+    function drawtext_r_incentive_prac(r) {
+      var ctx = r.getContext("2d");
+      ctx.font = "36px Times New Roman, sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillStyle = "white";
+      tmp2 = 0
+      ctx.fillText("  " + w + " points", 140, 100);
+    }
+
+
+
+
+
+
+
     var fixedvalleft = 0;
 
     function drawRectR(d, arr_right) {
@@ -1807,7 +1862,7 @@
         arr_right[4] + 1,
         arr_right[5] + 1,
       ];
-      console.log("right :" + w)
+      // console.log("right :" + w)
     }
 
     function coverWhite(wh) {
@@ -1828,14 +1883,14 @@
 
     var instr2 = {
       type: "html-keyboard-response",
-      stimulus: `<p>Today, your task will be to choose between two objects. </p>
-            <p>To see an example, press the SPACE BAR. </p>`,
+      stimulus: `<p>Today, your task will be to make a series of choices between two objects. </p>
+            <p>To see an example object, press the SPACE BAR. </p>`,
       choices: ["space"],
     };
 
     var instr3 = {
       type: "image-keyboard-response",
-      stimulus: ["img/exampleobj.png"],
+      stimulus: ["img/exampleobj/exampleobj.png"],
       stimulus_height: 300,
       stimulus_width: 450,
       prompt: "<p>Press the SPACE BAR to continue</p>",
@@ -1847,21 +1902,23 @@
       stimulus:
         `<p>Over ` +
         rep * 2 +
-        ` rounds, you will be choosing the better of two objects. The value of each</p>
-            <p>object is simply the sum of the values of the colored blocks in the object.</p>
-            <p>Each block is valued according to its color, and each color is worth a different</p>
-            <p>amount of points. Also, each color is equally likely to appear. In order to know</p>
-            <p> the value of an object, you will need to learn what each color is worth.</p>
-            <p>Press the SPACE BAR to continue. </p>`,
+                ` rounds, you will be choosing the better of two objects. The value of each object is</p>
+          <p>simply the sum of the values of each colored block in the object. The colored blocks are</p>
+          <p>each worth a different amount of points, and each color is equally likely to appear. In</p>
+          <p>order to know the value of an object, you will first need to learn what each color is worth.</p>
+          <p>Press the SPACE BAR to continue. </p>`,
       choices: ["space"],
     };
 
     var instr5 = {
       type: "html-keyboard-response",
-      stimulus: `<p>Each round, you will see two objects on the screen. Your task is to indicate which</p>
-            <p> of the two objects you want to choose. All objects will have positive values and you will gain</p>
-            <p>points based on your choices. In <b>accuracy-based rounds</b>, you will gain a bonus for choosing the better</p>
-            <p>of the two options. In <b>value-based rounds</b>, you will simply gain the value of the object you selected.</p>
+      stimulus: 
+           `<p>Each round, you will see two objects on the screen. Your task is to select which of the two</p>
+            <p>objects you want to choose. All objects will have positive values and you can gain bonus</p>
+            <p>points based on your choices. In <b>accuracy-based rounds</b>, you will gain a bonus for</p>
+            <p>choosing the better of the two options. In <b>value-based rounds</b>, you can gain a bonus</p>
+            <p>worth the value of the object you selected.</p>
+            <p></p>
             <p>We will always let you know which type of round you are in before you make any choices.</p>
             <p>Press the SPACE BAR to continue.</p>`,
       choices: ["space"],
@@ -1870,15 +1927,15 @@
     var instr6 = {
       type: "html-keyboard-response",
       stimulus:
-        `<p>At the end of the task, you will gain a reward based on your performance in one of the two types</p>
-            <p>of rounds. You will have an equal chance of being rewarded based on the <b>accuracy-based rounds</b></p>
-            <p>or the <b>value-based rounds</b>. If an <b>accuracy-based round</b> is selected for pay out, you will</p>
-            <p>gain ` +
-        acc_reward +
-        ` points if you selected the better option in that round, but 0 points if you selected </p>
-            <p>the worse option. If a <b>value-based round</b> is selected, you will gain the point value of the option</p>
-            <p>you selected, regardless of whether it is the better or worse option.</p>
-            <p>Press the SPACE BAR to continue.</p>`,
+        `<p>At the end of the task, you will gain a reward based on your performance in one of these two</p>
+         <p>types of rounds. You will have an equal chance of being rewarded based on the <b>accuracy-based</b></p>
+         <p>or  <b>value-based</b> rounds. If an <b>accuracy-based round</b> is selected for pay out, you will</p>
+         <p>gain ` +
+                acc_reward +
+                ` points if you selected the better option in that round, but 0 points if you selected the worse</p>
+         <p>option. If a <b>value-based round</b> is selected, you will gain the point value of the option you</p>
+         <p>selected, whether or not it is the better or worse option.</p>
+         <p>Press the SPACE BAR to continue.</p>`,
       choices: ["space"],
     };
 
@@ -1909,11 +1966,13 @@
     var instrfixed = {
       type: "html-keyboard-response",
       stimulus:
-        `<p>You finished the training! In the following rounds of the experiment, you will receive an <b>accuracy-based reward</b> for choosing the option that has a higher total value. </p>
-            <p>This means that you will receive ` +
-        acc_reward +
-        ` points for selecting the better option, and zero points for selecting the worse option. The next screen will show an example.</p>
-            <p>Press the SPACE BAR to continue.</p>`,
+        `<p>You finished the training!</p>
+        <p></p>
+        <p>In the following rounds of the experiment, you will receive an <b>accuracy-based reward</b></p>
+        <p>for choosing the option that has a higher total value. This means that you will receive ` +
+        acc_reward +` </p>
+        <p>points for selecting the better option, and zero points for selecting the worse option.</p>
+        <p>The next screen will show an example. Press the SPACE BAR to continue.</p>`,
       choices: ["space"],
     };
 
@@ -1922,26 +1981,28 @@
       type: "html-keyboard-response",
       stimulus:
         `<p>In this trial, the object on the left has a higher total value than the object on the right.</p>
-         <p>Selecting the better object (higher value) will always give you ` + acc_reward + ` points.</p>
-            <p> Selecting the worse object (lower value) will give you  0 points. </p>
-            <p>Press the SPACE BAR to continue.</p>`,
+         <p>Selecting the better object (higher value) will give you ` + acc_reward + ` points.</p>
+         <p>Selecting the worse object (lower value) will give you  0 points. </p>
+         <p>Press the SPACE BAR to continue.</p>`,
       choices: ["space"],
     };
 
     var instrincentive = {
       type: "html-keyboard-response",
-      stimulus: `<p>You finished the training! In the following rounds of the experiment, you will receive a <b>value-based reward</b> for your choices.</p>
-        <p>This means that you will receive the point value of the option you select, regardless of whether or not it is the better option.</p>
-        <p>The next screen will show an example.</p>
-        <p>Press the SPACE BAR to continue.</p>`,
+      stimulus: `<p>You finished the training!</p>
+        <p>In the next part of the experiment, you will receive a <b>value-based reward</b> for your
+        <p>choices. This means that you will receive the point value of the option you select,</p>
+        <p>whether or not it is the better option.</p>
+        <p>The next screen will show an example. Press the SPACE BAR to continue.</p>`,
       choices: ["space"],
     };
 
     var instrincentive_2 = {
       type: "html-keyboard-response",
-      stimulus: `<p>In the following rounds, the object on the left has a higher total value than the object on the right.</p>
-        <p>Since you will receive the point value of the option you select, in this example you would receive XXX points for choosing the option on the left.</p>
-        <p>Similarly, you would receive XXX points for choosing the option on the right.</p>
+      stimulus: `<p>In the following rounds, the object on the left has a higher total value than the</p>
+        <p>object on the right. Since you will receive the point value of the option you select, in</p>
+        <p>this example you would receive XXX points for choosing the option on the left, and XXX</p>
+        <p>points for choosing the option on the right.</p>
         <p>Press the SPACE BAR to continue.</p>`,
       choices: ["space"],
     };
@@ -1949,17 +2010,18 @@
     var instr_start_training = {
       type: "html-keyboard-response",
       stimulus: `<p>You will now begin the training.</p>
-            <p>Six random colors will appear on the left, and six random colors will appear on the right.</p>
-            <p>Press <b>F</b> to select left, and press <b>J</b> to select right.</p>
-            <p>When you are ready, rest your fingers on <b>F</b> and <b>J</b>.</p>
+            <p>An object made up of six random colored blocks will appear on the left, and another object made up</p>
+            <p>of six random colored blocks will appear on the right. Select the side that you think is worth more</p>
+            <p>points. Press <b>F</b> to select left, and press <b>J</b> to select right. When you are ready, rest</p>
+            <p>your fingers on the <b>F</b> and <b>J</b> keys.</p>
             <p>Press the SPACE BAR to continue.</p>`,
       choices: ["space"],
     };
 
     var instr_start_training_2 = {
       type: "html-keyboard-response",
-      stimulus: `<p>You will now begin the training. </p>
-            <p>When you are ready, rest your fingers on <b>F</b> and <b>J</b>.</p>
+      stimulus: `<p>You will now begin the training.</p>
+            <p>When you are ready, rest your fingers on the <b>F</b> and <b>J</b> keys.</p>
             <p>Press the SPACE BAR to continue.</p>`,
       choices: ["space"],
     };
@@ -1968,19 +2030,22 @@
       type: "html-keyboard-response",
       stimulus:
         `<p>You are now ready to begin the experiment. Remember, if this section is chosen</p>
-        <p>for payout, one random trial will be selected and you will receive ` +
-        acc_reward +
-        ` points for choosing the better option.</p>
-        <p>When you are ready, rest your fingers on <b>F</b> and <b>J</b>.</p>
+        <p>for payout, one random round will be selected and you will receive ` +
+                                                                                acc_reward +
+                                                                              ` points</p>
+        <p>if you chose the better option. When you are ready, rest your fingers on</p>
+        <p>the <b>F</b> and <b>J</b> keys.</p>
         <p>Press the SPACE BAR to start the experiment.</p>`,
       choices: ["space"],
     };
 
     var pass_training_VB = {
       type: "html-keyboard-response",
-      stimulus: `<p>You are now ready to begin the experiment. Remember, if this section is chosen</p>
-          <p>for payout, one random trial will be selected and you will receive the point value of the chosen option.</p>
-          <p>When you are ready, rest your fingers on <b>F</b> and <b>J</b>.</p>
+      stimulus: 
+         `<p>You are now ready to begin the experiment. Remember, if this section is chosen</p>
+          <p>for payout, one random round will be selected and you will receive the point</p>
+          <p>value of the chosen option. When you are ready, rest your fingers on the</p>
+          <p><b>F</b> and <b>J</b> keys.</p>
           <p>Press the SPACE BAR to start the experiment.</p>`,
       choices: ["space"],
     };
@@ -1997,7 +2062,7 @@
 
     var fail_training_2 = {
       type: "html-keyboard-response",
-      stimulus: `<p> Whoops! Looks like you made a couple of mistakes. Let's try that again. </p>
+      stimulus: `<p> Whoops! Looks like you made a couple of mistakes. Let's try that again.</p>
         <p>Please remember to select the object with the higher value sum.</p>
         <p>Press <b>F</b> to select left, and press <b>J</b> to select right</p>
         <p>When you are ready, press the SPACE BAR to try the training one more time.</p>
@@ -2007,7 +2072,8 @@
 
     var fail_training_3 = {
       type: "html-keyboard-response",
-      stimulus: `<p> Whoops! Looks like you made a couple of mistakes. Please do as best as you can in the experiment.</p>
+      stimulus: `<p> Whoops! Looks like you made a couple of mistakes.</p>
+      <p>Please try your best in the next part of the experiment.</p>
         <p></p>
         <p>Please press space to continue.</p>
         `,
@@ -2383,54 +2449,54 @@
     };
 
     var OG = [
-      "OG/21.jpg",
-      "OG/24.jpg",
-      "OG/27.jpg",
-      "OG/29.jpg",
-      "OG/35.jpg",
+      "img/OG/21.jpg",
+      "img/OG/24.jpg",
+      "img/OG/27.jpg",
+      "img/OG/29.jpg",
+      "img/OG/35.jpg",
     ];
 
     var PB = [
-      "PB/21.jpg",
-      "PB/24.jpg",
-      "PB/27.jpg",
-      "PB/29.jpg",
-      "PB/35.jpg",
+      "img/PB/21.jpg",
+      "img/PB/24.jpg",
+      "img/PB/27.jpg",
+      "img/PB/29.jpg",
+      "img/PB/35.jpg",
     ];
 
     var OG_choice = [
-      { stim: "OG/21.jpg", value: "21" },
-      { stim: "OG/24.jpg", value: "24" },
-      { stim: "OG/27.jpg", value: "27" },
-      { stim: "OG/29.jpg", value: "29" },
-      { stim: "OG/35.jpg", value: "35" },
+      { stim: "img/OG/21.jpg", value: "21" },
+      { stim: "img/OG/24.jpg", value: "24" },
+      { stim: "img/OG/27.jpg", value: "27" },
+      { stim: "img/OG/29.jpg", value: "29" },
+      { stim: "img/OG/35.jpg", value: "35" },
     ];
 
     // choice: make F and J, change instructions
     var PB_choice = [
-      { stim: "PB/21.jpg", value: "21" },
-      { stim: "PB/24.jpg", value: "24" },
-      { stim: "PB/27.jpg", value: "27" },
-      { stim: "PB/29.jpg", value: "29" },
-      { stim: "PB/35.jpg", value: "35" },
+      { stim: "img/PB/21.jpg", value: "21" },
+      { stim: "img/PB/24.jpg", value: "24" },
+      { stim: "img/PB/27.jpg", value: "27" },
+      { stim: "img/PB/29.jpg", value: "29" },
+      { stim: "img/PB/35.jpg", value: "35" },
     ];
 
 
     var example_current = [0, 0]
     var example_current_2 = [0, 0];
     
-    var example_PB = ["examples/PB.jpg", "right", "25", "35"]
+    var example_PB = ["img/examples/PB.jpg", "right", "25", "35"]
     //left 25, right 35
 
-    var example_BP = ["examples/BP.jpg", "right", "13", "33"]
+    var example_BP = ["img/examples/BP.jpg", "right", "13", "33"]
     //left 13, right 33
 
 
-    var example_GO = ["examples/GO.jpg", "right", "19", "33"]
+    var example_GO = ["img/examples/GO.jpg", "right", "19", "33"]
     //left 19, right 33
 
 
-    var example_OG = ["examples/OG.jpg", "left", "29", "34"]
+    var example_OG = ["img/examples/OG.jpg", "left", "29", "34"]
     //left 29, right 34
 
   
@@ -2474,6 +2540,39 @@
     };
 
     var idx5 = 0;
+
+
+    var trial_practice_fixed = {
+      type: "blocks-prac-fixed",
+      stimulus_L: drawRectL,
+      stimulus_R: drawRectR,
+      text_l: drawtext_l_fixed_prac,
+      text_r: drawtext_r_fixed_prac,
+      coverWhite_f: coverWhite,
+      choices: ["f", "j"]
+    };
+    var node_prac_fixed = {
+      timeline: [fixation, trial_practice_fixed],
+      repetitions: z,
+    };
+
+
+    var trial_practice_VB = {
+      type: "blocks-prac-VB",
+      stimulus_L: drawRectL,
+      stimulus_R: drawRectR,
+      text_l: drawtext_l_incentive_prac,
+      text_r: drawtext_r_incentive_prac,
+      coverWhite_f: coverWhite,
+      choices: ["f", "j"]
+    };
+    var node_prac_VB = {
+      timeline: [fixation, trial_practice_VB],
+      repetitions: z,
+    };
+
+
+
 
     var trial_training_fixed = {
       type: "blocks",
@@ -3030,17 +3129,16 @@
       //prompt: "<p>In this example, the total value of the left object is " + example_current[2] + " and the total value of the right object is " + example_current[3] + ". Press the SPACE BAR to continue</p>",
       on_start: function (trial) {
         if(fixedfirst){
-          trial.prompt =
-          trial.prompt = `<p> In this example, the total value of the left object is ` + example_current[2] + `.</p>
-              <p>The total of value of the right object is ` + example_current[3] + `.</p>
+          trial.prompt = `<p> In this example, the total value of the left object is ` + example_current_2[2] + `.</p>
+              <p>The total of value of the right object is ` + example_current_2[3] + `.</p>
               <p>Since this is a value-based trial, your reward for choosing the option on the right is $` +
-            example_current[3] + `.</p>
+            example_current_2[3] + `.</p>
             <p>If you choose the option on the left, your reward will be $` +
-            example_current[2] + `.</p>  
+            example_current_2[2] + `.</p>  
             <p>Press the SPACE BAR to continue.</p>`;
         } else {
-            `<p> In this example, the total value of the left object is ` + example_current[2] + `.</p>
-              <p>The total of value of the right object is ` + example_current[3] + `.</p>
+          trial.prompt = `<p> In this example, the total value of the left object is ` + example_current_2[2] + `.</p>
+              <p>The total of value of the right object is ` + example_current_2[3] + `.</p>
               <p>Since this is an accuracy-based trial, your reward for choosing the correct answer is $` +
             acc_reward + `.</p>
             <p>Choosing the wrong answer would give you $0.</p>
@@ -3086,9 +3184,21 @@
     };
 
 
+    var instr_prac = {
+      type: "html-keyboard-response",
+      stimulus: `<p>Let's try a few final practice trials.</p>
+            <p>Select the better of the two options, and we will show you how many points you are awarded for your choice.</p>
+            <p>When you are ready, rest your fingers on the <b>F</b> and <b>J</b> keys.</p>
+            <p>Press the SPACE BAR to continue.</p>`,
+      choices: ["space"],
+    };
+
+
+
+
+
+
     if (fixedfirst == true) {
-      //instr_tmp = lets do some practice trials now so you become familiar with the task. the following screen will show a rainbow. (instr 7) 
-      
       timeline.push(instr7);
       timeline.push(show_rainbow_one);
       timeline.push(instr_start_training);
@@ -3097,8 +3207,9 @@
       timeline.push(conditional_2_fixed);
       timeline.push(conditional_3_fixed);
       timeline.push(instrfixed);
-      //example fixed
       timeline.push(instr_example)
+      timeline.push(instr_prac);
+      timeline.push(node_prac_fixed)
       timeline.push(pass_training_FR);
       timeline.push(experiment_node_fixed);
       timeline.push(checkOrdercall);
@@ -3136,8 +3247,9 @@
       timeline.push(conditional_2_value);
       timeline.push(conditional_3_value);
       timeline.push(instrincentive);
-      //example incentive
       timeline.push(instr_example_2)
+      timeline.push(instr_prac);
+      timeline.push(node_prac_VB)
       timeline.push(pass_training_VB);
       timeline.push(experiment_node_value);
       timeline.push(checkOrdercall);
@@ -3160,7 +3272,6 @@
       timeline.push(memchoice4);
       timeline.push(memchoice5);
     } else {
-      //instr_tmp = lets do some practice trials now so you become familiar with the task. the following screen will show a rainbow. (instr 7) 
       timeline.push(instr7);
       timeline.push(show_rainbow_one);
       timeline.push(instr_start_training_2);
@@ -3169,8 +3280,9 @@
       timeline.push(conditional_2_value);
       timeline.push(conditional_3_value);
       timeline.push(instrincentive);
-      //example
       timeline.push(instr_example)
+      timeline.push(instr_prac);
+      timeline.push(node_prac_VB)
       timeline.push(pass_training_VB);
       timeline.push(experiment_node_value);
       timeline.push(checkOrdercall);
@@ -3207,8 +3319,9 @@
       timeline.push(conditional_2_fixed);
       timeline.push(conditional_3_fixed);
       timeline.push(instrfixed);
-      //example
       timeline.push(instr_example_2)
+      timeline.push(instr_prac);
+      timeline.push(node_prac_fixed)
       timeline.push(pass_training_FR);
       timeline.push(experiment_node_fixed);
       timeline.push(checkOrdercall);
