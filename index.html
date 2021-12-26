@@ -5,6 +5,7 @@
     <script src="jspsych/plugins/jquery-3.5.1.min.js"></script>
     <script src="jspsych/plugins/jspsych-blocks.js"></script>
     <script src="jspsych/plugins/jspsych-image-keyboard-response.js"></script>
+    <script src="jspsych/plugins/jspsych-rainbowimage-keyboard-response.js"></script>
     <script src="jspsych/plugins/jspsych-blocks-exp.js"></script>
     <script src="jspsych/plugins/jspsych-image-button-response.js"></script>
     <script src="jspsych/plugins/jspsych-rainbow.js"></script>
@@ -1977,15 +1978,15 @@
     };
 
 
-    var instrfixed_2 = {
-      type: "html-keyboard-response",
-      stimulus:
-        `<p>In this trial, the object on the left has a higher total value than the object on the right.</p>
-         <p>Selecting the better object (higher value) will give you ` + acc_reward + ` points.</p>
-         <p>Selecting the worse object (lower value) will give you  0 points. </p>
-         <p>Press the SPACE BAR to continue.</p>`,
-      choices: ["space"],
-    };
+    // var instrfixed_2 = {
+    //   type: "html-keyboard-response",
+    //   stimulus:
+    //     `<p>In this trial, the object on the left has a higher total value than the object on the right.</p>
+    //      <p>Selecting the better object (higher value) will give you ` + acc_reward + ` points.</p>
+    //      <p>Selecting the worse object (lower value) will give you  0 points. </p>
+    //      <p>Press the SPACE BAR to continue.</p>`,
+    //   choices: ["space"],
+    // };
 
     var instrincentive = {
       type: "html-keyboard-response",
@@ -1997,15 +1998,15 @@
       choices: ["space"],
     };
 
-    var instrincentive_2 = {
-      type: "html-keyboard-response",
-      stimulus: `<p>In the following rounds, the object on the left has a higher total value than the</p>
-        <p>object on the right. Since you will receive the point value of the option you select, in</p>
-        <p>this example you would receive XXX points for choosing the option on the left, and XXX</p>
-        <p>points for choosing the option on the right.</p>
-        <p>Press the SPACE BAR to continue.</p>`,
-      choices: ["space"],
-    };
+    // var instrincentive_2 = {
+    //   type: "html-keyboard-response",
+    //   stimulus: `<p>In the following rounds, the object on the left has a higher total value than the</p>
+    //     <p>object on the right. Since you will receive the point value of the option you select, in</p>
+    //     <p>this example you would receive XXX points for choosing the option on the left, and XXX</p>
+    //     <p>points for choosing the option on the right.</p>
+    //     <p>Press the SPACE BAR to continue.</p>`,
+    //   choices: ["space"],
+    // };
 
     var instr_start_training = {
       type: "html-keyboard-response",
@@ -3152,12 +3153,12 @@
 
 
     var show_rainbow_one = {
-      type: "image-keyboard-response",
+      type: "rainbowimage-keyboard-response",
       stimulus: function () {
         return rainbow_one[0];
       },
-      stimulus_height: 100*2,
-      stimulus_width: 1000*1.5,
+      stimulus_height: 100,
+      stimulus_width: 1000,
       on_start: function(trial) {
           trial.prompt = 
           `<p> The values of the colors increase across the spectrum, from ` + rainbow_one[1] + ` to ` + rainbow_one[2] + `.</p>
@@ -3169,12 +3170,12 @@
 
 
     var show_rainbow_two = {
-      type: "image-keyboard-response",
+      type: "rainbowimage-keyboard-response",
       stimulus: function () {
         return rainbow_two[0];
       },
-      stimulus_height: 100*2,
-      stimulus_width: 1000*1.5,
+      stimulus_height: 100,
+      stimulus_width: 1000,
       on_start: function(trial) {
           trial.prompt = 
           `<p> The values of the colors increase across the spectrum, from ` + rainbow_two[1] + ` to ` + rainbow_two[2] + `.</p>

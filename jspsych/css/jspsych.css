@@ -44,7 +44,7 @@
 
 .jspsych-display-element {
   font-family: 'Open Sans', 'Arial', sans-serif;
-  font-size: 18px;
+  font-size: 20px;
   line-height: 1.6em;
   color: rgb(255, 255, 255);
   background-color: black
@@ -205,4 +205,31 @@
 /* Control appearance of jsPsych.data.displayData() */
 #jspsych-data-display {
   text-align: left;
+}
+
+#jspsych-image-keyboard-response-prompt {
+  position:relative;
+  width: 100%;
+  height: 100%;
+  font-size: 60px;
+  text-align: center;
+  color: black;
+}
+
+#jspsych-image-keyboard-response-stimulus {
+  position:relative;
+  width: 100*.2%;
+  height: 20*.2%;
+  /* font-size: 60px; */
+  text-align: center;
+  color: black;
+}
+
+#jspsych-rainbowimage-keyboard-response-stimulus {
+  position:relative;
+  width: 87%;
+  height: 19%;
+  /* font-size: 60px; */
+  text-align: center;
+  color: black;
 }
