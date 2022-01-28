@@ -26,10 +26,10 @@
   <body></body>
   <script>
     var subject_id = jsPsych.randomization.randomID(9);
-    var n = 2; //number of training trials
-    var z = 2 //number of practice trials
-    var rep = 2; //number of experiment trials (MAX is 150)
-
+    var n = 30; //number of training trials
+    var z = 10; //number of practice trials
+    var rep = 150; //number of experiment trials (MAX is 150)
+    var conversion_rate = 2; //number of points per dollar
 
 
     const fixation_duration = 500;
@@ -149,12 +149,12 @@
       "rgb(100,129.5,184.5)",
     ];
 
-    //blue to pink
-    if (Math.random() > 0.5) {
-      colors.reverse();
-      pinktoblue = false;
-      bluetopink = true;
-    }
+    // //blue to pink
+    // if (Math.random() > 0.5) {
+    //   colors.reverse();
+    //   pinktoblue = false;
+    //   bluetopink = true;
+    // }
 
     //green to orange
     var colors2 = [
@@ -168,24 +168,30 @@
       "rgb(202,101,27)",
     ];
 
-    //orange to green
-    if (Math.random() > 0.5) {
-      greentoorange = false;
-      orangetogreen = true;
-      colors2.reverse();
-    }
+    // //orange to green
+    // if (Math.random() > 0.5) {
+    //   greentoorange = false;
+    //   orangetogreen = true;
+    //   colors2.reverse();
+    // }
+
+  pinktoblue = true;
+  greentoorange = true;
 
     var BPfirst = false;
     var GOfirst = false;
 
-    if (Math.random() > 0.5) {
-      col1 = colors; //BP
-      BPfirst = true;
-    } else {
-      col1 = colors2; //GO
-      GOfirst = true;
-    }
+    // if (Math.random() > 0.5) {
+    //   col1 = colors; //BP
+    //   BPfirst = true;
+    // } else {
+    //   col1 = colors2; //GO
+    //   GOfirst = true;
+    // }
 
+
+    BPfirst = true;
+    col1 = colors;
 
     rainbow_one = []
     rainbow_two = []
@@ -1906,7 +1912,8 @@
                 ` rounds, you will be choosing the better of two objects. The value of each object is</p>
           <p>simply the sum of the values of each colored block in the object. The colored blocks are</p>
           <p>each worth a different amount of points, and each color is equally likely to appear. In</p>
-          <p>order to know the value of an object, you will first need to learn what each color is worth.</p>
+          <p>this task, each point is worth $` + Number(1/conversion_rate).toFixed(2) + `. In order to know the value of an object, you will</p>
+          <p>first need to learn what each color is worth.</p>
           <p>Press the SPACE BAR to continue. </p>`,
       choices: ["space"],
     };
@@ -3101,17 +3108,17 @@
           trial.prompt =
             `<p> In this example, the total value of the left object is ` + example_current[2] + `.</p>
               <p>The total of value of the right object is ` + example_current[3] + `.</p>
-              <p>Since this is an accuracy-based trial, your reward for choosing the correct answer is $` +
-            acc_reward + `.</p>
-            <p>Choosing the wrong answer would give you $0.</p>
+              <p>Since this is an accuracy-based trial, your reward for choosing the correct answer is ` +
+            acc_reward + ` points.</p>
+            <p>Choosing the wrong answer would give you 0 points.</p>
             <p>Press the SPACE BAR to continue.</p>`;
         } else {
           trial.prompt = `<p> In this example, the total value of the left object is ` + example_current[2] + `.</p>
               <p>The total of value of the right object is ` + example_current[3] + `.</p>
-              <p>Since this is a value-based trial, your reward for choosing the option on the right is $` +
-            example_current[3] + `.</p>
-            <p>If you choose the option on the left, your reward will be $` +
-            example_current[2] + `.</p>  
+              <p>Since this is a value-based trial, your reward for choosing the option on the right is ` +
+            example_current[3] + ` points.</p>
+            <p>If you choose the option on the left, your reward will be ` +
+            example_current[2] + ` points.</p>  
             <p>Press the SPACE BAR to continue.</p>`;
         }
     
@@ -3132,17 +3139,17 @@
         if(fixedfirst){
           trial.prompt = `<p> In this example, the total value of the left object is ` + example_current_2[2] + `.</p>
               <p>The total of value of the right object is ` + example_current_2[3] + `.</p>
-              <p>Since this is a value-based trial, your reward for choosing the option on the right is $` +
-            example_current_2[3] + `.</p>
-            <p>If you choose the option on the left, your reward will be $` +
-            example_current_2[2] + `.</p>  
+              <p>Since this is a value-based trial, your reward for choosing the option on the right is ` +
+            example_current_2[3] + ` points.</p>
+            <p>If you choose the option on the left, your reward will be ` +
+            example_current_2[2] + ` points.</p>  
             <p>Press the SPACE BAR to continue.</p>`;
         } else {
           trial.prompt = `<p> In this example, the total value of the left object is ` + example_current_2[2] + `.</p>
               <p>The total of value of the right object is ` + example_current_2[3] + `.</p>
-              <p>Since this is an accuracy-based trial, your reward for choosing the correct answer is $` +
-            acc_reward + `.</p>
-            <p>Choosing the wrong answer would give you $0.</p>
+              <p>Since this is an accuracy-based trial, your reward for choosing the correct answer is ` +
+            acc_reward + ` points.</p>
+            <p>Choosing the wrong answer would give you 0 points.</p>
             <p>Press the SPACE BAR to continue.</p>`;
         }
     
@@ -3340,6 +3347,7 @@
       timeline.push(cursor_off);
       timeline.push(memchoice_instr);
       timeline.push(memchoice);
+      timeline.push(fixation)
       timeline.push(memchoice2);
       timeline.push(fixation)
       timeline.push(memchoice3);
@@ -3422,9 +3430,10 @@
         trial.stimulus =
           `<p> You have completed the experiment! </p>
             <p>Your reward will be from the value-based trials.</p>
-            <p>One trial was selected at random, and you are rewarded the value of that choice.</p>
-            <p>Your reward is $` +
-          reward_val_VB +
+            <p>One trial was selected at random, for which you earned ` + reward_val_VB + ` points.</p>
+            <p>At a conversion rate of $1 for every ` + conversion_rate + ` points,</p>
+            <p>you will receive $` +
+          Number(reward_val_VB/conversion_rate).toFixed(2) +
           `.</p><p>Press the SPACE BAR to continue.</p>`;
       },
     };
@@ -3453,8 +3462,10 @@
           `<p> You have completed the experiment! </p> \
             <p>Your reward will be from the accuracy-based trials.</p>
             <p>One trial was selected at random, which you got correct!</p>
-            <p>Your reward is $` +
-          acc_reward +
+            <p>Your bonus is: ` + acc_reward + ` points.</p>
+            <p>At a conversion rate of $1 for every ` + conversion_rate + ` points,</p>
+            <p>you will receive $` +
+          Number(acc_reward/conversion_rate).toFixed(2) +
           `.</p><p>Press the SPACE BAR to continue.</p>`;
       },
     };
