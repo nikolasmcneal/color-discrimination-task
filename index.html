@@ -26,10 +26,10 @@
   <body></body>
   <script>
     var subject_id = jsPsych.randomization.randomID(9);
-    var n = 30; //number of training trials
-    var z = 10; //number of practice trials
-    var rep = 150; //number of experiment trials (MAX is 150)
-    var conversion_rate = 2; //number of points per dollar
+    var n = 1; //number of training trials //30
+    var z = 1; //number of practice trials //10
+    var rep = 1; //number of experiment trials (MAX is 150) //150
+    var conversion_rate = 4; //number of points per dollar
 
 
     const fixation_duration = 500;
@@ -1935,13 +1935,12 @@
     var instr6 = {
       type: "html-keyboard-response",
       stimulus:
-        `<p>At the end of the task, you will gain a reward based on your performance in one of these two</p>
-         <p>types of rounds. You will have an equal chance of being rewarded based on the <b>accuracy-based</b></p>
-         <p>or  <b>value-based</b> rounds. If an <b>accuracy-based round</b> is selected for pay out, you will</p>
+        `<p>You will gain a reward based on your performance in one random trial</p>
+         <p>from each round. One <b>accuracy-based round</b> will be selected for pay out, and you will</p>
          <p>gain ` +
                 acc_reward +
-                ` points if you selected the better option in that round, but 0 points if you selected the worse</p>
-         <p>option. If a <b>value-based round</b> is selected, you will gain the point value of the option you</p>
+                ` points if you selected the better option in that round, but 0 points if you selected the worse option.</p>
+         <p>One <b>value-based round</b> will also be selected, and you will gain the point value of the option you</p>
          <p>selected, whether or not it is the better or worse option.</p>
          <p>Press the SPACE BAR to continue.</p>`,
       choices: ["space"],
@@ -2037,8 +2036,8 @@
     var pass_training_FR = {
       type: "html-keyboard-response",
       stimulus:
-        `<p>You are now ready to begin the experiment. Remember, if this section is chosen</p>
-        <p>for payout, one random round will be selected and you will receive ` +
+        `<p>You are now ready to begin the experiment. Remember, one random trial from</p>
+        <p>this section will be chosen for payout, and you will receive ` +
                                                                                 acc_reward +
                                                                               ` points</p>
         <p>if you chose the better option. When you are ready, rest your fingers on</p>
@@ -2050,8 +2049,8 @@
     var pass_training_VB = {
       type: "html-keyboard-response",
       stimulus: 
-         `<p>You are now ready to begin the experiment. Remember, if this section is chosen</p>
-          <p>for payout, one random round will be selected and you will receive the point</p>
+         `<p>You are now ready to begin the experiment. Remember, one random trial form this section</p>
+          <p>will be chosen for payout, and you will receive the point</p>
           <p>value of the chosen option. When you are ready, rest your fingers on the</p>
           <p><b>F</b> and <b>J</b> keys.</p>
           <p>Press the SPACE BAR to start the experiment.</p>`,
@@ -2583,7 +2582,7 @@
 
 
     var trial_training_fixed = {
-      type: "blocks",
+      type: "blocks",  
       stimulus_L: drawRectL,
       stimulus_R: drawRectR,
       text_l: drawtext_l_incentive,
@@ -3017,8 +3016,11 @@
           testsetchoice[0].value +
           ".</p><p>Press <b>F</b> if you believe this is <b>correct</b>.</p>" +
           "</p>Press <b>J</b> if you believe this is <b>incorrect</b>.</p>"
-        );
+        ); 
       },
+      on_finish: function(data){
+        data.testvalue = testsetchoice[0].value;
+      }
     };
 
     var memchoice2 = {
@@ -3037,6 +3039,9 @@
           "</p>Press <b>J</b> if you believe this is <b>incorrect</b>.</p>"
         );
       },
+      on_finish: function(data){
+        data.testvalue = testsetchoice[1].value;
+      }
     };
 
     var memchoice3 = {
@@ -3055,6 +3060,9 @@
           "</p>Press <b>J</b> if you believe this is <b>incorrect</b>.</p>"
         );
       },
+      on_finish: function(data){
+        data.testvalue = testsetchoice[2].value;
+      }
     };
 
     var memchoice4 = {
@@ -3073,6 +3081,9 @@
           "</p>Press <b>J</b> if you believe this is <b>incorrect</b>.</p>"
         );
       },
+      on_finish: function(data){
+        data.testvalue = testsetchoice[3].value;
+      }
     };
 
     var memchoice5 = {
@@ -3091,6 +3102,9 @@
           "</p>Press <b>J</b> if you believe this is <b>incorrect</b>.</p>"
         );
       },
+      on_finish: function(data){
+        data.testvalue = testsetchoice[4].value;
+      }
     };
 
 
@@ -3275,9 +3289,13 @@
       timeline.push(cursor_off);
       timeline.push(memchoice_instr);
       timeline.push(memchoice);
+      timeline.push(fixation)
       timeline.push(memchoice2);
+      timeline.push(fixation)
       timeline.push(memchoice3);
+      timeline.push(fixation)
       timeline.push(memchoice4);
+      timeline.push(fixation)
       timeline.push(memchoice5);
     } else {
       timeline.push(instr7);
@@ -3358,15 +3376,15 @@
     }
     var final_reward_value;
 
-    var reward_is_VB;
-    var reward_is_FR;
-    if (Math.random() < 0.5) {
-      reward_is_VB = true;
-      // console.log("VB reward");
-    } else {
-      reward_is_FR = true;
+    // var reward_is_VB;
+    // var reward_is_FR;
+    // if (Math.random() < 0.5) {
+    //   reward_is_VB = true;
+    //   // console.log("VB reward");
+    // } else {
+    //   reward_is_FR = true;
       // console.log("FR reward (21 or 0");
-    }
+    // }
 
     var reward_function_VB = function () {
       while (reward_val_VB == 0 || !(reward_val_VB > 0)) {
@@ -3389,9 +3407,9 @@
         data.trialN = "NA";
       },
     };
-    if (reward_is_VB) {
-      timeline.push(reward_node_VB);
-    }
+    
+    timeline.push(reward_node_VB);
+    
     var randidx_FR;
     var final_reward_boolean;
     var final_reward;
@@ -3418,102 +3436,119 @@
         data.randidx_FR = randidx_FR;
         data.trialN = "NA";
       },
-    };
-    if (reward_is_FR) {
-      timeline.push(reward_node_FR);
     }
 
-    var reward_VB = {
-      type: "html-keyboard-response",
-      choices: ["space"],
-      on_start: function (trial) {
-        trial.stimulus =
-          `<p> You have completed the experiment! </p>
-            <p>Your reward will be from the value-based trials.</p>
-            <p>One trial was selected at random, for which you earned ` + reward_val_VB + ` points.</p>
-            <p>At a conversion rate of $1 for every ` + conversion_rate + ` points,</p>
-            <p>you will receive $` +
-          Number(reward_val_VB/conversion_rate).toFixed(2) +
-          `.</p><p>Press the SPACE BAR to continue.</p>`;
-      },
-    };
+    timeline.push(reward_node_FR);
+
+    // var reward_VB = {
+    //   type: "html-keyboard-response",
+    //   choices: ["space"],
+    //   on_start: function (trial) {
+    //     trial.stimulus =
+    //       `<p> You have completed the experiment! </p>
+    //         <p>Your reward will be from the value-based trials.</p>
+    //         <p>One trial was selected at random, for which you earned ` + reward_val_VB + ` points.</p>
+    //         <p>At a conversion rate of $1 for every ` + conversion_rate + ` points,</p>
+    //         <p>you will receive $` +
+    //       Number(reward_val_VB/conversion_rate).toFixed(2) +
+    //       `.</p><p>Press the SPACE BAR to continue.</p>`;
+    //   },
+    // };
     // if (reward_is_VB) {
     //   timeline.push(reward_VB);
     // }
 
-    var if_node_VB = {
-      timeline: [reward_VB],
-      conditional_function: function () {
-        if (reward_is_VB) {
-          return true;
-        } else {
-          return false;
-        }
-      },
-    };
+    // var if_node_VB = {
+    //   timeline: [reward_VB],
+    //   conditional_function: function () {
+    //     if (reward_is_VB) {
+    //       return true;
+    //     } else {
+    //       return false;
+    //     }
+    //   },
+    // };
 
-    timeline.push(if_node_VB);
+    // timeline.push(if_node_VB);
 
-    var reward_FR_correct = {
+    var reward_correct = {
       type: "html-keyboard-response",
       choices: ["space"],
       on_start: function (trial) {
         trial.stimulus =
           `<p> You have completed the experiment! </p> \
-            <p>Your reward will be from the accuracy-based trials.</p>
-            <p>One trial was selected at random, which you got correct!</p>
-            <p>Your bonus is: ` + acc_reward + ` points.</p>
+            <p>Your reward will be based on one trial from each half of the experiment.</p>
+            <p>One accuracy-based trial was selected at random, which you got correct!</p>
+            <p>In this accuracy-based trial, you earned ` + acc_reward + ` points.</p>
+            <p>One value-based trial was selected at random, for which you earned an additional ` + reward_val_VB + ` points.</p>
             <p>At a conversion rate of $1 for every ` + conversion_rate + ` points,</p>
-            <p>you will receive $` +
-          Number(acc_reward/conversion_rate).toFixed(2) +
+            <p>you will receive a total of $` +
+          Number((acc_reward/conversion_rate) + (reward_val_VB/conversion_rate)).toFixed(2) +
           `.</p><p>Press the SPACE BAR to continue.</p>`;
       },
     };
 
-    var reward_FR_incorrect = {
+
+
+    var reward_incorrect = {
       type: "html-keyboard-response",
       choices: ["space"],
       on_start: function (trial) {
-        trial.stimulus = `<p> You have completed the experiment! </p> \
-            <p>Your reward will be from the accuracy-based trials.</p>
-            <p>One trial was selected at random, which you unfortunately did not get correct.</p>
-            <p>Your reward is $0.</p>
-            <p>Press the SPACE BAR to continue.</p>`;
+        trial.stimulus =
+          `<p> You have completed the experiment! </p> \
+            <p>Your reward will be based on one trial from each half of the experiment.</p>
+            <p>One accuracy-based trial was selected at random, which you unfortunately did not get correct.</p>
+            <p>In this accuracy-based trial, you earned 0 points.</p>
+            <p>One value-based trial was selected at random, for which you earned an additional ` + reward_val_VB + ` points.</p>
+            <p>At a conversion rate of $1 for every ` + conversion_rate + ` points,</p>
+            <p>you will receive a total of $` +
+          Number((reward_val_VB/conversion_rate)).toFixed(2) +
+          `.</p><p>Press the SPACE BAR to continue.</p>`;
       },
     };
+
+
+    // var reward_incorrect = {
+    //   type: "html-keyboard-response",
+    //   choices: ["space"],
+    //   on_start: function (trial) {
+    //     trial.stimulus = `<p> You have completed the experiment! </p> \
+    //         <p>Your reward will be from the accuracy-based trials.</p>
+    //         <p>One trial was selected at random, which you unfortunately did not get correct.</p>
+    //         <p>Your reward is $0.</p>
+    //         <p>Press the SPACE BAR to continue.</p>`;
+    //   },
+    // };
 
     var reward_FR_is_correct;
 
     var determine_FR_reward_type = function () {
-      if (reward_is_FR) {
         if (final_reward_value == 0) {
           reward_FR_is_correct = false;
         } else {
           reward_FR_is_correct = true;
         }
-      }
     };
 
     var node_FR_reward = {
       type: "call-function",
       func: determine_FR_reward_type,
 
-      //     on_start: function(timeline){
-      //         if(reward_FR_is_correct){
-      //             timeline.push(reward_FR_correct)
-      //         }
-      //         if(reward_FR_is_correct == false){
-      //             timeline.push(reward_FR_incorrect)
-      //         }
-      //     },
+          on_start: function(timeline){
+              if(reward_FR_is_correct){
+                  timeline.push(reward_correct)
+              }
+              if(reward_FR_is_correct == false){
+                  timeline.push(reward_incorrect)
+              }
+          },
     };
 
-    if (reward_is_FR) {
-      timeline.push(node_FR_reward);
-    }
+  
+    timeline.push(node_FR_reward);
 
     var if_node = {
-      timeline: [reward_FR_correct],
+      timeline: [reward_correct],
       conditional_function: function () {
         if (reward_FR_is_correct) {
           return true;
@@ -3524,7 +3559,7 @@
     };
 
     var if_node_2 = {
-      timeline: [reward_FR_incorrect],
+      timeline: [reward_incorrect],
       conditional_function: function () {
         if (reward_FR_is_correct == false) {
           return true;
