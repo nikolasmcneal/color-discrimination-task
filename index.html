@@ -26,11 +26,10 @@
   <body></body>
   <script>
     var subject_id = jsPsych.randomization.randomID(9);
-    var n = 1; //number of training trials //30
+    var n = 3; //number of training trials //30
     var z = 1; //number of practice trials //10
-    var rep = 1; //number of experiment trials (MAX is 150) //150
+    var rep = 15; //number of experiment trials (MAX is 150) //150
     var conversion_rate = 4; //number of points per dollar
-
 
     const fixation_duration = 500;
 
@@ -96,6 +95,10 @@
     timeline.push({
       type: "fullscreen",
       fullscreen_mode: true,
+      message: `<p>Before we begin, please close any unnecessary programs or applications on your computer. This will help the study run more smoothly.</p>
+               <p>Also, please close any browser tabs that could produce popups or alerts that would interfere with the study. Finally, once the study</p>
+               <p>has started, DO NOT EXIT fullscreen mode or you will terminate the study and not receive any payment.</p>
+               <p>The study will switch to full screen mode when you press the button below. When you are ready to begin, press the button.</p>`
     });
 
     var cursor_off = {
@@ -149,12 +152,12 @@
       "rgb(100,129.5,184.5)",
     ];
 
-    // //blue to pink
-    // if (Math.random() > 0.5) {
-    //   colors.reverse();
-    //   pinktoblue = false;
-    //   bluetopink = true;
-    // }
+    //blue to pink
+    if (Math.random() > 0.5) {
+      colors.reverse();
+      pinktoblue = false;
+      bluetopink = true;
+    }
 
     //green to orange
     var colors2 = [
@@ -168,30 +171,27 @@
       "rgb(202,101,27)",
     ];
 
-    // //orange to green
-    // if (Math.random() > 0.5) {
-    //   greentoorange = false;
-    //   orangetogreen = true;
-    //   colors2.reverse();
-    // }
-
-  pinktoblue = true;
-  greentoorange = true;
+    //orange to green
+    if (Math.random() > 0.5) {
+      greentoorange = false;
+      orangetogreen = true;
+      colors2.reverse();
+    }
 
     var BPfirst = false;
     var GOfirst = false;
 
-    // if (Math.random() > 0.5) {
-    //   col1 = colors; //BP
-    //   BPfirst = true;
-    // } else {
-    //   col1 = colors2; //GO
-    //   GOfirst = true;
-    // }
+    if (Math.random() > 0.5) {
+      col1 = colors; //BP
+      BPfirst = true;
+    } else {
+      col1 = colors2; //GO
+      GOfirst = true;
+    }
 
 
-    BPfirst = true;
-    col1 = colors;
+    // BPfirst = true;
+    // col1 = colors;
 
     rainbow_one = []
     rainbow_two = []
@@ -1582,6 +1582,8 @@
         arr_left[3] + 1,
         arr_left[4] + 1,
         arr_left[5] + 1,
+
+        console.log("left: " + j)
       ];
     }
 
@@ -1625,7 +1627,7 @@
         arr_right[4] + 1,
         arr_right[5] + 1,
       ];
-      // console.log("arr_R :" + w)
+      console.log("arr_R :" + w)
     }
 
     var j = 0;
@@ -1888,6 +1890,16 @@
       choices: ["space"],
     };
 
+    var payment_trial = {
+      type: "survey-text",
+      preamble: `<p>In order for you to be compensated, we will need your PayPal account information.</p>
+                <p>If you do not wish to provide us with this information, or do not have an account, you may exit the experiment by hitting the ESC key.</p>`,
+      questions: [
+        { prompt: "PayPal account", name: "payment_account"},
+      ],
+    };
+    timeline.push(payment_trial);
+
     var instr2 = {
       type: "html-keyboard-response",
       stimulus: `<p>Today, your task will be to make a series of choices between two objects. </p>
@@ -1923,11 +1935,11 @@
       stimulus: 
            `<p>Each round, you will see two objects on the screen. Your task is to select which of the two</p>
             <p>objects you want to choose. All objects will have positive values and you can gain bonus</p>
-            <p>points based on your choices. In <b>accuracy-based rounds</b>, you will gain a bonus for</p>
-            <p>choosing the better of the two options. In <b>value-based rounds</b>, you can gain a bonus</p>
+            <p>points based on your choices. In the <b>accuracy-based rounds</b>, you will gain a bonus for</p>
+            <p>choosing the better of the two options. In the <b>value-based rounds</b>, you can gain a bonus</p>
             <p>worth the value of the object you selected.</p>
             <p></p>
-            <p>We will always let you know which type of round you are in before you make any choices.</p>
+            <p>We will always let you the know type of round you are in before you make any choices.</p>
             <p>Press the SPACE BAR to continue.</p>`,
       choices: ["space"],
     };
@@ -1936,12 +1948,12 @@
       type: "html-keyboard-response",
       stimulus:
         `<p>You will gain a reward based on your performance in one random trial</p>
-         <p>from each round. One <b>accuracy-based round</b> will be selected for pay out, and you will</p>
+         <p>from each type of round. One <b>accuracy-based round</b> will be selected for pay out, and you will</p>
          <p>gain ` +
                 acc_reward +
                 ` points if you selected the better option in that round, but 0 points if you selected the worse option.</p>
          <p>One <b>value-based round</b> will also be selected, and you will gain the point value of the option you</p>
-         <p>selected, whether or not it is the better or worse option.</p>
+         <p>selected, whether or not it is the better option.</p>
          <p>Press the SPACE BAR to continue.</p>`,
       choices: ["space"],
     };
@@ -2432,7 +2444,7 @@
           // example_current = example_GO
         }
         if (greentoorange) {
-          ordermemtask = orangetogreen;
+          ordermemtask = greentoorange;
           ("greentoorange");
           testset = OG;
           testsetchoice = OG_choice;
@@ -2503,7 +2515,7 @@
     //left 19, right 33
 
 
-    var example_OG = ["img/examples/OG.jpg", "left", "29", "34"]
+    var example_OG = ["img/examples/OG.jpg", "right", "29", "34"]
     //left 29, right 34
 
   
@@ -3120,11 +3132,11 @@
       on_start: function (trial) {
         if(fixedfirst){
           trial.prompt =
-            `<p> In this example, the total value of the left object is ` + example_current[2] + `.</p>
-              <p>The total of value of the right object is ` + example_current[3] + `.</p>
-              <p>Since this is an accuracy-based trial, your reward for choosing the correct answer is ` +
+          `<p> In this example, the total value of the left object is ` + example_current[2] + `.</p>
+          <p>The total of value of the right object is ` + example_current[3] + `.</p>
+              <p>Since this is an accuracy-based trial, your reward for choosing the option on the right is ` +
             acc_reward + ` points.</p>
-            <p>Choosing the wrong answer would give you 0 points.</p>
+            <p>If you choose the option on the right, your reward will be 0 points.</p>
             <p>Press the SPACE BAR to continue.</p>`;
         } else {
           trial.prompt = `<p> In this example, the total value of the left object is ` + example_current[2] + `.</p>
@@ -3481,14 +3493,16 @@
             <p>One accuracy-based trial was selected at random, which you got correct!</p>
             <p>In this accuracy-based trial, you earned ` + acc_reward + ` points.</p>
             <p>One value-based trial was selected at random, for which you earned an additional ` + reward_val_VB + ` points.</p>
-            <p>At a conversion rate of $1 for every ` + conversion_rate + ` points,</p>
-            <p>you will receive a total of $` +
+            <p>At a conversion rate of $1 for every ` + conversion_rate + ` points, you will receive a total of $` +
           Number((acc_reward/conversion_rate) + (reward_val_VB/conversion_rate)).toFixed(2) +
           `.</p><p>Press the SPACE BAR to continue.</p>`;
       },
+      on_finish: function() {
+        jsPsych.data.addProperties({
+            compensation: Number((acc_reward/conversion_rate) + (reward_val_VB/conversion_rate)).toFixed(2),
+            });
+      }
     };
-
-
 
     var reward_incorrect = {
       type: "html-keyboard-response",
@@ -3498,27 +3512,18 @@
           `<p> You have completed the experiment! </p> \
             <p>Your reward will be based on one trial from each half of the experiment.</p>
             <p>One accuracy-based trial was selected at random, which you unfortunately did not get correct.</p>
-            <p>In this accuracy-based trial, you earned 0 points.</p>
-            <p>One value-based trial was selected at random, for which you earned an additional ` + reward_val_VB + ` points.</p>
-            <p>At a conversion rate of $1 for every ` + conversion_rate + ` points,</p>
-            <p>you will receive a total of $` +
+            <p>In this accuracy-based trial, <b>you earned 0 points.</b></p>
+            <p>One value-based trial was selected at random, for which <b>you earned an additional ` + reward_val_VB + ` points.</b></p>
+            <p>At a conversion rate of $1 for every ` + conversion_rate + ` points, you will receive a bonus of $` +
           Number((reward_val_VB/conversion_rate)).toFixed(2) +
           `.</p><p>Press the SPACE BAR to continue.</p>`;
       },
+      on_finish: function() {
+        jsPsych.data.addProperties({
+            compensation: Number((reward_val_VB/conversion_rate)).toFixed(2),
+            });
+      }
     };
-
-
-    // var reward_incorrect = {
-    //   type: "html-keyboard-response",
-    //   choices: ["space"],
-    //   on_start: function (trial) {
-    //     trial.stimulus = `<p> You have completed the experiment! </p> \
-    //         <p>Your reward will be from the accuracy-based trials.</p>
-    //         <p>One trial was selected at random, which you unfortunately did not get correct.</p>
-    //         <p>Your reward is $0.</p>
-    //         <p>Press the SPACE BAR to continue.</p>`;
-    //   },
-    // };
 
     var reward_FR_is_correct;
 
