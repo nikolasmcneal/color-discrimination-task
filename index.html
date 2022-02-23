@@ -1815,12 +1815,6 @@
       ctx.fillText("  " + w + " points", 140, 100);
     }
 
-
-
-
-
-
-
     var fixedvalleft = 0;
 
     function drawRectR(d, arr_right) {
@@ -1892,10 +1886,10 @@
 
     var payment_trial = {
       type: "survey-text",
-      preamble: `<p>In order for you to be compensated, we will need your PayPal account information.</p>
+      preamble: `<p>In order for you to be compensated, we will need your PayPal or Venmo account information.</p>
                 <p>If you do not wish to provide us with this information, or do not have an account, you may exit the experiment by hitting the ESC key.</p>`,
       questions: [
-        { prompt: "PayPal account", name: "payment_account"},
+        { prompt: "PayPal/Venmo account", name: "payment_account"},
       ],
     };
     timeline.push(payment_trial);
@@ -1939,7 +1933,7 @@
             <p>choosing the better of the two options. In the <b>value-based rounds</b>, you can gain a bonus</p>
             <p>worth the value of the object you selected.</p>
             <p></p>
-            <p>We will always let you the know type of round you are in before you make any choices.</p>
+            <p>We will always let you the know the type of round you are in before you make any choices.</p>
             <p>Press the SPACE BAR to continue.</p>`,
       choices: ["space"],
     };
