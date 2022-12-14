@@ -1,4 +1,4 @@
-# Color-Discrimination-Task
+# color-discrimination-task
 
 ## About
 
