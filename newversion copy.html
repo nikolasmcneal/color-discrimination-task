@@ -40,7 +40,7 @@
 // instructions about rainbow and training
 // training
 // instructions about the condition (dynamic for e.g.)
-// practice with ~5 trials + feedback
+//
 // experiment
 
     var timeline = [];
@@ -125,7 +125,7 @@
     }
 
     //Reward
-    acc_reward = 21;
+    acc_reward = 33;
     
     var fixation = {
       type: "html-keyboard-response",
@@ -286,19 +286,6 @@
     //     [2, 3, 1, 5, 3, 2],
     //   ],
     // ];
-
-
-
-
-// DSC -- don't need to present this year
-// we need to construct the trials in a way that allows us to measure the overall accuracy effect more precisely
-// perhaps we need to use 12 colors instead of 8
-// look at the multi-attribute choice
-// difference of colors with itself, square matrix
-// blair will send me the csv file
-// EXPERIMENT 2: moving forward, i should also be coding the one that changes the training
-
-
 
     var arrays1 = [
   [
@@ -1793,7 +1780,7 @@
       ctx.fillStyle = "white";
       tmp = 0
       if(j > w){
-        tmp = 21
+        tmp = acc_reward
       }
       ctx.fillText("  " + tmp + " points", 140, 100);
     }
@@ -1804,7 +1791,7 @@
       ctx.fillStyle = "white";
       tmp2 = 0
       if(w > j){
-        tmp2 = 21
+        tmp2 = acc_reward
       }
       ctx.fillText("  " + tmp2 + " points", 140, 100);
     }
@@ -3237,6 +3224,18 @@
 
 
 
+    var current_score = {
+      type: 'html-keyboard-response',      
+      stimulus: `<p>You have received </p>
+            <p>Please make sure that you complete this experiment in Google Chrome.</p>
+            <p>The experiment will now end. Press any key to continue.</p>`,
+      choices: jsPsych.ALL_KEYS,
+      on_finish: function(data){
+        jsPsych.endExperiment();
+      }
+    }
+
+
 
 
     if (fixedfirst == true) {
@@ -3606,6 +3605,19 @@
       ],
     };
     timeline.push(demo_trial);
+
+// 
+// count_FR = 0
+// for(var i = 0; i < acc_exp_FR.length; i++){
+//   if(acc_exp_FR[i] == 1){
+//     count_FR += 1 
+//   }
+// score_FR = count_FR / acc_exp_FR.length
+// }
+
+
+
+
 
     jsPsych.init({
       timeline,

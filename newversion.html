@@ -287,19 +287,6 @@
     //   ],
     // ];
 
-
-
-
-// DSC -- don't need to present this year
-// we need to construct the trials in a way that allows us to measure the overall accuracy effect more precisely
-// perhaps we need to use 12 colors instead of 8
-// look at the multi-attribute choice
-// difference of colors with itself, square matrix
-// blair will send me the csv file
-// EXPERIMENT 2: moving forward, i should also be coding the one that changes the training
-
-
-
     var arrays1 = [
   [
     [7, 2, 1, 0, 5, 0],
@@ -3606,6 +3593,19 @@
       ],
     };
     timeline.push(demo_trial);
+
+// 
+// count_FR = 0
+// for(var i = 0; i < acc_exp_FR.length; i++){
+//   if(acc_exp_FR[i] == 1){
+//     count_FR += 1 
+//   }
+// score_FR = count_FR / acc_exp_FR.length
+// }
+
+
+
+
 
     jsPsych.init({
       timeline,
